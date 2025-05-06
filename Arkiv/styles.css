@@ -1,0 +1,140 @@
+/* text och färger */
+body {
+    font-family: "Courier New", sans-serif;
+    background-color: #fffaf0;
+    color: #333333;
+    margin: 0;
+    padding: 30px;
+}
+
+header {
+    text-align: center; /* Centrerar h1-rubriken */
+}
+
+image {
+    align-self: center;
+}
+
+nav {
+    display: flex; /* Använd flexbox */
+    justify-content: center; /* Centrerar rubrikerna horisontellt */
+    gap: 30px; /* Mellanrum mellan rubrikerna */
+    margin-top: 20px; /* Lägger till ett litet mellanrum över nav-rubrikerna */
+}
+
+h1 {
+    color: #a0522d;
+    font-size: 24px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+h2 {
+    color: #a0522d;
+    font-size: 18px;
+    margin: 0; /* Ta bort extra marginal runt rubrikerna */
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+/* Lägg till en container för bild och text */
+section {
+    display: flex; /* Gör så att bilden och texten hamnar på samma rad */
+    align-items: center; /* Centrerar innehållet vertikalt */
+    gap: 20px; /* Mellanrum mellan bild och text */
+}
+
+img {
+    margin-top: 0px;
+    border-radius: 15px;
+    width: 200px;
+    height: 200px;
+    border: 3px solid #a0522d;
+    padding: 0px;
+}
+
+/* Styling för länkar */
+a {
+    text-decoration: none; /* Tar bort understrykning */
+    color: inherit; /* Ärver färgen från rubriken */
+    transition-duration: 0.4s;
+}
+
+a:hover {
+    text-decoration: underline; /* Understrykning vid hovring */
+    text-shadow:
+        2 8px 16px 2 rgba(0, 0, 0, 0.2),
+        2 6px 20px 2 rgba(0, 0, 0, 0.19);
+}
+
+/* Vanligt ljusläge */
+body {
+    font-family: "Courier New", sans-serif;
+    background-color: #fffaf0;
+    color: #333333;
+    margin: 0;
+    padding: 30px;
+}
+
+/* Mörkt läge från systeminställningar */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333333;
+        color: #fffaf0;
+    }
+    h1,
+    h2 {
+        color: #e1c16e;
+    }
+    img {
+        border: 3px solid #e1c16e;
+    }
+}
+
+button {
+    position: fixed;
+    bottom: 30px; /* Avstånd från botten */
+    right: 30px; /* Avstånd från höger kant */
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 10px;
+    font-family: "Courier New", sans-serif;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    font-size: 80%;
+    box-shadow:
+        0 8px 16px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Ljusläge */
+button {
+    background-color: #a0522d; /* Samma som h1-färg */
+    color: #fffaf0;
+}
+
+/* Mörkt läge från systeminställningar */
+@media (prefers-color-scheme: dark) {
+    button {
+        background-color: #e1c16e;
+        color: #333;
+    }
+}
+
+/* Manuell dark mode - ska alltid ha högsta prioritet */
+body.dark-mode {
+    background-color: #333 !important;
+    color: #fffaf0 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2 {
+    color: #e1c16e !important;
+}
+
+body.dark-mode img {
+    border: 3px solid #e1c16e !important;
+}
