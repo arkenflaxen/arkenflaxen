@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="eng">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,39 +7,255 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <header>
+        <div class="background-overlay"></div>
+        <header id="main-header" class="hidden-header">
             <nav>
-                <h1><a href="projects.html" class="nav-link">PROJECTS</a></h1>
-                <h1><a href="index.html" class="nav-link">FILIP ARKEMAR</a></h1>
-                <h1><a href="contact.html" class="nav-link">CONTACT</a></h1>
+                <h1><a href="#grid-section" class="nav-link">PROJECTS</a></h1>
+                <h1>
+                    <a href="#top" id="header-title" class="nav-link"
+                        >FILIP ARKEMAR</a
+                    >
+                </h1>
+                <h1><a href="#contact-section" class="nav-link">CONTACT</a></h1>
             </nav>
         </header>
-        <main>
-            <img
-                class="index-img"
-                src="Portfoliobilder/APD LONG UHIQ 1.jpg"
-                alt="axo"
-            />
-            <h2>Sauna Raft</h2>
-            <p>
-                Welcome to the Sauna Raft project, a unique blend of traditional
-                Finnish sauna culture and innovative maritime design. This
-                floating sanctuary combines the therapeutic benefits of a
-                wood-fired sauna with the serene experience of being on water.
-                Built with sustainable materials and thoughtful craftsmanship,
-                the Sauna Raft offers an escape from everyday life, allowing you
-                to reconnect with nature while enjoying the ritual of heat and
-                relaxation. Perfect for all seasons, this project represents my
-                passion for creating functional spaces that enhance well-being
-                and foster memorable experiences.
-            </p>
-        </main>
-        <label for="themeSelector">theme:</label>
-        <select id="themeSelector">
-            <option value="system">system</option>
-            <option value="light">light</option>
-            <option value="dark">dark</option>
-        </select>
+
+        <section id="top" class="landing-main">
+            <div class="centered-title">
+                <div class="horizontal-line top-line"></div>
+                <h1 id="main-title">FILIP ARKEMAR</h1>
+                <div class="horizontal-line bottom-line"></div>
+                <p class="subtitle">DIGITAL PORTFOLIO 1.0</p>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+                <div class="scroll-text">Scroll Down</div>
+            </div>
+        </section>
+
+        <section id="grid-section" class="project-section">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                <div class="image-grid">
+                    <a href="#top" class="no-underline">
+                        <div class="grid-item">
+                            <img
+                                src="images/fjärilsdalen_från_åkern.png"
+                                alt="Fjärilsdalen"
+                            />
+                            <div class="grid-caption">Fjärilsdalen</div>
+                        </div>
+                    </a>
+                    <a href="#top" class="no-underline">
+                        <div class="grid-item">
+                            <img
+                                src="images/tamnougalt_torg.png"
+                                alt="Tamnougalt"
+                            />
+                            <div class="grid-caption">Tamnougalt</div>
+                        </div>
+                    </a>
+                    <a href="#top" class="no-underline">
+                        <div class="grid-item">
+                            <img
+                                src="images/santa_fé_nightrender.jpg"
+                                alt="Santa Fé"
+                            />
+                            <div class="grid-caption">Santa Fé</div>
+                        </div>
+                    </a>
+                    <a href="#top" class="no-underline">
+                        <div class="grid-item">
+                            <img
+                                src="images/malmöhus_giraff.png"
+                                alt="Malmöhus"
+                            />
+                            <div class="grid-caption">Malmöhus</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills-section" class="skills-section">
+            <div class="container">
+                <h2 class="section-title">Skills</h2>
+                <div class="skills-container">
+                    <a href="#top" class="no-underline">
+                        <div class="skill-item">
+                            <div class="skill-logo">
+                                <img
+                                    src="logos/Autodesk_logo.png"
+                                    alt="Autodesk"
+                                />
+                            </div>
+                            <div class="skill-text">
+                                <h3>Autodesk Suite</h3>
+                                <p>
+                                    Proficient in various Autodesk products
+                                    including AutoCAD, Maya, and 3ds Max.
+                                    Experienced in creating detailed 3D models
+                                    and technical drawings.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#top" class="no-underline">
+                        <div class="skill-item">
+                            <div class="skill-logo">
+                                <img
+                                    src="logos/adobe-logo-black-transparent.png"
+                                    alt="Adobe"
+                                />
+                            </div>
+                            <div class="skill-text">
+                                <h3>Adobe Creative Suite</h3>
+                                <p>
+                                    Skilled in Photoshop, Illustrator, and
+                                    InDesign. Capable of creating professional
+                                    graphics, editing photos, and designing
+                                    layouts for various media.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#top" class="no-underline">
+                        <div class="skill-item">
+                            <div class="skill-logo">
+                                <img
+                                    src="logos/Unreal_Engine_Logo.svg.png"
+                                    alt="Unreal Engine"
+                                />
+                            </div>
+                            <div class="skill-text">
+                                <h3>Unreal Engine</h3>
+                                <p>
+                                    Experience with game development and
+                                    interactive visualization using Unreal
+                                    Engine. Capable of creating immersive 3D
+                                    environments and interactive experiences.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#top" class="no-underline">
+                        <div class="skill-item">
+                            <div class="skill-logo">
+                                <img
+                                    src="logos/rhino3d-icon-2048x1543-78f6rjal.png"
+                                    alt="Rhino 3D"
+                                />
+                            </div>
+                            <div class="skill-text">
+                                <h3>Rhino 3D</h3>
+                                <p>
+                                    Specialized in creating precise 3D models
+                                    using Rhino. Experienced in NURBS modeling
+                                    for architecture, product design, and
+                                    digital fabrication.
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact Me</h2>
+                <p class="contact-intro">
+                    Feel free to reach out if you have any questions or would
+                    like to discuss potential projects.
+                </p>
+
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        <div class="profile-picture">
+                            <img src="images/profilbild.JPG" alt="Profilbild" />
+                            <div class="grid-caption"></div>
+                        </div>
+                        <p>
+                            <strong>Email:</strong>
+                            <a href="mailto:filip.arkemar@gmail.com"
+                                >filip.arkemar@gmail.com</a
+                            >
+                        </p>
+                        <p>
+                            <strong>LinkedIn:</strong>
+                            <a href="https://www.linkedin.com/in/filip-arkemar/"
+                                >Filip Arkemar</a
+                            >
+                        </p>
+                        <p>
+                            <strong>Instagram:</strong>
+                            <a
+                                href="https://www.instagram.com/pedro_official_sweden/"
+                                >pedro_official_sweden</a
+                            >
+                        </p>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <h3>Send me a message</h3>
+                        <form
+                            id="contact-form"
+                            action="https://formsubmit.co/filip.arkemar@gmail.com"
+                            method="POST"
+                        >
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    required
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-btn">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <script src="script.js"></script>
     </body>
 </html>

@@ -1,41 +1,43 @@
+// Initialize header in hidden state
 document.addEventListener("DOMContentLoaded", function () {
-  const themeSelector = document.getElementById("themeSelector");
-  const body = document.body;
+  const header = document.getElementById("main-header");
+  header.classList.add("hidden-header");
+});
 
-  function applyTheme(theme) {
-    body.classList.remove("light-mode", "dark-mode");
+// Scroll effects for header and main title with smoother transitions
+window.addEventListener("scroll", function () {
+  const header = document.getElementById("main-header");
+  const mainTitle = document.querySelector(".centered-title");
+  const scrollPosition = window.scrollY;
+  const firstSection = document.getElementById("grid-section");
+  const sectionTop = firstSection.offsetTop;
 
-    if (theme === "dark") {
-      body.classList.add("dark-mode");
-    } else if (theme === "light") {
-      body.classList.add("light-mode");
-    } else if (theme === "system") {
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        body.classList.add("dark-mode");
-      } else {
-        body.classList.add("light-mode");
-      }
+  // Start title fade out earlier and progressively
+  if (scrollPosition > 50) {
+    // Calculate fade based on scroll position
+    const fadeRatio = Math.min(scrollPosition / (sectionTop * 0.5), 1);
+    mainTitle.style.opacity = 1 - fadeRatio;
+    mainTitle.style.transform = `translateY(-${fadeRatio * 70}px)`;
+
+    // Show header when approaching the next section
+    if (scrollPosition >= sectionTop - 150) {
+      header.classList.remove("hidden-header");
+      header.classList.add("visible-header");
     }
+  } else {
+    // Reset when at the top
+    mainTitle.style.opacity = 1;
+    mainTitle.style.transform = "translateY(0)";
+    header.classList.remove("visible-header");
+    header.classList.add("hidden-header");
   }
+});
 
-  // Hämta lagrat tema vid sidladdning
-  const savedTheme = localStorage.getItem("theme") || "system";
-  themeSelector.value = savedTheme;
-  applyTheme(savedTheme);
-
-  // Lyssna på ändringar i dropdown-menyn
-  themeSelector.addEventListener("change", function () {
-    const selectedTheme = themeSelector.value;
-    localStorage.setItem("theme", selectedTheme);
-    applyTheme(selectedTheme);
+// Smooth scroll to top when clicking the header title
+document.getElementById("header-title").addEventListener("click", function (e) {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
   });
-
-  // Uppdatera om systemtemat ändras (endast om system är valt)
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", function () {
-      if (themeSelector.value === "system") {
-        applyTheme("system");
-      }
-    });
 });
