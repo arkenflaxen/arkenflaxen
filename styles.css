@@ -5,11 +5,11 @@
     --text: #222222;
     --hover-text: #333333;
     --subtle-bg: #dddddd; /* Keep subtle backgrounds as light gray */
-    --accent: #152535;
-    --accent-hover: #253545;
+    --accent: #ff5500;
+    --accent-hover: #ff7700;
     --border-color: #00000011; /* Subtle border for light */
-    --form-bg: #ddddddff;
-    --input-bg: #ccccccff;
+    --form-bg: #dddddd;
+    --input-bg: #cccccc;
     --skill-bg: #cccccc;
     --selector-color: #cccccc99;
 
@@ -27,17 +27,17 @@
         --text: #dddddd;
         --hover-text: #aaaaaa;
         --subtle-bg: #222222;
-        --accent: #aaaa00;
-        --accent-hover: #ffaa00;
+        --accent: #ff5500;
+        --accent-hover: #ff7700;
         --border-color: #ffffff11; /* Subtle border for dark */
-        --form-bg: #222222ff;
-        --input-bg: #333333ff;
+        --form-bg: #222222;
+        --input-bg: #333333;
         --skill-bg: #333333;
         --selector-color: #33333399;
     }
 }
 
-/*Main stylsen*/
+/*Main styes*/
 body {
     font-family:
         "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -421,11 +421,34 @@ a.button::after {
 
 .degree-item img {
     width: 100%;
-    height: 750px;
+    height: 250px;
     object-fit: cover;
     display: block;
     border: none;
     border-radius: var(--border-radius);
+}
+
+.degree-item {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition:
+        transform var(--transition-standard),
+        box-shadow var(--transition-standard);
+}
+
+.degree-item:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Project section styling */
+.degree-section {
+    background-color: var(--bg);
+    padding: 80px 0;
+    position: relative;
+    z-index: 1;
 }
 
 /* Text on top of project images – dolt från början */
@@ -680,7 +703,7 @@ a.button::after {
 
 .submit-btn {
     background-color: var(--accent);
-    color: #ffffff; /* Keep button text white in both modes for contrast */
+    color: var(--text); /* Keep button text white in both modes for contrast */
     padding: 12px 24px;
     border: none;
     border-radius: var(--border-radius);
@@ -696,7 +719,7 @@ a.button::after {
 
 .submit-btn:hover {
     background-color: var(--accent-hover);
-    transform: scale(1.05);
+    /*transform: scale(1.05); */
 }
 
 /* Image Modal Styles */
@@ -757,8 +780,8 @@ a.button::after {
     position: absolute;
     top: 15px;
     right: 15px;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background-color: var(--bg);
     color: var(--text);
     border: none;
@@ -775,8 +798,8 @@ a.button::after {
 }
 
 .modal-close:hover {
-    background-color: var(--accent);
-    color: #ffffff;
+    background-color: var(--input-bg);
+    color: var(--bg);
     transform: scale(1.1);
 }
 
