@@ -235,49 +235,49 @@ a.button::after {
     background-color: currentColor;
     position: absolute;
     margin: 24px 0; /*marginal till undertiteln*/
-    width: 100%; /* Adjust to better match text width */
-    left: 0%; /* Center the line */
-    right: 0%;
+    width: 100%; /* Reduced width to match title text */
+    left: 50%; /* Position at center */
+    transform: translateX(-50%); /* Center the line */
     transform-origin: center;
 }
 
 .top-line {
     margin-top: -6px;
-    transform: scaleX(0);
+    transform: translateX(-50%) scaleX(0);
     transform-origin: center;
     animation: slideInLeft 1s ease forwards 0.3s;
 }
 
 .bottom-line {
     margin-top: -6px;
-    transform: scaleX(0);
+    transform: translateX(-50%) scaleX(0);
     transform-origin: center;
     animation: slideInRight 1s ease forwards 0.3s;
 }
 
 @keyframes slideInLeft {
     from {
-        transform: scaleX(0);
+        transform: translateX(-50%) scaleX(0);
     }
     to {
-        transform: scaleX(1);
+        transform: translateX(-50%) scaleX(1);
     }
 }
 
 @keyframes slideInRight {
     from {
-        transform: scaleX(0);
+        transform: translateX(-50%) scaleX(0);
     }
     to {
-        transform: scaleX(1);
+        transform: translateX(-50%) scaleX(1);
     }
 }
 
 /*Titel animation*/
 .centered-title h1 {
-    font-size: 5rem;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
-    letter-spacing: 12px;
+    letter-spacing: 1rem;
     animation: fadeIn 0.5s ease-in forwards;
     opacity: 0;
 }
@@ -295,8 +295,9 @@ a.button::after {
 
 /* Ny animation för undertitel – ingen zoom, bara fade */
 .subtitle {
-    font-size: 1.5rem;
-    margin-top: 12px;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    margin-top: 0.7rem;
     opacity: 0;
     animation: fadeOnly 1.2s ease-in forwards 0.8s;
 }
@@ -521,7 +522,11 @@ a.button::after {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+    .horizontal-line {
+        width: 100%; /* Reduced width to match title text on small screens */
+    }
+
     .skill-item {
         flex-direction: column;
         text-align: center;
@@ -551,11 +556,12 @@ a.button::after {
 
     /* Adjust font sizes for smaller screens */
     .centered-title h1 {
-        font-size: 3rem;
+        font-size: 1.5rem;
+        letter-spacing: 9px;
     }
 
     .subtitle {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .image-grid {
@@ -737,7 +743,7 @@ a.button::after {
     width: 90%;
     height: 90%;
     max-width: 90vw;
-    max-height: 80vh;
+    max-height: 90vh;
     z-index: 10001;
     border-radius: var(--border-radius);
     overflow-y: auto;
@@ -809,7 +815,7 @@ a.button::after {
 }
 
 /* Responsive adjustments for modal */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .modal-content {
         width: 95%;
         max-width: 95vw;
