@@ -46,21 +46,40 @@ document.getElementById("header-title").addEventListener("click", function (e) {
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("image-modal");
   const modalImage = document.getElementById("modal-image");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDescription = document.getElementById("modal-description-text");
   const closeButton = document.getElementById("modal-close");
   const modalOverlay = document.querySelector(".modal-overlay");
   const gridItems = document.querySelectorAll(".grid-item");
+  
+  // Project descriptions - can be extended with more projects
+  const projectDescriptions = {
+    "Fjärilsdalen": "This project explores the natural beauty of Fjärilsdalen, showcasing the unique landscape and biodiversity of the area. The design emphasizes sustainable development while preserving the ecological balance of the valley.",
+    "Tamnougalt": "Tamnougalt is an architectural study of traditional Moroccan building techniques adapted to modern needs. The project investigates how ancient knowledge can inform contemporary sustainable design practices.",
+    "Santa Fé": "This night render of Santa Fé demonstrates advanced lighting techniques and atmosphere creation. The project focuses on creating an immersive urban environment that balances historical elements with modern infrastructure.",
+    "Malmöhus": "The Malmöhus project reimagines historical spaces for contemporary use, with particular attention to public accessibility and cultural preservation. The architectural approach respects the building's heritage while adding functional modern elements.",
+    "Hamburgsund": "The Sauna Raft project at Hamburgsund combines traditional Swedish sauna culture with innovative floating architecture. This sustainable design creates a unique experience connecting users with the surrounding natural environment."
+  };
   
   // Store the element that had focus before opening modal
   let lastFocusedElement;
 
   // Open modal with image
-  function openModal(imageSrc, altText) {
+  function openModal(imageSrc, title, altText) {
     // Save current focus for later restoration
     lastFocusedElement = document.activeElement;
     
     // Set image source and alt text
     modalImage.src = imageSrc;
     modalImage.alt = altText;
+    
+    // Set the title and description
+    modalTitle.textContent = title;
+    
+    // Get description from our project descriptions object, or use a default message
+    const description = projectDescriptions[title] || 
+                       "This is an example project showcasing architectural and design work.";
+    modalDescription.textContent = description;
     
     // Show modal with transition
     modal.classList.add("active");
@@ -98,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Make the grid item clickable
     item.addEventListener("click", function(e) {
       e.preventDefault();
-      openModal(img.src, caption || img.alt);
+      openModal(img.src, caption, img.alt);
     });
     
     // Add keyboard support for grid items
@@ -106,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Enter or Space key
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        openModal(img.src, caption || img.alt);
+        openModal(img.src, caption, img.alt);
       }
     });
   });
@@ -117,8 +136,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Close on overlay click (outside the image)
   modalOverlay.addEventListener("click", closeModal);
   
-  // Prevent closing when clicking the image itself
+  // Prevent closing when clicking the modal content (image or description)
   modalImage.addEventListener("click", function(e) {
+    e.stopPropagation();
+  });
+  
+  document.querySelector(".modal-description").addEventListener("click", function(e) {
     e.stopPropagation();
   });
 
