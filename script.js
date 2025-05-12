@@ -51,16 +51,81 @@ document.addEventListener("DOMContentLoaded", function () {
   const closeButton = document.getElementById("modal-close");
   const modalOverlay = document.querySelector(".modal-overlay");
   const gridItems = document.querySelectorAll(".grid-item");
-  
+
   // Project descriptions - can be extended with more projects
   const projectDescriptions = {
-    "Fjärilsdalen": "This project explores the natural beauty of Fjärilsdalen, showcasing the unique landscape and biodiversity of the area. The design emphasizes sustainable development while preserving the ecological balance of the valley.",
-    "Tamnougalt": "Tamnougalt is an architectural study of traditional Moroccan building techniques adapted to modern needs. The project investigates how ancient knowledge can inform contemporary sustainable design practices.",
-    "Santa Fé": "This night render of Santa Fé demonstrates advanced lighting techniques and atmosphere creation. The project focuses on creating an immersive urban environment that balances historical elements with modern infrastructure.",
-    "Malmöhus": "The Malmöhus project reimagines historical spaces for contemporary use, with particular attention to public accessibility and cultural preservation. The architectural approach respects the building's heritage while adding functional modern elements.",
-    "Hamburgsund": "The Sauna Raft project at Hamburgsund combines traditional Swedish sauna culture with innovative floating architecture. This sustainable design creates a unique experience connecting users with the surrounding natural environment."
+    Fjärilsdalen: `This project was part of an elective bachelor course
+    that mostly focused on extensive use of digital tools
+    like subdivision and grasshopper.
+    The site, on the outskirts of eastern Helsingborg,
+    already had a planned development that involved turning
+    top grade arable land into predominantly suburbs.
+    We were tasked with creating a new twist of the swedish
+    concept “Naturum”, making it more focused on the
+    conservation and appreciation of agricultural sites
+    like this. The biggest challenge in creating this
+    blobby and organic architecture was how to convey
+    its spaces through two dimensional drawings.
+    The final proposal is a very sculptural building meant
+    to symbolise the merge between nature and structure as
+    a dichotomy yet with a symbiotic relationship.
+    `,
+    Tamnougalt: `In this course we were tasked with
+    developing architecture through
+    biomimicry and parametric design.
+    The site was in a small rural town in
+    the Moroccan country side and for
+    our concept we chose to make new
+    roofs for an old abandoned kasbah,
+    making it livable again. Our biggest
+    concern was shading from the sun
+    and to have minimal impact on the
+    rammed earth walls. We experimented
+    with knitting to make a fabric that
+    could have variable density and the
+    final proposal was a knitted fabric
+    thet shades in accordance with sun
+    hours and wind. It is suspended with
+    a skeleton of metal that uses the
+    existing constructional holes and
+    does not require any extra means of
+    mounting.`,
+    "Santa Fé": `The final project of my exchange to
+    Colombia was set in eastern Bogotá, tasked with
+    designing a recreational facility with a
+    strong emphasis on gender equality and accessability.
+    Knowing that many Colombians suffer from different
+    kinds of physical impairments due to a long
+    history of violence in the region we decided to create
+    a paralympic sports arena. It houses all of the
+    paralympic summer games that could be performed indoors
+    and is fully accessible with specific attention to the
+    requirements of the impairments of each individual sport.`,
+    Malmöhus: `This was a renovation proposal for the western wing of the Malmö
+    Museum comlpex and it focuses on creating a clearer separation between
+    the art museum and the castle to enhance the flow through the property.
+    By establishing a space between these functions, a gathering place with
+    unique qualities for expression and experiences is formed. The site’s former
+    prison building served as inspiration for the project’s overall expression,
+    this intermediate time and space becomes a dynamic and versatile area that
+    contrasts with the current structure and yet ties everything together.`,
+    Hamburgsund: `In an attempt to broaden my horizons and
+    qualifications as an architect my thesis project
+    treats architecture as a total process from initial
+    sketch to finished building, aiming to highlight
+    what kinds of problems and opportunities arise
+    from overseeing the complete construction of
+    a project. My goal was to design and construct
+    a sauna that could seamlessly integrate into
+    the existing, saltwater-sprayed, and rocky
+    bathing culture of the Swedish west coast of the
+    Bohuslän archipelago. The design is therefor
+    meant to mimic a very local typology called a
+    “vadbod” and a lot of the materials are reused
+    or upcycled, minimising costs and climate
+    impact.`,
   };
-  
+
   // Store the element that had focus before opening modal
   let lastFocusedElement;
 
@@ -68,27 +133,28 @@ document.addEventListener("DOMContentLoaded", function () {
   function openModal(imageSrc, title, altText) {
     // Save current focus for later restoration
     lastFocusedElement = document.activeElement;
-    
+
     // Set image source and alt text
     modalImage.src = imageSrc;
     modalImage.alt = altText;
-    
+
     // Set the title and description
     modalTitle.textContent = title;
-    
+
     // Get description from our project descriptions object, or use a default message
-    const description = projectDescriptions[title] || 
-                       "This is an example project showcasing architectural and design work.";
+    const description =
+      projectDescriptions[title] ||
+      "This is an example project showcasing architectural and design work.";
     modalDescription.textContent = description;
-    
+
     // Show modal with transition
     modal.classList.add("active");
-    
+
     // Focus the close button for keyboard accessibility
     setTimeout(() => {
       closeButton.focus();
     }, 50);
-    
+
     // Prevent background scrolling
     document.body.style.overflow = "hidden";
   }
@@ -97,10 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function closeModal() {
     // Hide modal with transition
     modal.classList.remove("active");
-    
+
     // Restore scroll
     document.body.style.overflow = "";
-    
+
     // Restore focus to the element that was focused before opening the modal
     if (lastFocusedElement) {
       setTimeout(() => {
@@ -110,18 +176,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Add click event to each grid item
-  gridItems.forEach(item => {
+  gridItems.forEach((item) => {
     const img = item.querySelector("img");
     const caption = item.querySelector(".grid-caption").textContent;
-    
+
     // Make the grid item clickable
-    item.addEventListener("click", function(e) {
+    item.addEventListener("click", function (e) {
       e.preventDefault();
       openModal(img.src, caption, img.alt);
     });
-    
+
     // Add keyboard support for grid items
-    item.addEventListener("keydown", function(e) {
+    item.addEventListener("keydown", function (e) {
       // Enter or Space key
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -132,21 +198,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Close on X button click
   closeButton.addEventListener("click", closeModal);
-  
+
   // Close on overlay click (outside the image)
   modalOverlay.addEventListener("click", closeModal);
-  
+
   // Prevent closing when clicking the modal content (image or description)
-  modalImage.addEventListener("click", function(e) {
-    e.stopPropagation();
-  });
-  
-  document.querySelector(".modal-description").addEventListener("click", function(e) {
+  modalImage.addEventListener("click", function (e) {
     e.stopPropagation();
   });
 
+  document
+    .querySelector(".modal-description")
+    .addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+
   // Close on ESC key
-  window.addEventListener("keydown", function(e) {
+  window.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeModal();
     }
