@@ -5,29 +5,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Filip Arkemar</title>
         <link rel="stylesheet" href="styles.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
     </head>
     <body>
         <div class="background-overlay"></div>
         <header id="main-header" class="hidden-header">
             <nav>
-                <button class="hamburger-btn" aria-label="Menu">
+                <button
+                    class="hamburger-btn"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                >
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                 </button>
-                
-                <h1><a href="#top" id="header-title" class="nav-link">FILIP ARKEMAR</a></h1>
-                
+
+                <h1>
+                    <a href="#top" id="header-title" class="nav-link"
+                        >FILIP ARKEMAR</a
+                    >
+                </h1>
+
                 <button class="contact-btn" aria-label="Contact">
-                    <i class="fas fa-envelope-open-text nav-icon"></i>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
                 </button>
             </nav>
             <div class="nav-overlay">
                 <div class="nav-menu">
                     <a href="#top" class="nav-link">HOME</a>
                     <a href="#grid-section" class="nav-link">PROJECTS</a>
-                    <a href="#degree-section" class="nav-link">DEGREE PROJECT</a>
+                    <a href="#degree-section" class="nav-link"
+                        >DEGREE PROJECT</a
+                    >
                     <a href="#skills-section" class="nav-link">SKILLS</a>
                     <a href="#contact-section" class="nav-link">CONTACT</a>
                 </div>
@@ -51,42 +66,51 @@
             <div class="container">
                 <h2 class="section-title">Projects</h2>
                 <div class="image-grid">
-                    <a href="#top" class="no-underline">
-                        <div class="grid-item">
-                            <img
-                                src="images/fjärilsdalen_från_åkern.png"
-                                alt="Fjärilsdalen"
-                            />
-                            <div class="grid-caption">Fjärilsdalen</div>
+                    <div class="grid-item">
+                        <img
+                            src="images/fjärilsdalen_från_åkern.png"
+                            alt="Fjärilsdalen"
+                        />
+                        <div class="grid-caption">
+                            Fjärilsdalen
+                            <a href="fjarilsdalen.html" class="read-more-btn"
+                                >Read More</a
+                            >
                         </div>
-                    </a>
-                    <a href="#top" class="no-underline">
-                        <div class="grid-item">
-                            <img
-                                src="images/tamnougalt_torg.png"
-                                alt="Tamnougalt"
-                            />
-                            <div class="grid-caption">Tamnougalt</div>
+                    </div>
+                    <div class="grid-item">
+                        <img
+                            src="images/tamnougalt_torg.png"
+                            alt="Tamnougalt"
+                        />
+                        <div class="grid-caption">
+                            Tamnougalt
+                            <a href="tamnougalt.html" class="read-more-btn"
+                                >Read More</a
+                            >
                         </div>
-                    </a>
-                    <a href="#top" class="no-underline">
-                        <div class="grid-item">
-                            <img
-                                src="images/santa_fé_nightrender.jpg"
-                                alt="Santa Fé"
-                            />
-                            <div class="grid-caption">Santa Fé</div>
+                    </div>
+                    <div class="grid-item">
+                        <img
+                            src="images/santa_fé_nightrender.jpg"
+                            alt="Santa Fé"
+                        />
+                        <div class="grid-caption">
+                            Santa Fé
+                            <a href="santafe.html" class="read-more-btn"
+                                >Read More</a
+                            >
                         </div>
-                    </a>
-                    <a href="#top" class="no-underline">
-                        <div class="grid-item">
-                            <img
-                                src="images/malmohus_giraff.png"
-                                alt="Malmöhus"
-                            />
-                            <div class="grid-caption">Malmöhus</div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="images/malmohus_giraff.png" alt="Malmöhus" />
+                        <div class="grid-caption">
+                            Malmöhus
+                            <a href="malmohus.html" class="read-more-btn"
+                                >Read More</a
+                            >
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -312,7 +336,10 @@
                 <img id="modal-image" src="" alt="" />
                 <div class="modal-description">
                     <h3 id="modal-title" class="modal-title"></h3>
-                    <div id="modal-description-text" class="modal-description-text"></div>
+                    <div
+                        id="modal-description-text"
+                        class="modal-description-text"
+                    ></div>
                 </div>
                 <button
                     id="modal-close"
@@ -325,31 +352,57 @@
         </div>
 
         <!-- Contact Form Modal -->
-        <div id="contact-modal" class="nav-overlay contact-overlay">
+        <div id="contact-modal" class="contact-overlay">
             <div class="contact-form-wrapper">
                 <h3>Send me a message</h3>
-                <form id="contact-modal-form" action="https://formsubmit.co/filip.arkemar@gmail.com" method="POST">
+                <form
+                    id="contact-modal-form"
+                    action="https://formsubmit.co/filip.arkemar@gmail.com"
+                    method="POST"
+                >
                     <div class="form-group">
                         <label for="modal-name">Name</label>
-                        <input type="text" id="modal-name" name="name" required />
+                        <input
+                            type="text"
+                            id="modal-name"
+                            name="name"
+                            required
+                        />
                     </div>
 
                     <div class="form-group">
                         <label for="modal-email">Email</label>
-                        <input type="email" id="modal-email" name="email" required />
+                        <input
+                            type="email"
+                            id="modal-email"
+                            name="email"
+                            required
+                        />
                     </div>
 
                     <div class="form-group">
                         <label for="modal-subject">Subject</label>
-                        <input type="text" id="modal-subject" name="subject" required />
+                        <input
+                            type="text"
+                            id="modal-subject"
+                            name="subject"
+                            required
+                        />
                     </div>
 
                     <div class="form-group">
                         <label for="modal-message">Message</label>
-                        <textarea id="modal-message" name="message" rows="5" required></textarea>
+                        <textarea
+                            id="modal-message"
+                            name="message"
+                            rows="5"
+                            required
+                        ></textarea>
                     </div>
 
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="submit-btn">
+                        Send Message
+                    </button>
                 </form>
             </div>
         </div>

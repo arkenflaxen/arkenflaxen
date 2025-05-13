@@ -1,9 +1,3 @@
-// Initialize header in hidden state
-document.addEventListener("DOMContentLoaded", function () {
-  const header = document.getElementById("main-header");
-  header.classList.add("hidden-header");
-});
-
 // Scroll effects for header and main title with smoother transitions
 window.addEventListener("scroll", function () {
   const header = document.getElementById("main-header");
@@ -18,18 +12,10 @@ window.addEventListener("scroll", function () {
     const fadeRatio = Math.min(scrollPosition / (sectionTop * 0.5), 1);
     mainTitle.style.opacity = 1 - fadeRatio;
     mainTitle.style.transform = `translateY(-${fadeRatio * 70}px)`;
-
-    // Show header when approaching the next section
-    if (scrollPosition >= sectionTop - 150) {
-      header.classList.remove("hidden-header");
-      header.classList.add("visible-header");
-    }
   } else {
     // Reset when at the top
     mainTitle.style.opacity = 1;
     mainTitle.style.transform = "translateY(0)";
-    header.classList.remove("visible-header");
-    header.classList.add("hidden-header");
   }
 });
 
@@ -52,7 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalOverlay = document.querySelector(".modal-overlay");
   const gridItems = document.querySelectorAll(".grid-item");
 
-  // Project descriptions - can be extended with more projects
   const projectDescriptions = {
     Fjärilsdalen: `This project was part of an elective bachelor course
     that mostly focused on extensive use of digital tools
@@ -126,69 +111,44 @@ document.addEventListener("DOMContentLoaded", function () {
     impact.`,
   };
 
-  // Store the element that had focus before opening modal
   let lastFocusedElement;
 
-  // Open modal with image
   function openModal(imageSrc, title, altText) {
-    // Save current focus for later restoration
     lastFocusedElement = document.activeElement;
-
-    // Set image source and alt text
     modalImage.src = imageSrc;
     modalImage.alt = altText;
-
-    // Set the title and description
     modalTitle.textContent = title;
-
-    // Get description from our project descriptions object, or use a default message
     const description =
       projectDescriptions[title] ||
       "This is an example project showcasing architectural and design work.";
     modalDescription.textContent = description;
-
-    // Show modal with transition
     modal.classList.add("active");
-
-    // Focus the close button for keyboard accessibility
     setTimeout(() => {
       closeButton.focus();
     }, 50);
-
-    // Prevent background scrolling
-    document.body.style.overflow = "hidden";
+    // Allow scrolling with modal open
   }
 
-  // Close modal function
   function closeModal() {
-    // Hide modal with transition
     modal.classList.remove("active");
-
-    // Restore scroll
-    document.body.style.overflow = "";
-
-    // Restore focus to the element that was focused before opening the modal
+    // No need to reset overflow as scrolling remains enabled
     if (lastFocusedElement) {
       setTimeout(() => {
         lastFocusedElement.focus();
-      }, 300); // Match transition timing
+      }, 300);
     }
   }
 
-  // Add click event to each grid item
   gridItems.forEach((item) => {
     const img = item.querySelector("img");
     const caption = item.querySelector(".grid-caption").textContent;
 
-    // Make the grid item clickable
     item.addEventListener("click", function (e) {
       e.preventDefault();
       openModal(img.src, caption, img.alt);
     });
 
-    // Add keyboard support for grid items
     item.addEventListener("keydown", function (e) {
-      // Enter or Space key
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         openModal(img.src, caption, img.alt);
@@ -196,24 +156,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Close on X button click
   closeButton.addEventListener("click", closeModal);
-
-  // Close on overlay click (outside the image)
   modalOverlay.addEventListener("click", closeModal);
-
-  // Prevent closing when clicking the modal content (image or description)
   modalImage.addEventListener("click", function (e) {
     e.stopPropagation();
   });
-
   document
     .querySelector(".modal-description")
     .addEventListener("click", function (e) {
       e.stopPropagation();
     });
 
-  // Close on ESC key
   window.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeModal();
@@ -222,127 +175,159 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Hamburger menu functionality
-document.addEventListener("DOMContentLoaded", function() {
-  const hamburgerBtn = document.querySelector('.hamburger-btn');
-  const navOverlay = document.querySelector('.nav-overlay');
-  const navLinks = document.querySelectorAll('.nav-overlay .nav-link');
-  const sections = document.querySelectorAll('section[id]');
-  
-  function toggleMenu() {
-    hamburgerBtn.classList.toggle('active');
-    navOverlay.classList.toggle('active');
-    
-    // Toggle body scroll
-    if (navOverlay.classList.contains('active')) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }
-  
-  // Update active section in the menu
-  function setActiveSection() {
-    const scrollPosition = window.scrollY + 100; // Offset for better detection
+document.addEventListener("DOMContentLoaded", function () {
+  const hamburgerBtn = document.querySelector(".hamburger-btn");
+  const navOverlay = document.querySelector(".nav-overlay");
+  const navLinks = document.querySelectorAll(".nav-overlay .nav-link");
+  const sections = document.querySelectorAll("section[id]");
 
-    sections.forEach(section => {
+  if (!hamburgerBtn || !navOverlay) {
+    console.error("Hamburger menu elements not found");
+    return;
+  }
+
+  function toggleMenu(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    hamburgerBtn.classList.toggle("active");
+    navOverlay.classList.toggle("active");
+  }
+
+  function setActiveSection() {
+    const scrollPosition = window.scrollY + 100;
+
+    // Check if at the top of the page (home section)
+    if (scrollPosition < 150) {
+      // Set home link as active
+      navLinks.forEach((link) => link.classList.remove("active"));
+      const homeLink = document.querySelector(`.nav-link[href="#top"]`);
+      if (homeLink) {
+        homeLink.classList.add("active");
+      }
+      return; // Skip other section checks
+    }
+
+    // Check other sections
+    sections.forEach((section) => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-      const menuLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-      
-      if (menuLink && scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        navLinks.forEach(link => link.classList.remove('active'));
-        menuLink.classList.add('active');
+      const sectionId = section.getAttribute("id");
+      const menuLink = document.querySelector(
+        `.nav-link[href="#${sectionId}"]`,
+      );
+      if (
+        menuLink &&
+        scrollPosition >= sectionTop &&
+        scrollPosition < sectionTop + sectionHeight
+      ) {
+        navLinks.forEach((link) => link.classList.remove("active"));
+        menuLink.classList.add("active");
       }
     });
   }
 
-  hamburgerBtn.addEventListener('click', toggleMenu);
+  // Add click event listener
+  hamburgerBtn.addEventListener("click", toggleMenu);
 
-  // Close menu when clicking a link
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      hamburgerBtn.classList.remove('active');
-      navOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-  });
-  
-  // Close on ESC key
-  window.addEventListener("keydown", function(e) {
-    if (e.key === "Escape" && navOverlay.classList.contains("active")) {
-      hamburgerBtn.classList.remove('active');
-      navOverlay.classList.remove('active');
-      document.body.style.overflow = '';
+  // Add keyboard accessibility
+  hamburgerBtn.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleMenu(e);
     }
   });
-  
-  // Update active section on scroll
-  window.addEventListener('scroll', setActiveSection);
-  
-  // Set initial active section
+
+  // Make sure button is focusable
+  hamburgerBtn.setAttribute("tabindex", "0");
+
+  // Close menu when clicking outside
+  document.addEventListener("click", function (e) {
+    if (
+      !navOverlay.contains(e.target) &&
+      !hamburgerBtn.contains(e.target) &&
+      navOverlay.classList.contains("active")
+    ) {
+      toggleMenu();
+    }
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault(); // Prevent default hash navigation
+      const targetId = link.getAttribute("href").substring(1); // Remove the # from href
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+      // Menu stays open as per previous requirements
+    });
+  });
+
+  // Handle escape key
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && navOverlay.classList.contains("active")) {
+      toggleMenu();
+    }
+  });
+
+  window.addEventListener("scroll", setActiveSection);
   setActiveSection();
 });
 
 // Contact form modal functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const contactBtn = document.querySelector('.contact-btn');
-    const contactModal = document.getElementById('contact-modal');
-    const contactForm = document.getElementById('contact-modal-form');
-    
-    if (contactBtn && contactModal) {
-        function toggleContactModal() {
-            contactModal.classList.toggle('active');
-            contactBtn.classList.toggle('active');
-            
-            // Toggle body scroll
-            if (contactModal.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-                // Focus first input after animation
-                setTimeout(() => {
-                    document.getElementById('modal-name').focus();
-                }, 300);
-            } else {
-                document.body.style.overflow = '';
-            }
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  const contactBtn = document.querySelector(".contact-btn");
+  const contactModal = document.getElementById("contact-modal");
+  const contactForm = document.getElementById("contact-modal-form");
 
-        // Open/close modal
-        contactBtn.addEventListener('click', toggleContactModal);
-        
-        // Open modal with keyboard
-        contactBtn.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleContactModal();
-            }
-        });
-
-        // Close on background click
-        contactModal.addEventListener('click', function(e) {
-            if (e.target === contactModal) {
-                toggleContactModal();
-            }
-        });
-
-        // Stop propagation on form click
-        if (contactForm) {
-            contactForm.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-            
-            // Handle form submission
-            contactForm.addEventListener('submit', function(e) {
-                // Form will submit normally
-                setTimeout(toggleContactModal, 100);
-            });
-        }
-
-        // Close on ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && contactModal.classList.contains('active')) {
-                toggleContactModal();
-            }
-        });
+  if (contactBtn && contactModal) {
+    function toggleContactModal() {
+      contactModal.classList.toggle("active");
+      contactBtn.classList.toggle("active");
+      // Allow scrolling with contact modal open
+      // Page remains scrollable when any modal is open for consistent behavior
+      if (contactModal.classList.contains("active")) {
+        setTimeout(() => {
+          const firstInput = document.getElementById("modal-name");
+          if (firstInput) firstInput.focus();
+        }, 300);
+      }
     }
+
+    contactBtn.addEventListener("click", toggleContactModal);
+    contactBtn.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleContactModal();
+      }
+    });
+
+    contactModal.addEventListener("click", function (e) {
+      if (e.target === contactModal) {
+        toggleContactModal();
+      }
+    });
+
+    if (contactForm) {
+      contactForm.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+
+      contactForm.addEventListener("submit", function (e) {
+        setTimeout(toggleContactModal, 100);
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && contactModal.classList.contains("active")) {
+        toggleContactModal();
+      }
+    });
+  }
 });

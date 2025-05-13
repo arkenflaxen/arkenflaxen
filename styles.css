@@ -1,12 +1,13 @@
 /* CSS Variables for both light and dark mode */
 :root {
-    /* Light mode colors */
+    /* RGB values for background colors (for transparency) */
+    --bg-rgb: 221, 221, 221; /* Light mode RGB */
     --bg: #dddddd; /* Base background color - light mode for project section */
-    --text: #222222;
+    --text: #222222; /* light mode background */
     --hover-text: #333333;
     --subtle-bg: #dddddd; /* Keep subtle backgrounds as light gray */
     --accent: #ff5500;
-    --accent-hover: #ff7700;
+    --accent-hover: #ff1100;
     --border-color: #00000011; /* Subtle border for light */
     --form-bg: #dddddd;
     --input-bg: #cccccc;
@@ -16,19 +17,20 @@
     /* Common variables (same for both modes) */
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.3);
-    --transition-standard: 0.3s ease;
+    --transition-standard: 0.2s ease;
     --border-radius: 6px;
 }
 
 /* Dark mode variables */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #222222; /* Dark mode for project section */
+        --bg-rgb: 34, 34, 34; /* Dark mode RGB */
+        --bg: #222222; /* Dark mode background */
         --text: #dddddd;
         --hover-text: #aaaaaa;
         --subtle-bg: #222222;
         --accent: #ff5500;
-        --accent-hover: #ff7700;
+        --accent-hover: #ff1100;
         --border-color: #ffffff11; /* Subtle border for dark */
         --form-bg: #222222;
         --input-bg: #333333;
@@ -77,36 +79,22 @@ body::before {
 }
 
 /*Titel till startsidan*/
-h1,
-h2 {
+h1 {
     font-family: "Trebuchet MS", sans-serif;
     color: var(--text);
-}
-
-h1 {
     font-size: 18px;
     margin-top: 0;
 }
 
-/*Undertitel för varje del av sidan*/
+/*Underitel till sidan*/
 h2 {
-    font-size: 18px;
+    font-family: "Trebuchet MS", sans-serif;
+    color: var(--text);
+    font-size: 8px;
     margin-top: 10px;
 }
 
-/* Header navigation that overlays everything after scrolling down */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 9999; /* Ensure it stays above all content */
-    transition:
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.3s ease;
-}
-
-/*Also header styles*/
+/*Header styles*/
 nav {
     position: fixed;
     top: 0;
@@ -125,72 +113,42 @@ nav {
         transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         background-color var(--transition-standard);
     box-shadow: var(--shadow);
-    padding: 0 12px; /* Reduced from 20px to 12px */
+    padding: 0px;
 }
 
-/* Center the title */
+/* Center header title */
 nav h1 {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     margin: 0;
+    letter-spacing: 0.4rem;
 }
-
-/* Contact button styles */
-.contact-btn {
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-    padding: 8px; /* Reduced padding */
-    font-size: 16px;
-    font-family: inherit;
-    transition: color var(--transition-standard);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    border-radius: var(--border-radius);
-}
-
-.contact-btn:hover {
-    color: var(--accent);
-}
-
-/* Shared navigation icon styles */
-.nav-icon {
-    font-size: 24px;
-    color: var(--text);
-    transition: color var(--transition-standard);
-}
-
-button:hover .nav-icon {
-    color: var(--hover-text);
-}
-
-/* Contact modal specific styles */
-/* Removed unused contact-modal classes */
 
 /* Contact form overlay styles */
 .contact-overlay {
     position: fixed;
     top: 0;
-    right: 0; /* Positioned on the right side instead of left */
-    width: 300px;
+    right: 0; /* Keep positioned on the right side */
+    width: 175px; /* Match nav-overlay width */
     height: 100vh;
-    background-color: var(--bg);
-    backdrop-filter: blur(10px);
+    background-color: rgba(
+        var(--bg-rgb),
+        0.85
+    ); /* Solid semi-transparent background */
+    backdrop-filter: blur(20px); /* Match nav-overlay stronger blur */
+    -webkit-backdrop-filter: blur(20px); /* Safari support */
     z-index: 9998;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(100%); /* Move right instead of left */
+    transform: translateX(100%); /* Keep off-screen to the right */
     transition:
         transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.3s ease,
         visibility 0.3s ease;
     display: flex;
     justify-content: flex-start;
-    padding-top: 80px;
+    padding-top: 60px; /* Reduced space for the header */
     box-shadow: var(--shadow);
 }
 
@@ -198,19 +156,19 @@ button:hover .nav-icon {
 .contact-overlay.active {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
+    transform: translateX(0); /* Slide in from right */
 }
 
 .contact-form-wrapper {
+    width: 100%;
+    padding: 0 12px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    max-width: 500px;
-    margin: 0 auto;
+    gap: 8px;
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateX(
+        20px
+    ); /* Changed from translateY to translateX for right-side entry */
     transition:
         opacity 0.3s ease,
         transform 0.3s ease;
@@ -219,15 +177,14 @@ button:hover .nav-icon {
 /* Active state for contact form wrapper */
 .contact-overlay.active .contact-form-wrapper {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
     transition-delay: 0.2s;
 }
 
 .contact-form-wrapper h3 {
     color: var(--text);
-    font-size: 24px;
-    margin-bottom: 30px;
-    text-align: center;
+    font-size: 16px;
+    margin-bottom: 12px;
 }
 
 .contact-form-wrapper form {
@@ -236,7 +193,8 @@ button:hover .nav-icon {
 
 /* Update form styles to match the theme */
 .contact-form-wrapper .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .contact-form-wrapper input,
@@ -244,73 +202,102 @@ button:hover .nav-icon {
     background-color: var(--input-bg);
     border: none;
     border-radius: var(--border-radius);
-    padding: 12px;
+    padding: 8px 10px;
     width: 100%;
     color: var(--text);
-    font-size: 16px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent);
 }
 
 .contact-form-wrapper label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     color: var(--text);
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .contact-form-wrapper .submit-btn {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    font-size: 14px;
     width: 100%;
-    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
-/* Mobile styling for navigation elements */
+.contact-form-wrapper .submit-btn:hover {
+    background-color: var(--accent-hover);
+}
 
-/* Hamburger button styles */
-.hamburger-btn {
+/* Shared styles for hamburger and contact buttons */
+.hamburger-btn,
+.contact-btn {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 4px; /* Reduced gap */
+    gap: 4px;
     z-index: 10000;
+    position: relative;
     transition: all 0.2s ease;
     border-radius: var(--border-radius);
+    width: 40px;
+    height: 40px;
+    margin: 30px;
 }
 
-.hamburger-btn:hover {
+.hamburger-btn:hover,
+.contact-btn:hover {
     color: var(--accent);
 }
 
+/* Hamburger lines (shared) */
 .hamburger-line {
-    width: 20px; /* Reduced width */
+    width: 20px;
     height: 2px;
     background-color: var(--text);
     border-radius: 2px;
     transform-origin: center;
-    transition: 
+    transition:
         transform 0.2s ease,
         opacity 0.2s ease,
         background-color 0.2s ease;
+    display: block;
+    pointer-events: none;
 }
 
-/* Simplified hamburger animation for open state */
-.hamburger-btn.active .hamburger-line {
+/* Active states - shared logic */
+.hamburger-btn.active .hamburger-line,
+.contact-btn.active .hamburger-line {
     background-color: var(--accent);
 }
 
-.hamburger-btn.active .hamburger-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg); /* Reduced translation */
+.hamburger-btn.active .hamburger-line:nth-child(1),
+.contact-btn.active .hamburger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
 }
 
-.hamburger-btn.active .hamburger-line:nth-child(2) {
+.hamburger-btn.active .hamburger-line:nth-child(2),
+.contact-btn.active .hamburger-line:nth-child(2) {
     opacity: 0;
 }
 
-.hamburger-btn.active .hamburger-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg); /* Reduced translation */
+.hamburger-btn.active .hamburger-line:nth-child(3),
+.contact-btn.active .hamburger-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
 }
 
 /* Navigation overlay */
@@ -318,10 +305,11 @@ button:hover .nav-icon {
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px; /* Fixed width instead of full screen */
+    width: 175px;
     height: 100vh;
-    background-color: var(--bg);
-    backdrop-filter: blur(10px);
+    background-color: rgba(var(--bg-rgb), 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 9998;
     opacity: 0;
     visibility: hidden;
@@ -332,8 +320,9 @@ button:hover .nav-icon {
         visibility 0.3s ease;
     display: flex;
     justify-content: flex-start;
-    padding-top: 80px; /* Space for the header */
+    padding-top: 48px;
     box-shadow: var(--shadow);
+    pointer-events: auto;
 }
 
 .nav-overlay.active {
@@ -345,7 +334,7 @@ button:hover .nav-icon {
 /* Navigation menu */
 .nav-menu {
     width: 100%;
-    padding: 0 20px;
+    padding: 12px 12px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -354,8 +343,8 @@ button:hover .nav-icon {
 .nav-menu .nav-link {
     display: flex;
     align-items: center;
-    font-size: 18px;
-    padding: 15px 20px;
+    font-size: 12px;
+    padding: 12px;
     margin-bottom: 5px;
     border-radius: var(--border-radius);
     background-color: transparent;
@@ -366,52 +355,48 @@ button:hover .nav-icon {
         color 0.3s ease,
         transform 0.3s ease,
         opacity 0.3s ease;
+    text-decoration: none;
     position: relative;
 }
+
+.nav-menu .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 5px;
+    height: 2px;
+    background-color: var(--text);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: var(--transition-standard);
+}
+
+.nav-menu .nav-link:hover {
+    background-color: var(--input-bg);
+}
+
+/* Denna funkar inte riktigt*/
+/*
+.nav-menu .nav-link:hover::after {
+    transform: scaleX(0.7);
+    left: -7%;
+}
+*/
 
 .nav-overlay.active .nav-link {
     opacity: 1;
     transform: translateX(0);
 }
 
-/* Active state for nav links */
 .nav-link.active {
-    background-color: var(--accent);
-    color: var(--bg);
+    color: var(--accent);
 }
 
-/* Hover state */
-.nav-menu .nav-link:hover:not(.active) {
-    background-color: var(--input-bg);
+/* Stagger animations */
+.nav-menu .nav-link:nth-child(n) {
+    transition-delay: calc(0.1s * var(--i, 1));
 }
-
-/* Position indicator dot */
-.nav-link::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--accent);
-    opacity: 0;
-    transform: translateX(-20px);
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
-}
-
-.nav-link.active::before {
-    opacity: 1;
-    transform: translateX(-10px);
-}
-
-/* Stagger the animation of menu items */
-.nav-menu .nav-link:nth-child(1) { transition-delay: 0.1s; }
-.nav-menu .nav-link:nth-child(2) { transition-delay: 0.2s; }
-.nav-menu .nav-link:nth-child(3) { transition-delay: 0.3s; }
-.nav-menu .nav-link:nth-child(4) { transition-delay: 0.4s; }
-.nav-menu .nav-link:nth-child(5) { transition-delay: 0.5s; }
 
 /* Mobile styles merged into main media query */
 
@@ -488,6 +473,8 @@ button a::after,
 }
 
 /* Header visibility classes */
+/* Header is now always visible - these classes are deprecated */
+/*
 .hidden-header {
     transform: translateY(-100%);
     opacity: 0;
@@ -499,6 +486,7 @@ button a::after,
     opacity: 1;
     pointer-events: auto;
 }
+*/
 
 /* Centered title styles */
 .centered-title {
@@ -507,7 +495,6 @@ button a::after,
     transition:
         opacity 0.7s ease,
         transform 0.7s ease;
-    padding: 30px 0;
     will-change: opacity, transform;
 }
 
@@ -657,7 +644,6 @@ button a::after,
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0;
 }
 
 /*So this one is for the sections apparently*/
@@ -702,7 +688,7 @@ button a::after,
 /* Project section styling */
 .degree-section {
     background-color: var(--bg);
-    padding: 80px 0;
+    padding: 10px;
     position: relative;
     z-index: 1;
 }
@@ -715,6 +701,7 @@ button a::after,
     right: 0;
     bottom: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: var(--text);
@@ -724,6 +711,7 @@ button a::after,
     transition:
         opacity 0.3s ease,
         background-color 0.3s ease;
+    padding: 20px;
 }
 
 /* Vid hover – visa texten och lägg till bakgrund */
@@ -734,17 +722,52 @@ button a::after,
     ); /* eller rgba(0,0,0,0.4) om du vill ha semitransparent */
 }
 
+/* Read more button styling */
+.read-more-btn {
+    display: inline-block;
+    color: var(--text);
+    font-size: 1rem;
+    margin-top: 10px;
+    text-decoration: none;
+    position: relative;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+.read-more-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.read-more-btn:hover {
+    opacity: 1;
+}
+
+.read-more-btn:hover::after {
+    transform: scaleX(1);
+}
+
 /* Skills section styling */
 .skills-section {
     background-color: var(--bg);
-    padding: 80px 0;
+    padding: 10px 0;
     color: var(--text);
 }
 
 /* Project section styling */
 .project-section {
     background-color: var(--bg);
-    padding: 80px 0;
+    padding: 10px 0;
     position: relative;
     z-index: 1;
 }
@@ -801,60 +824,61 @@ button a::after,
     line-height: 1.5;
 }
 
-/* Responsive adjustments for@media (max-width: 600px) {
+/* Responsive adjustments for */
+@media (max-width: 600px) {
     /* Navigation mobile styles */
     nav {
-        padding: 0 8px;
+        padding: 0 0px;
     }
 
     nav h1 {
         font-size: 16px;
     }
-    
-    .contact-btn {
-        font-size: 14px;
-        padding: 6px;
-    }
-    
+
     .nav-icon {
         font-size: 18px;
     }
 
     /* Nav overlay mobile styles */
     .nav-overlay {
-        width: 250px;
+        width: 100vw;
+    }
+
+    /* Contact overlay mobile styles */
+    .contact-overlay {
+        width: 100vw;
     }
 
     .nav-menu .nav-link {
-        font-size: 16px;
-        padding: 12px 15px;
+        font-size: 18px;
+        padding: 18px 24px;
     }
-    
+
     /* Landing page mobile styles */
     .horizontal-line {
         width: 100%;
     }
-    
+
     .centered-title h1 {
         font-size: 1.5rem;
         letter-spacing: 9px;
     }
-    
+
     .subtitle {
         font-size: 1rem;
     }
-    
+
     /* Skills section mobile styles */
     .skill-item {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .skill-logo {
         margin-right: 0;
         margin-bottom: 15px;
     }
-    
+
     /* Contact section mobile styles */
     .contact-container {
         width: 90%;
@@ -862,18 +886,18 @@ button a::after,
         align-items: center;
         gap: 20px;
     }
-    
+
     .contact-info,
     .contact-form-container {
         width: 100%;
         margin: 0;
     }
-    
+
     /* Projects grid mobile styles */
     .grid-item {
         transform: none;
     }
-    
+
     .image-grid {
         grid-template-columns: 1fr;
     }
@@ -881,7 +905,7 @@ button a::after,
 
 /* Contact section styling */
 .contact-section {
-    padding: 80px 0; /* Remove horizontal padding */
+    padding: 10px 0; /* Remove horizontal padding */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -895,7 +919,7 @@ button a::after,
     margin: 0 auto 40px;
     font-size: 1.1rem;
     line-height: 1.6;
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
 /*Profile picture*/

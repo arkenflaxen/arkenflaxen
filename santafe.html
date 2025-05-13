@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Santa Fé Project | Filip Arkemar</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="background-overlay"></div>
+        <header id="main-header">
+            <nav>
+                <button class="hamburger-btn" aria-label="Menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+
+                <h1>
+                    <a href="index.html" id="header-title" class="nav-link"
+                        >FILIP ARKEMAR</a
+                    >
+                </h1>
+
+                <button class="contact-btn" aria-label="Contact">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+            <div class="nav-overlay">
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="index.html#grid-section" class="nav-link">PROJECTS</a>
+                    <a href="index.html#degree-section" class="nav-link"
+                        >DEGREE PROJECT</a
+                    >
+                    <a href="index.html#skills-section" class="nav-link">SKILLS</a>
+                    <a href="index.html#contact-section" class="nav-link">CONTACT</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="project-section" style="padding-top: 120px;">
+            <div class="container">
+                <h2 class="section-title">Santa Fé Project</h2>
+                
+                <div class="project-description" style="margin-bottom: 50px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    <p>
+                        The Santa Fé project explores contemporary urban design with influences from Southwestern American architecture. This night rendering showcases the interplay of light and shadow in the built environment, emphasizing the project's focus on creating vibrant public spaces that come alive after dark.
+                    </p>
+                </div>
+
+                <div class="image-grid">
+                    <div class="grid-item">
+                        <img
+                            src="images/santa_fé_nightrender.jpg"
+                            alt="Santa Fé Night View"
+                        />
+                        <div class="grid-caption">Night Rendering</div>
+                    </div>
+                    <div class="grid-item">
+                        <img
+                            src="images/santa_fé_nightrender.jpg"
+                            alt="Santa Fé Public Space"
+                        />
+                        <div class="grid-caption">Public Square</div>
+                    </div>
+                    <div class="grid-item">
+                        <img
+                            src="images/santa_fé_nightrender.jpg"
+                            alt="Santa Fé Detail"
+                        />
+                        <div class="grid-caption">Architectural Detail</div>
+                    </div>
+                    <div class="grid-item">
+                        <img
+                            src="images/santa_fé_nightrender.jpg"
+                            alt="Santa Fé Interior"
+                        />
+                        <div class="grid-caption">Interior Lighting</div>
+                    </div>
+                </div>
+                
+                <div class="back-link" style="text-align: center; margin-top: 50px; margin-bottom: 30px;">
+                    <a href="index.html#grid-section" class="submit-btn" style="text-decoration: none; padding: 12px 24px;">Back to Projects</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Modal -->
+        <div id="contact-modal" class="contact-overlay">
+            <div class="contact-form-wrapper">
+                <h3>Send me a message</h3>
+                <form
+                    id="contact-modal-form"
+                    action="https://formsubmit.co/filip.arkemar@gmail.com"
+                    method="POST"
+                >
+                    <div class="form-group">
+                        <label for="modal-name">Name</label>
+                        <input
+                            type="text"
+                            id="modal-name"
+                            name="name"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modal-email">Email</label>
+                        <input
+                            type="email"
+                            id="modal-email"
+                            name="email"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modal-subject">Subject</label>
+                        <input
+                            type="text"
+                            id="modal-subject"
+                            name="subject"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="modal-message">Message</label>
+                        <textarea
+                            id="modal-message"
+                            name="message"
+                            rows="5"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
+
