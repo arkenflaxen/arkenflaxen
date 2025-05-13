@@ -220,3 +220,129 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Hamburger menu functionality
+document.addEventListener("DOMContentLoaded", function() {
+  const hamburgerBtn = document.querySelector('.hamburger-btn');
+  const navOverlay = document.querySelector('.nav-overlay');
+  const navLinks = document.querySelectorAll('.nav-overlay .nav-link');
+  const sections = document.querySelectorAll('section[id]');
+  
+  function toggleMenu() {
+    hamburgerBtn.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+    
+    // Toggle body scroll
+    if (navOverlay.classList.contains('active')) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+  
+  // Update active section in the menu
+  function setActiveSection() {
+    const scrollPosition = window.scrollY + 100; // Offset for better detection
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+      const menuLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+      
+      if (menuLink && scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        menuLink.classList.add('active');
+      }
+    });
+  }
+
+  hamburgerBtn.addEventListener('click', toggleMenu);
+
+  // Close menu when clicking a link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+  });
+  
+  // Close on ESC key
+  window.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && navOverlay.classList.contains("active")) {
+      hamburgerBtn.classList.remove('active');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Update active section on scroll
+  window.addEventListener('scroll', setActiveSection);
+  
+  // Set initial active section
+  setActiveSection();
+});
+
+// Contact form modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const contactBtn = document.querySelector('.contact-btn');
+    const contactModal = document.getElementById('contact-modal');
+    const contactForm = document.getElementById('contact-modal-form');
+    
+    if (contactBtn && contactModal) {
+        function toggleContactModal() {
+            contactModal.classList.toggle('active');
+            contactBtn.classList.toggle('active');
+            
+            // Toggle body scroll
+            if (contactModal.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                // Focus first input after animation
+                setTimeout(() => {
+                    document.getElementById('modal-name').focus();
+                }, 300);
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Open/close modal
+        contactBtn.addEventListener('click', toggleContactModal);
+        
+        // Open modal with keyboard
+        contactBtn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleContactModal();
+            }
+        });
+
+        // Close on background click
+        contactModal.addEventListener('click', function(e) {
+            if (e.target === contactModal) {
+                toggleContactModal();
+            }
+        });
+
+        // Stop propagation on form click
+        if (contactForm) {
+            contactForm.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            // Handle form submission
+            contactForm.addEventListener('submit', function(e) {
+                // Form will submit normally
+                setTimeout(toggleContactModal, 100);
+            });
+        }
+
+        // Close on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+                toggleContactModal();
+            }
+        });
+    }
+});

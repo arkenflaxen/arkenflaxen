@@ -102,8 +102,8 @@ header {
     width: 100%;
     z-index: 9999; /* Ensure it stays above all content */
     transition:
-        transform var(--transition-standard),
-        opacity var(--transition-standard);
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.3s ease;
 }
 
 /*Also header styles*/
@@ -113,28 +113,314 @@ nav {
     left: 0;
     width: 100%;
     height: 48px;
-    padding: 6px 0;
     background-color: var(--subtle-bg);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     z-index: 9999;
     border-bottom: 1px solid var(--border-color); /* Use variable instead of fixed color */
     backdrop-filter: blur(10px);
-    will-change: transform, opacity;
+    will-change: transform;
     transition:
-        transform var(--transition-standard),
-        opacity var(--transition-standard),
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         background-color var(--transition-standard);
     box-shadow: var(--shadow);
+    padding: 0 12px; /* Reduced from 20px to 12px */
 }
+
+/* Center the title */
+nav h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+/* Contact button styles */
+.contact-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 8px; /* Reduced padding */
+    font-size: 16px;
+    font-family: inherit;
+    transition: color var(--transition-standard);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    border-radius: var(--border-radius);
+}
+
+.contact-btn:hover {
+    color: var(--accent);
+}
+
+/* Shared navigation icon styles */
+.nav-icon {
+    font-size: 24px;
+    color: var(--text);
+    transition: color var(--transition-standard);
+}
+
+button:hover .nav-icon {
+    color: var(--hover-text);
+}
+
+/* Contact modal specific styles */
+/* Removed unused contact-modal classes */
+
+/* Contact form overlay styles */
+.contact-overlay {
+    position: fixed;
+    top: 0;
+    right: 0; /* Positioned on the right side instead of left */
+    width: 300px;
+    height: 100vh;
+    background-color: var(--bg);
+    backdrop-filter: blur(10px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%); /* Move right instead of left */
+    transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 80px;
+    box-shadow: var(--shadow);
+}
+
+/* Active state for contact overlay */
+.contact-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.contact-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* Active state for contact form wrapper */
+.contact-overlay.active .contact-form-wrapper {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.contact-form-wrapper h3 {
+    color: var(--text);
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.contact-form-wrapper form {
+    width: 100%;
+}
+
+/* Update form styles to match the theme */
+.contact-form-wrapper .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form-wrapper input,
+.contact-form-wrapper textarea {
+    background-color: var(--input-bg);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 12px;
+    width: 100%;
+    color: var(--text);
+    font-size: 16px;
+}
+
+.contact-form-wrapper label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text);
+    font-size: 16px;
+}
+
+.contact-form-wrapper .submit-btn {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Mobile styling for navigation elements */
+
+/* Hamburger button styles */
+.hamburger-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px; /* Reduced gap */
+    z-index: 10000;
+    transition: all 0.2s ease;
+    border-radius: var(--border-radius);
+}
+
+.hamburger-btn:hover {
+    color: var(--accent);
+}
+
+.hamburger-line {
+    width: 20px; /* Reduced width */
+    height: 2px;
+    background-color: var(--text);
+    border-radius: 2px;
+    transform-origin: center;
+    transition: 
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        background-color 0.2s ease;
+}
+
+/* Simplified hamburger animation for open state */
+.hamburger-btn.active .hamburger-line {
+    background-color: var(--accent);
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg); /* Reduced translation */
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg); /* Reduced translation */
+}
+
+/* Navigation overlay */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px; /* Fixed width instead of full screen */
+    height: 100vh;
+    background-color: var(--bg);
+    backdrop-filter: blur(10px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition:
+        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 80px; /* Space for the header */
+    box-shadow: var(--shadow);
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* Navigation menu */
+.nav-menu {
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-menu .nav-link {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    padding: 15px 20px;
+    margin-bottom: 5px;
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
+    position: relative;
+}
+
+.nav-overlay.active .nav-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Active state for nav links */
+.nav-link.active {
+    background-color: var(--accent);
+    color: var(--bg);
+}
+
+/* Hover state */
+.nav-menu .nav-link:hover:not(.active) {
+    background-color: var(--input-bg);
+}
+
+/* Position indicator dot */
+.nav-link::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.nav-link.active::before {
+    opacity: 1;
+    transform: translateX(-10px);
+}
+
+/* Stagger the animation of menu items */
+.nav-menu .nav-link:nth-child(1) { transition-delay: 0.1s; }
+.nav-menu .nav-link:nth-child(2) { transition-delay: 0.2s; }
+.nav-menu .nav-link:nth-child(3) { transition-delay: 0.3s; }
+.nav-menu .nav-link:nth-child(4) { transition-delay: 0.4s; }
+.nav-menu .nav-link:nth-child(5) { transition-delay: 0.5s; }
+
+/* Mobile styles merged into main media query */
 
 /* Contact container - used in contact section */
 .contact-container {
     display: flex;
     justify-content: center;
     gap: 40px;
-    width: var(--container-width, 90%); /* Match container class width */
+    width: 90%; /* Width matching container class */
     max-width: 1200px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -178,18 +464,14 @@ a:hover::after {
     display: none;
 }
 
-/* Nav link style is already applied via HTML */
-
 /* Special styling for buttons to prevent underline animation */
 button a,
-.button a,
-a.button {
+.submit-btn a {
     display: inline-block;
 }
 
 button a::after,
-.button a::after,
-a.button::after {
+.submit-btn a::after {
     display: none;
 }
 
@@ -244,14 +526,12 @@ a.button::after {
 .top-line {
     margin-top: -6px;
     transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
     animation: slideInLeft 1s ease forwards 0.3s;
 }
 
 .bottom-line {
     margin-top: -6px;
     transform: translateX(-50%) scaleX(0);
-    transform-origin: center;
     animation: slideInRight 1s ease forwards 0.3s;
 }
 
@@ -521,49 +801,79 @@ a.button::after {
     line-height: 1.5;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .horizontal-line {
-        width: 100%; /* Reduced width to match title text on small screens */
+/* Responsive adjustments for@media (max-width: 600px) {
+    /* Navigation mobile styles */
+    nav {
+        padding: 0 8px;
     }
 
+    nav h1 {
+        font-size: 16px;
+    }
+    
+    .contact-btn {
+        font-size: 14px;
+        padding: 6px;
+    }
+    
+    .nav-icon {
+        font-size: 18px;
+    }
+
+    /* Nav overlay mobile styles */
+    .nav-overlay {
+        width: 250px;
+    }
+
+    .nav-menu .nav-link {
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+    
+    /* Landing page mobile styles */
+    .horizontal-line {
+        width: 100%;
+    }
+    
+    .centered-title h1 {
+        font-size: 1.5rem;
+        letter-spacing: 9px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    /* Skills section mobile styles */
     .skill-item {
         flex-direction: column;
         text-align: center;
     }
-
+    
     .skill-logo {
         margin-right: 0;
         margin-bottom: 15px;
     }
-
+    
+    /* Contact section mobile styles */
     .contact-container {
-        width: 90%; /* Slightly wider on mobile but not edge-to-edge */
+        width: 90%;
         flex-direction: column;
         align-items: center;
         gap: 20px;
     }
-
+    
     .contact-info,
     .contact-form-container {
         width: 100%;
         margin: 0;
     }
-
+    
+    /* Projects grid mobile styles */
     .grid-item {
         transform: none;
     }
-
-    /* Adjust font sizes for smaller screens */
-    .centered-title h1 {
-        font-size: 1.5rem;
-        letter-spacing: 9px;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-    }
-
+    
     .image-grid {
         grid-template-columns: 1fr;
     }
@@ -684,7 +994,7 @@ a.button::after {
 
 .submit-btn {
     background-color: var(--accent);
-    color: var(--text); /* Keep button text white in both modes for contrast */
+    color: white; /* White text for better contrast on accent color background */
     padding: 12px 24px;
     border: none;
     border-radius: var(--border-radius);
@@ -700,7 +1010,6 @@ a.button::after {
 
 .submit-btn:hover {
     background-color: var(--accent-hover);
-    /*transform: scale(1.05); */
 }
 
 /* Image Modal Styles */
