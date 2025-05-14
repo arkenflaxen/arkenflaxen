@@ -721,12 +721,6 @@ button a::after,
         font-weight: bold;
     }
 
-    /* Centering the hamburger button on mobile */
-    .hamburger-btn {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     /* Additional landing page mobile styles */
     .horizontal-line {
         width: 100%;
