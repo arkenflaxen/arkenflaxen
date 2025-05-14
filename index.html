@@ -14,23 +14,17 @@
         <div class="background-overlay"></div>
         <header id="main-header" class="hidden-header">
             <nav>
-                <button
-                    class="hamburger-btn"
-                    aria-label="Toggle menu"
-                    aria-expanded="false"
-                >
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
-
                 <h1>
                     <a href="#top" id="header-title" class="nav-link"
                         >FILIP ARKEMAR</a
                     >
                 </h1>
 
-                <button class="contact-btn" aria-label="Contact">
+                <button
+                    class="hamburger-btn"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                >
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
                     <span class="hamburger-line"></span>
@@ -350,63 +344,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- Contact Form Modal -->
-        <div id="contact-modal" class="contact-overlay">
-            <div class="contact-form-wrapper">
-                <h3>Send me a message</h3>
-                <form
-                    id="contact-modal-form"
-                    action="https://formsubmit.co/filip.arkemar@gmail.com"
-                    method="POST"
-                >
-                    <div class="form-group">
-                        <label for="modal-name">Name</label>
-                        <input
-                            type="text"
-                            id="modal-name"
-                            name="name"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modal-email">Email</label>
-                        <input
-                            type="email"
-                            id="modal-email"
-                            name="email"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modal-subject">Subject</label>
-                        <input
-                            type="text"
-                            id="modal-subject"
-                            name="subject"
-                            required
-                        />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="modal-message">Message</label>
-                        <textarea
-                            id="modal-message"
-                            name="message"
-                            rows="5"
-                            required
-                        ></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">
-                        Send Message
-                    </button>
-                </form>
-            </div>
-        </div>
-
         <script src="script.js"></script>
     </body>
 </html>
