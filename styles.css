@@ -194,7 +194,7 @@ nav h1 {
     z-index: 9998;
     opacity: 0;
     visibility: hidden;
-    transform: translateX(100%);
+    transform: translateX(100%); /* Flytta utanför skärmen */
     transition:
         transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         opacity 0.3s ease,
@@ -204,11 +204,11 @@ nav h1 {
     padding-top: 60px;
 }
 
-/* === Active overlay === */
+/* === När overlay är aktiv === */
 .nav-overlay.active {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
+    transform: translateX(0); /* Flytta in */
 }
 
 /* === Navigation Menu === */
@@ -699,16 +699,6 @@ button a::after,
 
     .nav-icon {
         font-size: 18px;
-    }
-
-    /* Nav overlay mobile styles */
-    .nav-overlay {
-        width: 100vw; /* Ta hela bredden */
-        right: 0; /* Positionera till höger */
-        top: 0;
-        left: auto; /* Sätt vänster till auto så den inte påverkas av margin */
-        padding: 0; /* Ta bort padding */
-        position: fixed;
     }
 
     .nav-menu .nav-link {
