@@ -141,11 +141,12 @@ nav h1 {
     border-radius: var(--border-radius);
     width: 40px;
     height: 40px;
-    margin: 30px 30px 30px 0;
+    margin-right: 12px;
 }
 
 .hamburger-btn:hover {
     color: var(--accent);
+    background: var(--input-bg);
 }
 
 /* Hamburger lines (shared) */
@@ -688,42 +689,10 @@ button a::after,
 /* Responsive adjustments for */
 @media (max-width: 600px) {
     /* Navigation mobile styles */
-    nav {
-        padding: 0; /* Se till att nav inte har padding */
-        margin: 0; /* Se till att det inte finns någon margin */
-    }
 
-    nav h1 {
-        font-size: 16px;
-    }
-
-    .nav-icon {
-        font-size: 18px;
-    }
-
-    .nav-menu .nav-link {
-        padding: 30px;
-    }
-
-    .nav-menu .nav-link:hover {
-        background-color: var(--input-bg);
-        color: var(--hover-text); /* Ändrad hover färg */
-    }
-
-    /* --- Fixing the active state and initial positioning --- */
-    .nav-menu .nav-link::after {
-        display: none; /* Ta bort underline */
-    }
-
-    .nav-menu .nav-link.active {
-        background-color: var(--accent);
-        color: var(--text);
-        font-weight: bold;
-    }
-
-    /* Additional landing page mobile styles */
-    .horizontal-line {
-        width: 100%;
+    .nav-overlay {
+        width: 100vw;
+        margin-top: 20px;
     }
 
     .centered-title h1 {
