@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const modalDescription = document.getElementById("modal-description-text");
   const closeButton = document.getElementById("modal-close");
   const modalOverlay = document.querySelector(".modal-overlay");
-  const gridItems = document.querySelectorAll(".grid-item");
+  // Only target grid items in project pages, not the main index page
+  const gridItems = document.querySelectorAll(".project-section .grid-item:not([href])");
 
   const projectDescriptions = {
     Fjärilsdalen: `This project was part of an elective bachelor course
@@ -144,12 +145,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const caption = item.querySelector(".grid-caption").textContent;
 
     item.addEventListener("click", function (e) {
-      e.preventDefault();
-      openModal(img.src, caption, img.alt);
+      // Only prevent default if it's not a link
+      if (!item.hasAttribute('href')) {
+        e.preventDefault();
+        openModal(img.src, caption, img.alt);
+      }
     });
 
     item.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
+      if ((e.key === "Enter" || e.key === " ") && !item.hasAttribute('href')) {
         e.preventDefault();
         openModal(img.src, caption, img.alt);
       }
