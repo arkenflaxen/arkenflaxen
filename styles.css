@@ -17,8 +17,8 @@
     /* Common variables (same for both modes) */
     --shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.3);
-    --transition-standard: 0.2s ease;
-    --border-radius: 6px;
+    --transition-standard: 0.1s ease;
+    --border-radius: 3px;
 }
 
 /* Dark mode variables */
@@ -144,9 +144,12 @@ nav h1 {
     margin-right: 12px;
 }
 
-.hamburger-btn:hover {
-    color: var(--accent);
-    background: var(--input-bg);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .hamburger-btn:hover {
+        color: var(--accent);
+        background: var(--input-bg);
+    }
 }
 
 /* Hamburger lines (shared) */
@@ -244,9 +247,12 @@ nav h1 {
 }
 
 /* === Hover Effect === */
-.nav-menu .nav-link:hover {
-    background-color: var(--input-bg);
-    color: var(--hover-text);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .nav-menu .nav-link:hover {
+        background-color: var(--input-bg);
+        color: var(--hover-text);
+    }
 }
 
 /* === Reveal on active overlay === */
@@ -281,8 +287,11 @@ a {
     position: relative;
 }
 
-a:hover {
-    color: var(--hover-text); /* Dimmed color effect on hover */
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    a:hover {
+        color: var(--hover-text); /* Dimmed color effect on hover */
+    }
 }
 
 /* Create underline animation for all links */
@@ -298,8 +307,11 @@ a::after {
     transition: width var(--transition-standard);
 }
 
-a:hover::after {
-    width: 100%;
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    a:hover::after {
+        width: 100%;
+    }
 }
 
 /* Class for links without underline animation */
@@ -540,10 +552,13 @@ button a::after,
     color: var(--text);
 }
 
-.grid-item:hover {
-    transform: scale(1.02);
-    box-shadow: var(--shadow-hover);
-    color: var(--text);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .grid-item:hover {
+        transform: scale(1.02);
+        box-shadow: var(--shadow-hover);
+        color: var(--text);
+    }
 }
 
 .grid-item img {
@@ -584,11 +599,14 @@ button a::after,
 }
 
 /* Vid hover – visa texten och lägg till bakgrund */
-.grid-item:hover .grid-caption {
-    opacity: 1;
-    background-color: var(
-        --selector-color
-    ); /* eller rgba(0,0,0,0.4) om du vill ha semitransparent */
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .grid-item:hover .grid-caption {
+        opacity: 1;
+        background-color: var(
+            --selector-color
+        ); /* eller rgba(0,0,0,0.4) om du vill ha semitransparent */
+    }
 }
 
 /* Grid item link styling - hover states managed by parent styles */
@@ -626,9 +644,12 @@ button a::after,
         box-shadow var(--transition-standard);
 }
 
-.skill-item:hover {
-    transform: scale(1.01);
-    box-shadow: var(--shadow-hover);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .skill-item:hover {
+        transform: scale(1.01);
+        box-shadow: var(--shadow-hover);
+    }
 }
 
 .skill-logo {
@@ -658,6 +679,34 @@ button a::after,
     margin-bottom: 0;
     font-size: 0.95rem;
     line-height: 1.5;
+}
+
+/* Touch device optimizations - remove sticky hover states */
+@media (hover: none) and (pointer: coarse) {
+    /* Reset any potential sticky states on touch devices */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Ensure interactive elements give immediate visual feedback on touch */
+    .hamburger-btn:active {
+        transform: scale(0.95);
+    }
+
+    .nav-menu .nav-link:active {
+        background-color: var(--input-bg);
+        color: var(--hover-text);
+        transform: scale(0.98);
+    }
+
+    .submit-btn:active {
+        background-color: var(--accent-hover);
+        transform: scale(0.98);
+    }
+
+    .grid-item:active {
+        transform: scale(0.98);
+    }
 }
 
 /* Responsive adjustments for */
@@ -786,8 +835,11 @@ button a::after,
     transition: color var(--transition-standard);
 }
 
-.contact-info a:hover {
-    color: var(--hover-text);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .contact-info a:hover {
+        color: var(--hover-text);
+    }
 }
 
 .contact-form-container form {
@@ -852,8 +904,11 @@ button a::after,
     margin-top: 20px;
 }
 
-.submit-btn:hover {
-    background-color: var(--accent-hover);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .submit-btn:hover {
+        background-color: var(--accent-hover);
+    }
 }
 
 /* Image Modal Styles */
@@ -961,10 +1016,13 @@ button a::after,
         transform var(--transition-standard);
 }
 
-.modal-close:hover {
-    background-color: var(--input-bg);
-    color: var(--bg);
-    transform: scale(1.1);
+/* Only apply hover effects on devices that can actually hover */
+@media (hover: hover) {
+    .modal-close:hover {
+        background-color: var(--input-bg);
+        color: var(--bg);
+        transform: scale(1.1);
+    }
 }
 
 /* Responsive adjustments for modal */
