@@ -1,131 +1,128 @@
 /* CSS Variables for both light and dark mode */
 :root {
     /* RGB values for background colors (for transparency) */
-    --bg-rgb: 221, 221, 221; /* Light mode RGB */
-    --bg: #dddddd; /* Base background color - light mode for project section */
+    --bg: #dddddd; /* Base background color */
     --text: #222222; /* light mode background */
-    --hover-text: #333333;
-    --subtle-bg: #dddddd; /* Keep subtle backgrounds as light gray */
-    --accent: #ff5500;
-    --accent-hover: #ff1100;
-    --border-color: #00000011; /* Subtle border for light */
-    --form-bg: #dddddd;
-    --input-bg: #cccccc;
-    --skill-bg: #cccccc;
-    --selector-color: #cccccc99;
+    --hover-text: #555555; /* Text color on hover */
+    --accent: #7744ff; /* Accent color */
+    --accent-hover: #7700ff; /* Accent color on hover */
+    --border-color: #00000011; /* Subtle border color */
+    --input-bg: #cccccc; /* Text input background color */
+    --selector-color: #cccccc99; /* Selector hover overlay color */
 
     /* Common variables (same for both modes) */
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.3);
-    --transition-standard: 0.1s ease;
-    --border-radius: 3px;
+    --shadow: 0 3px 15px rgba(0, 0, 0, 0.15); /* Standard shadow */
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.3); /* Extra hard shadow when hovering over an object */
+    --transition-standard: 0.1s ease; /* Standard transition duration (unclear if this is actually used) */
+    --border-radius: 0px; /* Rounded corners */
 }
 
 /* Dark mode variables */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-rgb: 34, 34, 34; /* Dark mode RGB */
         --bg: #222222; /* Dark mode background */
-        --text: #dddddd;
-        --hover-text: #aaaaaa;
-        --subtle-bg: #222222;
-        --accent: #ff5500;
-        --accent-hover: #ff1100;
-        --border-color: #ffffff11; /* Subtle border for dark */
-        --form-bg: #222222;
-        --input-bg: #333333;
-        --skill-bg: #333333;
-        --selector-color: #33333399;
+        --text: #dddddd; /* Dark mode text colour */
+        --hover-text: #aaaaaa; /* Text color on hover */
+        --accent: #ff5500; /* Accent color */
+        --accent-hover: #ff1100; /* Accent color on hover */
+        --border-color: #ffffff11; /* Subtle border color*/
+        --input-bg: #333333; /* Text input background color */
+        --selector-color: #33333399; /* Selector hover overlay color */
+
+        /* Glowing text*/
+        /*
+        --text-glow-color: yellow;
+        --text-shadow: 0 0 3px var(--text-glow-color);
+        */
     }
 }
 
 /*Main styes*/
 body {
-    font-family: "Franklin Gothic Medium", Arial, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    position: relative;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+    text-shadow: var(--text-shadow);
+    background-color: var(--bg); /* Refers to background color */
+    color: var(--text); /* Refers to text color */
+    margin: 0px; /* Offsets top and left, don't know why you'd want this */
+    padding: 0px; /* Same, both need to be at 0 or the page will be off-centered */
+    width: 100%; /* How much of the sceen the site should take up, preferably all of it right?*/
+    position: relative; /* Position relative to parent element */
     overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Full-screen background image styles with fade-in animation */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("images/hamburgsund_vinter.jpg");
-    background-size: cover;
-    background-position: center;
-    z-index: -2;
-    opacity: 0;
-    animation: fadeInBackground 2s ease-in forwards;
+    content: ""; /* This is a pseudo-element used to create a full-screen background image */
+    position: fixed; /* Position fixed relative to the viewport */
+    top: 0; /* Position from top */
+    left: 0; /* Position from left */
+    width: 100%; /* Width of the background image relative to the viewport */
+    height: 100%; /* Height of the background image relative to the viewport */
+    background-image: url("images/hamburgsund_vinter.jpg"); /* Background image URL, Maybe make it change every hour? */
+    background-size: cover; /* Fills the background, image ajusts to viewport */
+    background-position: center; /* Center the background image */
+    z-index: -2; /* Depth-index of the background, puts it behind everything else */
+    animation: fadeInBackground 2s ease-in forwards; /* Animation name, duration, timing function, and fill mode */
 }
 
-/*Opacity for background image*/
+/*Opacity animation for background image*/
 @keyframes fadeInBackground {
     0% {
-        opacity: 0;
+        opacity: 0; /* Initial opacity */
     }
     100% {
-        opacity: 0.3;
+        opacity: 0.3; /* Final opacity */
     }
 }
 
 /*Titel till startsidan*/
 h1 {
-    font-family: "Trebuchet MS", sans-serif;
-    text-transform: uppercase;
-    color: var(--text);
-    font-size: 1rem;
-    margin-top: 0;
+    font-family: "Trebuchet MS", sans-serif; /* Font name */
+    font-style: italic; /*Makes all headers italic */
+    text-transform: uppercase; /* Text transformation, forces uppercase */
+    color: var(--text); /* Refers to the text color variable */
+    font-size: 1rem; /* Font size, relative to viewport */
+    margin-top: 0; /* Margin top, makes it centered between the lines */
 }
 
-/*Underitel till sidan*/
+/* Subtitel format */
 h2 {
     font-family: "Trebuchet MS", sans-serif;
-    text-transform: uppercase;
-    color: var(--text);
-    font-size: 1rem;
-    margin-top: 40px;
+    font-style: italic; /* Makes all sub-headers italic */
+    text-transform: uppercase; /* Text transformation, forces uppercase */
+    color: var(--text); /* Refers to the text color variable */
+    font-size: 1rem; /* Font size, relative to viewport */
 }
 
 /* === Header & Nav Bar === */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 48px;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--subtle-bg);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
-    will-change: transform;
-    transition:
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        background-color var(--transition-standard);
-    z-index: 9999;
+    position: fixed; /* Keep navbar fixed at the top */
+    top: 0; /* Distance from top of viewport */
+    left: 0; /* Distance from left of viewport */
+    width: 100%; /* Full width of the viewport */
+    height: 48px; /* Navbar height */
+
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Title left, hamburger right */
+    align-items: center; /* Vertically center items */
+
+    background-color: var(--bg); /* Navbar background */
+    border-bottom: 1px solid var(--border-color); /* Subtle bottom border */
+    box-shadow: var(--shadow); /* Optional shadow */
+    z-index: 11; /* Keep navbar on top of other content */
 }
 
+/* Nav bar title*/
 nav h1 {
-    margin: 0 0 0 30px;
+    margin: 0 0 0 20px;
     letter-spacing: 0.4rem;
+    z-index: 12;
 }
 
-/* -------------- */
-/*HAMBURGER BUTTON*/
-/* -------------- */
-
+/* Nav bar hamburger*/
 .hamburger-btn {
     background: none;
     border: none;
@@ -135,21 +132,13 @@ nav h1 {
     justify-content: center;
     align-items: center;
     gap: 4px;
-    z-index: 10000;
+    z-index: 12;
     position: relative;
     transition: all 0.2s ease;
     border-radius: var(--border-radius);
     width: 40px;
     height: 40px;
     margin-right: 12px;
-}
-
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .hamburger-btn:hover {
-        color: var(--accent);
-        background: var(--input-bg);
-    }
 }
 
 /* Hamburger lines (shared) */
@@ -178,6 +167,7 @@ nav h1 {
 
 .hamburger-btn.active .hamburger-line:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .hamburger-btn.active .hamburger-line:nth-child(3) {
@@ -195,7 +185,7 @@ nav h1 {
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     box-shadow: var(--shadow);
-    z-index: 9998;
+    z-index: 10;
     opacity: 0;
     visibility: hidden;
     transform: translateX(100%); /* Flytta utanför skärmen */
@@ -289,8 +279,14 @@ a {
 
 /* Only apply hover effects on devices that can actually hover */
 @media (hover: hover) {
-    a:hover {
-        color: var(--hover-text); /* Dimmed color effect on hover */
+    a.hover-dimmed:hover {
+        color: var(--hover-text);
+    }
+
+    a:hover,
+    button:hover {
+        color: var(--accent);
+        background: var(--input-bg);
     }
 }
 
@@ -307,7 +303,15 @@ a::after {
     transition: width var(--transition-standard);
 }
 
-/* Only apply hover effects on devices that can actually hover */
+a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
 @media (hover: hover) {
     a:hover::after {
         width: 100%;
@@ -367,6 +371,7 @@ button a::after,
 */
 
 /* Centered title styles */
+/*
 .centered-title {
     position: relative;
     z-index: 5;
@@ -374,33 +379,36 @@ button a::after,
         opacity 0.7s ease,
         transform 0.7s ease;
     will-change: opacity, transform;
-}
+} */
 
 /*Lines going over and under the title*/
 .horizontal-line {
-    height: 2px;
-    background-color: currentColor;
-    position: absolute;
-    margin: 24px 0; /*marginal till undertiteln*/
-    width: 100%; /* Reduced width to match title text */
+    height: 5px; /* Line thickness */
+    background-color: currentColor; /* Line color */
+    position: absolute; /* Positions of the lines around the title, needs to be absolute */
+    width: 100%; /* Width relative to title */
     left: 50%; /* Position at center */
     transform: translateX(-50%); /* Center the line */
-    transform-origin: center;
 }
 
+/* The line that goes over the title */
 .top-line {
     margin-top: -6px;
     transform: translateX(-50%) scaleX(0);
-    animation: slideInLeft 1s ease forwards 0.3s;
+    animation: slideIn 0.5s ease forwards 0.3s;
+    transform-origin: left; /* Origin of the animation */
 }
 
+/* The line that goes under the title */
 .bottom-line {
     margin-top: -6px;
     transform: translateX(-50%) scaleX(0);
-    animation: slideInRight 1s ease forwards 0.3s;
+    animation: slideIn 0.5s ease forwards 0.3s;
+    transform-origin: right; /* Origin of the animation */
 }
 
-@keyframes slideInLeft {
+/* Slide-in animation for lines */
+@keyframes slideIn {
     from {
         transform: translateX(-50%) scaleX(0);
     }
@@ -409,67 +417,50 @@ button a::after,
     }
 }
 
-@keyframes slideInRight {
-    from {
-        transform: translateX(-50%) scaleX(0);
-    }
-    to {
-        transform: translateX(-50%) scaleX(1);
-    }
-}
-
-/*Titel animation*/
+/* Landing page title format */
 .centered-title h1 {
-    font-size: 3rem;
+    font-size: 3rem; /* Size of font relative to viewport */
     margin-bottom: 0.5rem;
     letter-spacing: 1rem;
-    animation: fadeIn 0.5s ease-in forwards;
-    opacity: 0;
+    animation: scaleIn 0.3s ease-in forwards;
 }
 
-@keyframes fadeIn {
+/* Fade-in and scale-in animation */
+@keyframes scaleIn {
     0% {
-        opacity: 0;
-        transform: scale(0.9);
+        /* Start of animation */
+        opacity: 0; /* Initial opacity */
+        transform: scale(0.99); /* Initial scale */
     }
     100% {
-        opacity: 1;
-        transform: scale(1);
+        /* End of animation */
+        opacity: 1; /* Final opacity */
+        transform: scale(1); /* Final scale */
     }
 }
 
-/* Ny animation för undertitel – ingen zoom, bara fade */
+/* Landing page subtitle format */
 .subtitle {
     font-size: 1rem;
     letter-spacing: 0.1rem;
     margin-top: 0.7rem;
     opacity: 0;
-    animation: fadeOnly 1.2s ease-in forwards 0.8s;
+    animation: fadeIn 1.2s ease-in forwards 0.8s;
 }
 
-/* Ny animation: bara fade (ingen scale) */
-@keyframes fadeOnly {
+/* Fade-in animation */
+@keyframes fadeIn {
     from {
-        opacity: 0;
+        opacity: 0; /* Start with opacity 0 */
     }
     to {
-        opacity: 1;
+        opacity: 1; /* End with opacity 1 */
     }
 }
 
-/* Fade-out – snabbare, snärtigare */
-.fade-out {
-    opacity: 0;
-    transform: translateY(-50px);
-    pointer-events: none;
-    transition:
-        opacity 0.4s ease-in-out,
-        transform 0.4s ease-in-out;
-}
-
-/* Scroll indicator – blinkar men göms med fade-out */
+/* Scroll indicator format */
 .scroll-indicator {
-    color: var(--text);
+    color: currentColor;
     position: absolute;
     bottom: 30px;
     left: 50%;
@@ -484,13 +475,6 @@ button a::after,
         transform 0.4s ease-in-out;
 }
 
-/* När .fade-out sätts på scroll-indicator */
-.scroll-indicator.fade-out {
-    opacity: 0;
-    transform: translateY(-50px);
-    pointer-events: none;
-}
-
 .scroll-arrow {
     width: 20px;
     height: 20px;
@@ -500,28 +484,29 @@ button a::after,
     margin-bottom: 15px;
 }
 
+/* Scroll indicator text style */
 .scroll-text {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
+/* Pulsating animation */
 @keyframes pulse {
     0% {
-        opacity: 0.3;
+        opacity: 0.3; /* Start of animation */
     }
     50% {
-        opacity: 0.8;
+        opacity: 1; /* Middle of animation */
     }
     100% {
-        opacity: 0.3;
+        opacity: 0.3; /* End of animation */
     }
 }
 
+/* Image container style for multiple projects */ /* Denna måste fixas! */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
 }
 
 /*So this one is for the sections apparently*/
@@ -529,16 +514,23 @@ button a::after,
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
-    color: var(--text);
+    margin-top: 50px;
+    color: var(currentColor);
+    background: var(--accent);
+    background-repeat: no-repeat;
+    background-size: 30% 1em; /* höjden på markeringen */
+    background-position: 50% 50%; /* flytta upp/ner markeringen */
 }
 
+/* Grid format */
 .image-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 30px;
+    grid-gap: 0px;
     margin-bottom: 50px;
 }
 
+/* Grid image format */
 .grid-item {
     position: relative;
     border-radius: var(--border-radius);
@@ -635,7 +627,7 @@ button a::after,
 .skill-item {
     display: flex;
     align-items: center;
-    background-color: var(--skill-bg);
+    background-color: var(--input-bg);
     border-radius: var(--border-radius);
     padding: 20px;
     box-shadow: var(--shadow);
@@ -723,10 +715,6 @@ button a::after,
         letter-spacing: 9px;
     }
 
-    .subtitle {
-        font-size: 1rem;
-    }
-
     /* Skills section mobile styles */
     .skill-item {
         flex-direction: column;
@@ -809,7 +797,7 @@ button a::after,
 
 .contact-info,
 .contact-form-container {
-    background-color: var(--form-bg);
+    background-color: var(--bg);
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
@@ -862,7 +850,7 @@ button a::after,
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .form-group input,
