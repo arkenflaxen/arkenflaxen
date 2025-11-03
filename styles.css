@@ -2,7 +2,7 @@
 :root {
     /* RGB values for background colors (for transparency) */
     --bg: #dddddd; /* Base background color */
-    --text: #222222; /* light mode background */
+    --text: #222222; /* Light mode background */
     --hover-text: #555555; /* Text color on hover */
     --accent: #7744ff; /* Accent color */
     --accent-hover: #7700ff; /* Accent color on hover */
