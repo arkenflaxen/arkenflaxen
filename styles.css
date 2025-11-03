@@ -15,6 +15,11 @@
     --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.3); /* Extra hard shadow when hovering over an object */
     --transition-standard: 0.1s ease; /* Standard transition duration (unclear if this is actually used) */
     --border-radius: 0px; /* Rounded corners */
+    --scale-hover: 1.03; /* Scale factor on hover */
+    --scale-click: 0.97; /* Scale factor on click */
+    --bounce-ease: cubic-bezier(0.33, 1.5, 0.67, 1);
+    --transition-bounce: transform 0.25s var(--bounce-ease);
+    --glass-blur: blur(50px); /* själva oskärpan */
 }
 
 /* Dark mode variables */
@@ -39,13 +44,13 @@
 
 /*Main styes*/
 body {
-    font-family: "Silkscreen", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1rem;
-    text-shadow: var(--text-shadow);
-    background-color: var(--bg); /* Refers to background color */
-    color: var(--text); /* Refers to text color */
+    font-family: "Silkscreen", sans-serif; /* En digital font */
+    font-weight: 400; /* Hur fet texten är */
+    font-style: normal; /* Hur texten är skriven, tex. kursiv */
+    font-size: 1rem; /* Hur stor texten är */
+    color: var(--text); /* Textfärg */
+    background-color: var(--bg); /* Background color */
+    border: 1px solid var(--border); /* Border color */
     margin: 0px; /* Offsets top and left, don't know why you'd want this */
     padding: 0px; /* Same, both need to be at 0 or the page will be off-centered */
     width: 100%; /* How much of the sceen the site should take up, preferably all of it right?*/
@@ -80,7 +85,7 @@ body::before {
 
 /*Titel till startsidan*/
 h1 {
-    font-family: "Trebuchet MS", sans-serif; /* Font name */
+    font-family: "Trebuchet MS", sans-serif; /* Font till titeln */
     font-style: italic; /*Makes all headers italic */
     text-transform: uppercase; /* Text transformation, forces uppercase */
     color: var(--text); /* Refers to the text color variable */
@@ -90,122 +95,139 @@ h1 {
 
 /* Subtitel format */
 h2 {
-    font-family: "Trebuchet MS", sans-serif;
+    font-family: "Trebuchet MS", sans-serif; /* Font till undertiteln */
     font-style: italic; /* Makes all sub-headers italic */
     text-transform: uppercase; /* Text transformation, forces uppercase */
     color: var(--text); /* Refers to the text color variable */
     font-size: 1rem; /* Font size, relative to viewport */
 }
 
-/* === Header & Nav Bar === */
+/* Navigations-bar längst upp på sidan */
 nav {
-    position: fixed; /* Keep navbar fixed at the top */
-    top: 0; /* Distance from top of viewport */
-    left: 0; /* Distance from left of viewport */
-    width: 100%; /* Full width of the viewport */
-    height: 48px; /* Navbar height */
+    position: fixed; /* Håller menyraden fast högst upp även när man scrollar */
+    top: 0; /* Sätter den helt uppe vid överkanten */
+    left: 0; /* Sätter den helt ut i vänsterkant */
+    width: 100%; /* Låter menyraden gå hela vägen över skärmen */
+    height: 48px; /* Bestämmer höjden på menyraden */
 
-    display: flex; /* Use flexbox for layout */
-    justify-content: space-between; /* Title left, hamburger right */
-    align-items: center; /* Vertically center items */
+    display: flex; /* Låter innehållet ligga i rad och vara lätt att placera */
+    flex-direction: row; /* Gör att innehållet liggar i rad */
+    justify-content: space-between; /* Trycker första grejen till vänster och sista till höger */
+    align-items: center; /* Centrerar grejerna lodrätt i menyraden */
 
-    background-color: var(--bg); /* Navbar background */
-    border-bottom: 1px solid var(--border-color); /* Subtle bottom border */
-    box-shadow: var(--shadow); /* Optional shadow */
-    z-index: 11; /* Keep navbar on top of other content */
+    background-color: var(
+        --bg
+    ); /* Färgen på bakgrunden i menyraden hämtas från root variabel */
+    border-bottom: 1px solid var(--border-color); /* Tunn linje under menyraden för tydlig kant */
+    box-shadow: var(
+        --shadow
+    ); /* Liten skugga för att lyfta menyraden från sidan */
+    z-index: 11; /* Ser till att menyraden ligger ovanpå annat innehåll */
+    padding: 0 32px; /* Luft på vänster och höger insida av menyraden */
 }
 
-/* Nav bar title*/
+/* Nav bar titel, alltså typ sidans titel brukar man väl ha? */
 nav h1 {
-    margin: 0 0 0 20px;
-    letter-spacing: 0.4rem;
-    z-index: 12;
+    letter-spacing: 0.3rem; /* Ökar avståndet mellan bokstäverna i rubriken */
+    z-index: 12; /* Lägger rubriken ett snäpp ovanför om något skulle krocka */
 }
 
-/* Nav bar hamburger*/
+/* Nav bar hamburger */
 .hamburger-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    z-index: 12;
-    position: relative;
-    transition: all 0.2s ease;
-    border-radius: var(--border-radius);
-    width: 40px;
-    height: 40px;
-    margin-right: 12px;
+    margin: 48px;
+    background: none; /* Ingen bakgrundsfärg på knappen */
+    border: none; /* Ingen kantlinje runt knappen */
+    cursor: pointer; /* Visar handpekare när du håller musen över */
+    display: flex; /* Gör att linjerna i knappen kan placeras smidigt */
+    flex-direction: column; /* Lägger linjerna ovanpå varandra (uppifrån och ner) */
+    justify-content: center; /* Centrerar linjerna lodrätt i knappen */
+    align-items: center; /* Centrerar linjerna vågrätt i knappen */
+    gap: 4px; /* Avstånd mellan de tre linjerna */
+    z-index: 12; /* Lägger knappen ovanför annat om något överlappar */
+    position: relative; /* Gör att eventuella inre effekter utgår från knappens yta */
+    transition: all 0.2s ease; /* Gör små ändringar (t.ex. färg/rotation) mjuka */
+    border-radius: var(--border-radius); /* Rundar hörnen på knappen */
+    width: 40px; /* Bestämmer knappens bredd */
+    height: 40px; /* Bestämmer knappens höjd */
 }
 
-/* Hamburger lines (shared) */
+/* Hamburger lines, alla tre */
 .hamburger-line {
-    width: 20px;
-    height: 2px;
-    background-color: var(--text);
-    border-radius: 2px;
-    transform-origin: center;
+    width: 20px; /* Längden på varje linje i hamburgaren */
+    height: 2px; /* Tjockleken på varje linje */
+    background-color: var(
+        --text
+    ); /* Färgen på linjerna (samma som textfärgen) */
+    border-radius: 0px; /* Om man vill ha rundade kanter på linjerna */
+    transform-origin: center; /* Rotationer utgår från mitten på linjen */
     transition:
-        transform 0.2s ease,
-        opacity 0.2s ease,
-        background-color 0.2s ease;
-    display: block;
-    pointer-events: none;
-}
-
-/* Active states - shared logic */
-.hamburger-btn.active .hamburger-line {
-    background-color: var(--accent);
+        var(--transition-bounce),
+        /* Mjuk rörelse när linjer roteras/flyttas */ opacity 0.1s ease,
+        /* Mjuk övergång när linjer blir synliga/osynliga */ background-color
+            0.1s ease; /* Mjuk färgövergång vid aktivering */
+    display: block; /* Behandla linjerna som block (en rad var) */
+    pointer-events: none; /* Klick går igenom linjerna till knappen (inte på linjen) */
 }
 
 .hamburger-btn.active .hamburger-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg); /* Flyttar och vrider översta linjen till ett snedstreck */
 }
 
 .hamburger-btn.active .hamburger-line:nth-child(2) {
-    opacity: 0;
-    transform: scaleX(0);
+    opacity: 0; /* Gör mittenlinjen osynlig */
+    transform: scaleX(0); /* Krymper mittenlinjen så den försvinner helt */
 }
 
 .hamburger-btn.active .hamburger-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg); /* Flyttar och vrider nedersta linjen till motsatt snedstreck */
 }
 
-/* === Overlay Panels (nav-overlay from the right) === */
+/* Navigeringsmeny */
 .nav-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: rgba(var(--bg-rgb), 0.7);
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
-    box-shadow: var(--shadow);
-    z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(100%); /* Flytta utanför skärmen */
+    position: fixed; /* Fäster panelen på en fast plats på skärmen (rör sig inte när man scrollar) */
+    top: 0; /* Startar högst upp på skärmen */
+    right: 0; /* Fäster panelen mot högra kanten av skärmen */
+    width: 250px; /* Panelens bredd — hur mycket den täcker från höger */
+    height: 100vh; /* 100% av skärmens höjd (vh = "viewport height") */
+
+    background-color: var(
+        --border-color
+    ); /* Genomskinlig bakgrund med färg hämtad från din variabel */
+    backdrop-filter: var(
+        --glass-blur
+    ); /* Lägger till suddig effekt bakom panelen (som glas) */
+    -webkit-backdrop-filter: var(
+        --glass-blur
+    ); /* Samma sak, men för Safari (kräver prefix) */
+    box-shadow: var(
+        --shadow
+    ); /* Ger en liten skugga längs vänsterkanten så panelen känns upphöjd */
+    z-index: 10; /* Lägger panelen ovanpå sidan men under navbaren (som är på 11–12) */
+
+    opacity: 0; /* Osynlig från början */
+    visibility: hidden; /* Helt dold (så man inte kan klicka på den när den är borta) */
+    transform: translateX(
+        100%
+    ); /* Flyttar panelen helt utanför skärmen åt höger */
+
     transition:
         transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        opacity 0.3s ease,
-        visibility 0.3s ease;
-    display: flex;
-    justify-content: flex-start;
-    padding-top: 60px;
+        /* Hur panelen glider in/ut – mjuk rörelse */ opacity 0.3s ease,
+        /* Hur snabbt den tonas in/ut */ visibility 0.3s ease; /* Gör att “hidden” växlas samtidigt som resten */
+
+    display: flex; /* Gör att du kan använda flex-layout inuti panelen (t.ex. för länkar) */
+    justify-content: flex-start; /* Innehållet börjar längst till vänster i panelen */
+    padding-top: 60px; /* Lite luft upptill, så innehållet inte sitter fast i kanten */
 }
 
-/* === När overlay är aktiv === */
+/* När overlay är aktiv */
 .nav-overlay.active {
     opacity: 1;
     visibility: visible;
     transform: translateX(0); /* Flytta in */
 }
 
-/* === Navigation Menu === */
+/* Navigation Menu */
 .nav-menu {
     width: 100%;
     padding: 12px;
@@ -242,6 +264,7 @@ nav h1 {
     .nav-menu .nav-link:hover {
         background-color: var(--input-bg);
         color: var(--hover-text);
+        transform: scale(var(--scale-hover));
     }
 }
 
@@ -281,12 +304,14 @@ a {
 @media (hover: hover) {
     a.hover-dimmed:hover {
         color: var(--hover-text);
+        transform: scale(1.03);
     }
 
     a:hover,
     button:hover {
         color: var(--accent);
         background: var(--input-bg);
+        transform: scale(1.03);
     }
 }
 
@@ -603,8 +628,8 @@ button a::after,
 
 /* Grid item link styling - hover states managed by parent styles */
 
-/* Skills section styling */
-.skills-section {
+/* tools section styling */
+.tools-section {
     background-color: var(--bg);
     padding: 10px 0;
     color: var(--text);
@@ -618,13 +643,13 @@ button a::after,
     z-index: 1;
 }
 
-.skills-container {
+.tools-container {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-.skill-item {
+.tools-item {
     display: flex;
     align-items: center;
     background-color: var(--input-bg);
@@ -638,18 +663,18 @@ button a::after,
 
 /* Only apply hover effects on devices that can actually hover */
 @media (hover: hover) {
-    .skill-item:hover {
+    .tools-item:hover {
         transform: scale(1.01);
         box-shadow: var(--shadow-hover);
     }
 }
 
-.skill-logo {
+.tools-logo {
     flex: 0 0 120px;
     margin-right: 20px;
 }
 
-.skill-logo img {
+.tools-logo img {
     width: 100%;
     height: auto;
     max-height: 80px;
@@ -657,17 +682,17 @@ button a::after,
     border: none;
 }
 
-.skill-text {
+.tools-text {
     flex: 1;
 }
 
-.skill-text h3 {
+.tools-text h3 {
     margin-top: 0;
     color: var(--text);
     font-size: 1.3rem;
 }
 
-.skill-text p {
+.tools-text p {
     margin-bottom: 0;
     font-size: 0.95rem;
     line-height: 1.5;
@@ -715,13 +740,13 @@ button a::after,
         letter-spacing: 9px;
     }
 
-    /* Skills section mobile styles */
-    .skill-item {
+    /* tools section mobile styles */
+    .tools-item {
         flex-direction: column;
         text-align: center;
     }
 
-    .skill-logo {
+    .tools-logo {
         margin-right: 0;
         margin-bottom: 15px;
     }

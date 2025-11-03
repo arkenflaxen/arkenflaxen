@@ -1,25 +1,23 @@
 <!doctype html>
-<html lang="eng">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Filip Arkemar</title>
-        <link rel="stylesheet" href="styles.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <!-- Endast de fonter du faktiskt använder -->
         <link
-            href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single+Ink:wght@100..900&family=Bungee+Hairline&family=Bungee+Outline&family=Bungee+Shade&family=Bytesized&family=Doto:wght@100..900&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Kode+Mono:wght@400..700&family=Press+Start+2P&family=Rationale&family=Silkscreen:wght@400;700&family=Turret+Road:wght@200;300;400;500;700;800&family=VT323&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap"
             rel="stylesheet"
         />
-        />
+
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <div class="background-overlay"></div>
-        <header id="main-header" class="hidden-header">
+        <!-- HEADER / NAV -->
+        <header id="main-header">
             <nav>
-                <h1>
-                    <a href="#top" id="header-title">FILIP ARKEMAR</a>
-                </h1>
+                <h1><a href="#top" id="header-title">FILIP ARKEMAR</a></h1>
 
                 <button
                     class="hamburger-btn"
@@ -31,19 +29,21 @@
                     <span class="hamburger-line"></span>
                 </button>
             </nav>
-            <div class="nav-overlay">
+
+            <div class="nav-overlay" aria-hidden="true">
                 <div class="nav-menu">
                     <a href="#top" class="nav-link">HOME</a>
                     <a href="#grid-section" class="nav-link">PROJECTS</a>
                     <a href="#degree-section" class="nav-link"
                         >DEGREE PROJECT</a
                     >
-                    <a href="#skills-section" class="nav-link">SKILLS</a>
+                    <a href="#tools-section" class="nav-link">TOOLS</a>
                     <a href="#contact-section" class="nav-link">CONTACT</a>
                 </div>
             </div>
         </header>
 
+        <!-- HERO -->
         <section id="top" class="landing-main">
             <div class="centered-title">
                 <div class="horizontal-line top-line"></div>
@@ -51,12 +51,14 @@
                 <div class="horizontal-line bottom-line"></div>
                 <p class="subtitle">DIGITAL PORTFOLIO 1.0</p>
             </div>
-            <div class="scroll-indicator">
+
+            <div class="scroll-indicator" aria-hidden="true">
                 <div class="scroll-arrow"></div>
                 <div class="scroll-text">Scroll Down</div>
             </div>
         </section>
 
+        <!-- PROJECTS -->
         <section id="grid-section" class="project-section">
             <div class="container">
                 <h2 class="section-title">Projects</h2>
@@ -90,6 +92,7 @@
             </div>
         </section>
 
+        <!-- DEGREE -->
         <section id="degree-section" class="degree-section">
             <div class="container">
                 <h2 class="section-title">Degree Project</h2>
@@ -110,92 +113,83 @@
                         Read the full report at:
                         <a
                             href="https://lup.lub.lu.se/student-papers/search/publication/9185744"
-                            ><strong />LUP Student Papers<strong
-                        /></a>
+                            >LUP Student Papers</a
+                        >
                     </p>
                 </div>
             </div>
         </section>
 
-        <section id="skills-section" class="skills-section">
+        <!-- TOOLS -->
+        <section id="tools-section" class="tools-section">
             <div class="container">
-                <h2 class="section-title">Skills</h2>
-                <div class="skills-container">
+                <h2 class="section-title">Tools</h2>
+                <div class="tools-container">
                     <a href="#top" class="no-underline">
-                        <div class="skill-item">
-                            <div class="skill-logo">
+                        <div class="tools-item">
+                            <div class="tools-logo">
                                 <img
                                     src="logos/Autodesk_logo.png"
                                     alt="Autodesk"
                                 />
                             </div>
-                            <div class="skill-text">
+                            <div class="tools-text">
                                 <h3>Autodesk Suite</h3>
                                 <p>
-                                    Proficient in various Autodesk products
-                                    including AutoCAD, Maya, and 3ds Max.
-                                    Experienced in creating detailed 3D models
-                                    and technical drawings.
+                                    Proficient in AutoCAD, Maya, and 3ds Max.
+                                    Experienced in detailed 3D models and
+                                    technical drawings.
                                 </p>
                             </div>
                         </div>
                     </a>
 
                     <a href="#top" class="no-underline">
-                        <div class="skill-item">
-                            <div class="skill-logo">
+                        <div class="tools-item">
+                            <div class="tools-logo">
                                 <img
                                     src="logos/adobe-logo-black-transparent.png"
                                     alt="Adobe"
                                 />
                             </div>
-                            <div class="skill-text">
+                            <div class="tools-text">
                                 <h3>Adobe Creative Suite</h3>
-                                <p>
-                                    Skilled in Photoshop, Illustrator, and
-                                    InDesign. Capable of creating professional
-                                    graphics, editing photos, and designing
-                                    layouts for various media.
-                                </p>
+                                <p>Photoshop, Illustrator, and InDesign.</p>
                             </div>
                         </div>
                     </a>
 
                     <a href="#top" class="no-underline">
-                        <div class="skill-item">
-                            <div class="skill-logo">
+                        <div class="tools-item">
+                            <div class="tools-logo">
                                 <img
                                     src="logos/Unreal_Engine_Logo.svg.png"
                                     alt="Unreal Engine"
                                 />
                             </div>
-                            <div class="skill-text">
+                            <div class="tools-text">
                                 <h3>Unreal Engine</h3>
                                 <p>
-                                    Experience with game development and
-                                    interactive visualization using Unreal
-                                    Engine. Capable of creating immersive 3D
-                                    environments and interactive experiences.
+                                    Interactive visualization and 3D
+                                    environments.
                                 </p>
                             </div>
                         </div>
                     </a>
 
                     <a href="#top" class="no-underline">
-                        <div class="skill-item">
-                            <div class="skill-logo">
+                        <div class="tools-item">
+                            <div class="tools-logo">
                                 <img
                                     src="logos/rhino3d-icon-2048x1543-78f6rjal.png"
                                     alt="Rhino 3D"
                                 />
                             </div>
-                            <div class="skill-text">
+                            <div class="tools-text">
                                 <h3>Rhino 3D</h3>
                                 <p>
-                                    Specialized in creating precise 3D models
-                                    using Rhino. Experienced in NURBS modeling
-                                    for architecture, product design, and
-                                    digital fabrication.
+                                    NURBS modeling for architecture &
+                                    fabrication.
                                 </p>
                             </div>
                         </div>
@@ -204,6 +198,7 @@
             </div>
         </section>
 
+        <!-- CONTACT -->
         <section id="contact-section" class="contact-section">
             <div class="container">
                 <h2 class="section-title">Contact Me</h2>
@@ -216,7 +211,10 @@
                     <div class="contact-info">
                         <h3>Contact Information</h3>
                         <div class="profile-picture">
-                            <img src="images/profilbild.JPG" alt="Profilbild" />
+                            <img
+                                src="images/filip_med_briller.JPG"
+                                alt="Profilbild"
+                            />
                             <div class="grid-caption"></div>
                         </div>
                         <p>
@@ -250,9 +248,9 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input
-                                    type="text"
                                     id="name"
                                     name="name"
+                                    type="text"
                                     required
                                 />
                             </div>
@@ -260,9 +258,9 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input
-                                    type="email"
                                     id="email"
                                     name="email"
+                                    type="email"
                                     required
                                 />
                             </div>
@@ -270,9 +268,9 @@
                             <div class="form-group">
                                 <label for="subject">Subject</label>
                                 <input
-                                    type="text"
                                     id="subject"
                                     name="subject"
+                                    type="text"
                                     required
                                 />
                             </div>
@@ -296,35 +294,7 @@
             </div>
         </section>
 
-        <!-- Image Modal -->
-        <div
-            id="image-modal"
-            class="image-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-hidden="true"
-            aria-labelledby="modal-title"
-            aria-describedby="modal-description-text"
-        >
-            <div class="modal-overlay"></div>
-            <div class="modal-content">
-                <img id="modal-image" src="" alt="" />
-                <div class="modal-description">
-                    <h3 id="modal-title" class="modal-title"></h3>
-                    <div
-                        id="modal-description-text"
-                        class="modal-description-text"
-                    ></div>
-                </div>
-                <button
-                    id="modal-close"
-                    class="modal-close"
-                    aria-label="Close image"
-                >
-                    ×
-                </button>
-            </div>
-        </div>
+        <!-- JS (behövs för hamburger + scroll-effekt) -->
         <script src="script.js"></script>
     </body>
 </html>
