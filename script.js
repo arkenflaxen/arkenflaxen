@@ -28,9 +28,9 @@ document
 // Hamburger menu functionality
 document.addEventListener("DOMContentLoaded", function () {
   const hamburgerBtn = document.querySelector(".hamburger-btn");
-  const navOverlay = document.querySelector(".nav-overlay");
+  const navDrawer = document.querySelector(".nav-drawer");
 
-  if (!hamburgerBtn || !navOverlay) return;
+  if (!hamburgerBtn || !navDrawer) return;
 
   function toggleMenu(e) {
     if (e) {
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
       e.stopPropagation();
     }
     hamburgerBtn.classList.toggle("active");
-    navOverlay.classList.toggle("active");
+    navDrawer.classList.toggle("active");
   }
 
   hamburgerBtn.addEventListener("click", toggleMenu);
@@ -53,16 +53,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", function (e) {
     if (
-      !navOverlay.contains(e.target) &&
+      !navDrawer.contains(e.target) &&
       !hamburgerBtn.contains(e.target) &&
-      navOverlay.classList.contains("active")
+      navDrawer.classList.contains("active")
     ) {
       toggleMenu();
     }
   });
 
   window.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && navOverlay.classList.contains("active")) {
+    if (e.key === "Escape" && navDrawer.classList.contains("active")) {
       toggleMenu();
     }
   });

@@ -5,23 +5,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Filip Arkemar</title>
 
-        <!-- Endast de fonter du faktiskt använder -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;600;700&display=swap"
             rel="stylesheet"
         />
 
+        <!--<link rel="stylesheet" href="reset.css" />-->
         <link rel="stylesheet" href="styles.css" />
     </head>
-    <body>
-        <!-- HEADER / NAV -->
-        <header id="main-header">
-            <nav>
-                <h1><a href="#top" id="header-title">FILIP ARKEMAR</a></h1>
+    <body id="top">
+        <!-- ================= Header / Navigation ================= -->
+        <header id="header" class="site-header">
+            <nav class="site-nav container">
+                <a href="#top" id="home-btn" class="brand">FILIP ARKEMAR</a>
 
                 <button
                     class="hamburger-btn"
                     aria-label="Toggle menu"
+                    aria-controls="site-menu"
                     aria-expanded="false"
                 >
                     <span class="hamburger-line"></span>
@@ -30,220 +34,168 @@
                 </button>
             </nav>
 
-            <div class="nav-overlay" aria-hidden="true">
-                <div class="nav-menu">
-                    <a href="#top" class="nav-link">HOME</a>
-                    <a href="#grid-section" class="nav-link">PROJECTS</a>
-                    <a href="#degree-section" class="nav-link"
-                        >DEGREE PROJECT</a
-                    >
-                    <a href="#tools-section" class="nav-link">TOOLS</a>
-                    <a href="#contact-section" class="nav-link">CONTACT</a>
-                </div>
-            </div>
+            <!-- Right drawer -->
+            <aside id="site-menu" class="nav-drawer" aria-hidden="true">
+                <nav class="nav-menu">
+                    <a href="#hero" class="nav-link">Start</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#degree" class="nav-link">Degree Project</a>
+                    <a href="#tools" class="nav-link">Tools</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </nav>
+            </aside>
         </header>
 
-        <!-- HERO -->
-        <section id="top" class="landing-main">
-            <div class="centered-title">
-                <div class="horizontal-line top-line"></div>
-                <h1 id="main-title">FILIP ARKEMAR</h1>
-                <div class="horizontal-line bottom-line"></div>
-                <p class="subtitle">DIGITAL PORTFOLIO 1.0</p>
+        <!-- ================= Hero ================= -->
+        <section id="hero" class="hero">
+            <div class="centered-title container">
+                <div class="horizontal-line over-line"></div>
+                <h1 id="title" class="hero-title">FILIP ARKEMAR</h1>
+                <h2 id="subtitle" class="hero-subtitle">Online Portfolio</h2>
+                <div class="horizontal-line under-line"></div>
             </div>
 
-            <div class="scroll-indicator" aria-hidden="true">
+            <div class="scroll-indicator">
                 <div class="scroll-arrow"></div>
-                <div class="scroll-text">Scroll Down</div>
+                <span>scroll</span>
             </div>
         </section>
 
-        <!-- PROJECTS -->
-        <section id="grid-section" class="project-section">
+        <!-- ================= Projects ================= -->
+        <section id="projects" class="section">
             <div class="container">
                 <h2 class="section-title">Projects</h2>
-                <div class="image-grid">
-                    <a href="fjarilsdalen.html" class="grid-item">
+
+                <div class="grid">
+                    <a class="card" href="#projects">
                         <img
-                            src="images/fjärilsdalen_från_åkern.png"
-                            alt="Fjärilsdalen"
+                            src="images/santa_fé_nightrender.jpg"
+                            alt="Project San­ta Fe cover"
                         />
-                        <div class="grid-caption">Fjärilsdalen</div>
+                        <div class="card-caption">
+                            Santa Fe — residential concept
+                        </div>
                     </a>
-                    <a href="tamnougalt.html" class="grid-item">
+
+                    <a class="card" href="#projects">
                         <img
                             src="images/tamnougalt_torg.png"
-                            alt="Tamnougalt"
+                            alt="Project Tamnougalt cover"
                         />
-                        <div class="grid-caption">Tamnougalt</div>
+                        <div class="card-caption">
+                            Tamnougalt — adobe restoration
+                        </div>
                     </a>
-                    <a href="santafe.html" class="grid-item">
+
+                    <a class="card" href="#projects">
                         <img
-                            src="images/santa_fé_nightrender.jpg"
-                            alt="Santa Fé"
+                            src="images/malmohus_giraff.png"
+                            alt="Project Malmöhus cover"
                         />
-                        <div class="grid-caption">Santa Fé</div>
+                        <div class="card-caption">
+                            Malmöhus — museum pavilion
+                        </div>
                     </a>
-                    <a href="malmohus.html" class="grid-item">
-                        <img src="images/malmohus_giraff.png" alt="Malmöhus" />
-                        <div class="grid-caption">Malmöhus</div>
+
+                    <a class="card" href="#projects">
+                        <img
+                            src="images/fjärilsdalen_från_stora_vägen.png"
+                            alt="Project Fjärilsdalen cover"
+                        />
+                        <div class="card-caption">
+                            Fjärilsdalen — landscape study
+                        </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- DEGREE -->
-        <section id="degree-section" class="degree-section">
+        <!-- ================= Degree Project ================= -->
+        <section id="degree" class="section">
             <div class="container">
                 <h2 class="section-title">Degree Project</h2>
+
                 <div class="degree-container">
-                    <a href="hamburgsund.html" class="no-underline">
-                        <div class="grid-item">
+                    <p class="degree-text">
+                        Sauna raft — from first sketch to finished, floating
+                        structure: design, detailing, material logistics, and
+                        build.
+                    </p>
+                    <div class="grid">
+                        <div class="card">
+                            <img
+                                src="images/hamburgsund_vinter_bobby.jpg"
+                                alt="Sauna raft exterior"
+                            />
+                            <div class="card-caption">
+                                Exterior — winter test
+                            </div>
+                        </div>
+                        <div class="card">
                             <img
                                 src="images/hamburgsund_morgon.jpg"
-                                alt="Hamburgsund"
+                                alt="Sauna raft interior"
                             />
-                            <div class="grid-caption">Hamburgsund</div>
+                            <div class="card-caption">
+                                Interior — framing details
+                            </div>
                         </div>
-                    </a>
-                </div>
-                <div class="degree-text">
-                    <h3>Sauna Raft</h3>
-                    <p>
-                        Read the full report at:
-                        <a
-                            href="https://lup.lub.lu.se/student-papers/search/publication/9185744"
-                            >LUP Student Papers</a
-                        >
-                    </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- TOOLS -->
-        <section id="tools-section" class="tools-section">
+        <!-- ================= Tools ================= -->
+        <section id="tools" class="section">
             <div class="container">
-                <h2 class="section-title">Tools</h2>
-                <div class="tools-container">
-                    <a href="#top" class="no-underline">
-                        <div class="tools-item">
-                            <div class="tools-logo">
-                                <img
-                                    src="logos/Autodesk_logo.png"
-                                    alt="Autodesk"
-                                />
-                            </div>
-                            <div class="tools-text">
-                                <h3>Autodesk Suite</h3>
-                                <p>
-                                    Proficient in AutoCAD, Maya, and 3ds Max.
-                                    Experienced in detailed 3D models and
-                                    technical drawings.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                <h2 class="section-title">Tools I Use</h2>
 
-                    <a href="#top" class="no-underline">
-                        <div class="tools-item">
-                            <div class="tools-logo">
-                                <img
-                                    src="logos/adobe-logo-black-transparent.png"
-                                    alt="Adobe"
-                                />
-                            </div>
-                            <div class="tools-text">
-                                <h3>Adobe Creative Suite</h3>
-                                <p>Photoshop, Illustrator, and InDesign.</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#top" class="no-underline">
-                        <div class="tools-item">
-                            <div class="tools-logo">
-                                <img
-                                    src="logos/Unreal_Engine_Logo.svg.png"
-                                    alt="Unreal Engine"
-                                />
-                            </div>
-                            <div class="tools-text">
-                                <h3>Unreal Engine</h3>
-                                <p>
-                                    Interactive visualization and 3D
-                                    environments.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="#top" class="no-underline">
-                        <div class="tools-item">
-                            <div class="tools-logo">
-                                <img
-                                    src="logos/rhino3d-icon-2048x1543-78f6rjal.png"
-                                    alt="Rhino 3D"
-                                />
-                            </div>
-                            <div class="tools-text">
-                                <h3>Rhino 3D</h3>
-                                <p>
-                                    NURBS modeling for architecture &
-                                    fabrication.
-                                </p>
-                            </div>
-                        </div>
-                    </a>
+                <div class="tools">
+                    <div class="tool-card">
+                        <img src="icons/autocad.svg" alt="AutoCAD" />
+                        <h3>AutoCAD</h3>
+                    </div>
+                    <div class="tool-card">
+                        <img src="icons/rhino.svg" alt="Rhino" />
+                        <h3>Rhino</h3>
+                    </div>
+                    <div class="tool-card">
+                        <img src="icons/grasshopper.svg" alt="Grasshopper" />
+                        <h3>Grasshopper</h3>
+                    </div>
+                    <div class="tool-card">
+                        <img src="icons/figma.svg" alt="Figma" />
+                        <h3>Figma</h3>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT -->
-        <section id="contact-section" class="contact-section">
+        <!-- ================= Contact ================= -->
+        <section id="contact" class="section">
             <div class="container">
-                <h2 class="section-title">Contact Me</h2>
-                <p class="contact-intro">
-                    Feel free to reach out if you have any questions or would
-                    like to discuss potential projects.
-                </p>
+                <h2 class="section-title">Contact</h2>
 
                 <div class="contact-container">
                     <div class="contact-info">
-                        <h3>Contact Information</h3>
                         <div class="profile-picture">
                             <img
-                                src="images/filip_med_briller.JPG"
-                                alt="Profilbild"
+                                src="images/filip_uden_briller.jpg"
+                                alt="Filip Arkemar"
                             />
-                            <div class="grid-caption"></div>
                         </div>
                         <p>
-                            <strong>Email:</strong>
-                            <a href="mailto:filip.arkemar@gmail.com"
-                                >filip.arkemar@gmail.com</a
-                            >
-                        </p>
-                        <p>
-                            <strong>LinkedIn:</strong>
-                            <a href="https://www.linkedin.com/in/filip-arkemar/"
-                                >Filip Arkemar</a
-                            >
-                        </p>
-                        <p>
-                            <strong>Instagram:</strong>
-                            <a
-                                href="https://www.instagram.com/pedro_official_sweden/"
-                                >pedro_official_sweden</a
-                            >
+                            Based in Sweden. I like hands-on building, precise
+                            details, and automations that save time.
                         </p>
                     </div>
 
                     <div class="contact-form-container">
-                        <h3>Send me a message</h3>
                         <form
                             id="contact-form"
-                            action="https://formsubmit.co/filip.arkemar@gmail.com"
-                            method="POST"
+                            action="#"
+                            method="post"
+                            novalidate
                         >
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -251,7 +203,7 @@
                                     id="name"
                                     name="name"
                                     type="text"
-                                    required
+                                    placeholder="Your name"
                                 />
                             </div>
 
@@ -261,17 +213,7 @@
                                     id="email"
                                     name="email"
                                     type="email"
-                                    required
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="subject">Subject</label>
-                                <input
-                                    id="subject"
-                                    name="subject"
-                                    type="text"
-                                    required
+                                    placeholder="you@example.com"
                                 />
                             </div>
 
@@ -280,21 +222,24 @@
                                 <textarea
                                     id="message"
                                     name="message"
-                                    rows="5"
-                                    required
+                                    placeholder="Say hello…"
                                 ></textarea>
                             </div>
 
-                            <button type="submit" class="submit-btn">
-                                Send Message
+                            <button class="submit-btn" type="submit">
+                                Send message
                             </button>
                         </form>
                     </div>
                 </div>
+
+                <footer class="site-footer">
+                    <p>2025 Filip Arkemar</p>
+                </footer>
             </div>
         </section>
 
-        <!-- JS (behövs för hamburger + scroll-effekt) -->
+        <!-- Your JS (keeps hamburger + scroll effects working) -->
         <script src="script.js"></script>
     </body>
 </html>

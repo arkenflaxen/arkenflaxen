@@ -1,1073 +1,710 @@
-/* CSS Variables for both light and dark mode */
+/* =========================================================
+   FILIP ARKEMAR — Styles (streamlined HTML)
+   Goals:
+   - Fixed header (always clickable), drawer sits below header
+   - Consistent gutters via .container
+   - No underlines anywhere
+   - Hover captions overlay with blur
+   - Hero uses hamburgsund_vinter background
+   - Home button styled like hamburger
+   - Headings centered
+   ========================================================= */
+
+/* -----------------------
+   0) Tokens
+------------------------ */
 :root {
-    /* RGB values for background colors (for transparency) */
-    --bg: #dddddd; /* Base background color */
-    --text: #222222; /* Light mode background */
-    --hover-text: #555555; /* Text color on hover */
-    --accent: #7744ff; /* Accent color */
-    --accent-hover: #7700ff; /* Accent color on hover */
-    --border-color: #00000011; /* Subtle border color */
-    --input-bg: #cccccc; /* Text input background color */
-    --selector-color: #cccccc99; /* Selector hover overlay color */
+    --bg: #0d1117;
+    --bg-elev: #0f141b;
+    --ink: #e6edf3;
+    --ink-soft: #a9b6c7;
 
-    /* Common variables (same for both modes) */
-    --shadow: 0 3px 15px rgba(0, 0, 0, 0.15); /* Standard shadow */
-    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.3); /* Extra hard shadow when hovering over an object */
-    --transition-standard: 0.1s ease; /* Standard transition duration (unclear if this is actually used) */
-    --border-radius: 0px; /* Rounded corners */
-    --scale-hover: 1.03; /* Scale factor on hover */
-    --scale-click: 0.97; /* Scale factor on click */
-    --bounce-ease: cubic-bezier(0.33, 1.5, 0.67, 1);
-    --transition-bounce: transform 0.25s var(--bounce-ease);
-    --glass-blur: blur(50px); /* själva oskärpan */
+    --accent: #7ee7ff;
+    --accent-2: #b39cff;
+
+    --radius-lg: 16px;
+    --radius: 12px;
+    --radius-sm: 10px;
+
+    --hairline: 1px;
+    --shadow: 0 18px 60px rgba(0, 0, 0, 0.45), 0 4px 18px rgba(0, 0, 0, 0.32);
+    --inner: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    --header-h: 64px;
+    --container-w: 1120px;
+    --gutter: 24px;
+
+    --bg-rgb: 13, 17, 23;
+    --hero-img: url("hamburgsund_vinter.jpg");
 }
 
-/* Dark mode variables */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #222222; /* Dark mode background */
-        --text: #dddddd; /* Dark mode text colour */
-        --hover-text: #aaaaaa; /* Text color on hover */
-        --accent: #ff5500; /* Accent color */
-        --accent-hover: #ff1100; /* Accent color on hover */
-        --border-color: #ffffff11; /* Subtle border color*/
-        --input-bg: #333333; /* Text input background color */
-        --selector-color: #33333399; /* Selector hover overlay color */
-
-        /* Glowing text*/
-        /*
-        --text-glow-color: yellow;
-        --text-shadow: 0 0 3px var(--text-glow-color);
-        */
-    }
+/* -----------------------
+   1) Base
+------------------------ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
-/*Main styes*/
+html,
 body {
-    font-family: "Silkscreen", sans-serif; /* En digital font */
-    font-weight: 400; /* Hur fet texten är */
-    font-style: normal; /* Hur texten är skriven, tex. kursiv */
-    font-size: 1rem; /* Hur stor texten är */
-    color: var(--text); /* Textfärg */
-    background-color: var(--bg); /* Background color */
-    border: 1px solid var(--border); /* Border color */
-    margin: 0px; /* Offsets top and left, don't know why you'd want this */
-    padding: 0px; /* Same, both need to be at 0 or the page will be off-centered */
-    width: 100%; /* How much of the sceen the site should take up, preferably all of it right?*/
-    position: relative; /* Position relative to parent element */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    height: 100%;
 }
 
-/* Full-screen background image styles with fade-in animation */
-body::before {
-    content: ""; /* This is a pseudo-element used to create a full-screen background image */
-    position: fixed; /* Position fixed relative to the viewport */
-    top: 0; /* Position from top */
-    left: 0; /* Position from left */
-    width: 100%; /* Width of the background image relative to the viewport */
-    height: 100%; /* Height of the background image relative to the viewport */
-    background-image: url("images/hamburgsund_vinter.jpg"); /* Background image URL, Maybe make it change every hour? */
-    background-size: cover; /* Fills the background, image ajusts to viewport */
-    background-position: center; /* Center the background image */
-    z-index: -2; /* Depth-index of the background, puts it behind everything else */
-    animation: fadeInBackground 2s ease-in forwards; /* Animation name, duration, timing function, and fill mode */
+body {
+    margin: 0;
+    color: var(--ink);
+    background:
+        radial-gradient(
+            1200px 800px at 80% -10%,
+            rgba(126, 231, 255, 0.1),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 700px at -10% 45%,
+            rgba(179, 156, 255, 0.1),
+            transparent 60%
+        ),
+        var(--bg);
+    font:
+        400 16px/1.6 Inter,
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        "Noto Sans",
+        sans-serif;
+
+    /* Keep content out from under the fixed header */
+    padding-top: var(--header-h);
 }
 
-/*Opacity animation for background image*/
-@keyframes fadeInBackground {
-    0% {
-        opacity: 0; /* Initial opacity */
-    }
-    100% {
-        opacity: 0.3; /* Final opacity */
-    }
-}
-
-/*Titel till startsidan*/
-h1 {
-    font-family: "Trebuchet MS", sans-serif; /* Font till titeln */
-    font-style: italic; /*Makes all headers italic */
-    text-transform: uppercase; /* Text transformation, forces uppercase */
-    color: var(--text); /* Refers to the text color variable */
-    font-size: 1rem; /* Font size, relative to viewport */
-    margin-top: 0; /* Margin top, makes it centered between the lines */
-}
-
-/* Subtitel format */
-h2 {
-    font-family: "Trebuchet MS", sans-serif; /* Font till undertiteln */
-    font-style: italic; /* Makes all sub-headers italic */
-    text-transform: uppercase; /* Text transformation, forces uppercase */
-    color: var(--text); /* Refers to the text color variable */
-    font-size: 1rem; /* Font size, relative to viewport */
-}
-
-/* Navigations-bar längst upp på sidan */
-nav {
-    position: fixed; /* Håller menyraden fast högst upp även när man scrollar */
-    top: 0; /* Sätter den helt uppe vid överkanten */
-    left: 0; /* Sätter den helt ut i vänsterkant */
-    width: 100%; /* Låter menyraden gå hela vägen över skärmen */
-    height: 48px; /* Bestämmer höjden på menyraden */
-
-    display: flex; /* Låter innehållet ligga i rad och vara lätt att placera */
-    flex-direction: row; /* Gör att innehållet liggar i rad */
-    justify-content: space-between; /* Trycker första grejen till vänster och sista till höger */
-    align-items: center; /* Centrerar grejerna lodrätt i menyraden */
-
-    background-color: var(
-        --bg
-    ); /* Färgen på bakgrunden i menyraden hämtas från root variabel */
-    border-bottom: 1px solid var(--border-color); /* Tunn linje under menyraden för tydlig kant */
-    box-shadow: var(
-        --shadow
-    ); /* Liten skugga för att lyfta menyraden från sidan */
-    z-index: 11; /* Ser till att menyraden ligger ovanpå annat innehåll */
-    padding: 0 32px; /* Luft på vänster och höger insida av menyraden */
-}
-
-/* Nav bar titel, alltså typ sidans titel brukar man väl ha? */
-nav h1 {
-    letter-spacing: 0.3rem; /* Ökar avståndet mellan bokstäverna i rubriken */
-    z-index: 12; /* Lägger rubriken ett snäpp ovanför om något skulle krocka */
-}
-
-/* Nav bar hamburger */
-.hamburger-btn {
-    margin: 48px;
-    background: none; /* Ingen bakgrundsfärg på knappen */
-    border: none; /* Ingen kantlinje runt knappen */
-    cursor: pointer; /* Visar handpekare när du håller musen över */
-    display: flex; /* Gör att linjerna i knappen kan placeras smidigt */
-    flex-direction: column; /* Lägger linjerna ovanpå varandra (uppifrån och ner) */
-    justify-content: center; /* Centrerar linjerna lodrätt i knappen */
-    align-items: center; /* Centrerar linjerna vågrätt i knappen */
-    gap: 4px; /* Avstånd mellan de tre linjerna */
-    z-index: 12; /* Lägger knappen ovanför annat om något överlappar */
-    position: relative; /* Gör att eventuella inre effekter utgår från knappens yta */
-    transition: all 0.2s ease; /* Gör små ändringar (t.ex. färg/rotation) mjuka */
-    border-radius: var(--border-radius); /* Rundar hörnen på knappen */
-    width: 40px; /* Bestämmer knappens bredd */
-    height: 40px; /* Bestämmer knappens höjd */
-}
-
-/* Hamburger lines, alla tre */
-.hamburger-line {
-    width: 20px; /* Längden på varje linje i hamburgaren */
-    height: 2px; /* Tjockleken på varje linje */
-    background-color: var(
-        --text
-    ); /* Färgen på linjerna (samma som textfärgen) */
-    border-radius: 0px; /* Om man vill ha rundade kanter på linjerna */
-    transform-origin: center; /* Rotationer utgår från mitten på linjen */
-    transition:
-        var(--transition-bounce),
-        /* Mjuk rörelse när linjer roteras/flyttas */ opacity 0.1s ease,
-        /* Mjuk övergång när linjer blir synliga/osynliga */ background-color
-            0.1s ease; /* Mjuk färgövergång vid aktivering */
-    display: block; /* Behandla linjerna som block (en rad var) */
-    pointer-events: none; /* Klick går igenom linjerna till knappen (inte på linjen) */
-}
-
-.hamburger-btn.active .hamburger-line:nth-child(1) {
-    transform: translateY(6px) rotate(45deg); /* Flyttar och vrider översta linjen till ett snedstreck */
-}
-
-.hamburger-btn.active .hamburger-line:nth-child(2) {
-    opacity: 0; /* Gör mittenlinjen osynlig */
-    transform: scaleX(0); /* Krymper mittenlinjen så den försvinner helt */
-}
-
-.hamburger-btn.active .hamburger-line:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg); /* Flyttar och vrider nedersta linjen till motsatt snedstreck */
-}
-
-/* Navigeringsmeny */
-.nav-overlay {
-    position: fixed; /* Fäster panelen på en fast plats på skärmen (rör sig inte när man scrollar) */
-    top: 0; /* Startar högst upp på skärmen */
-    right: 0; /* Fäster panelen mot högra kanten av skärmen */
-    width: 250px; /* Panelens bredd — hur mycket den täcker från höger */
-    height: 100vh; /* 100% av skärmens höjd (vh = "viewport height") */
-
-    background-color: var(
-        --border-color
-    ); /* Genomskinlig bakgrund med färg hämtad från din variabel */
-    backdrop-filter: var(
-        --glass-blur
-    ); /* Lägger till suddig effekt bakom panelen (som glas) */
-    -webkit-backdrop-filter: var(
-        --glass-blur
-    ); /* Samma sak, men för Safari (kräver prefix) */
-    box-shadow: var(
-        --shadow
-    ); /* Ger en liten skugga längs vänsterkanten så panelen känns upphöjd */
-    z-index: 10; /* Lägger panelen ovanpå sidan men under navbaren (som är på 11–12) */
-
-    opacity: 0; /* Osynlig från början */
-    visibility: hidden; /* Helt dold (så man inte kan klicka på den när den är borta) */
-    transform: translateX(
-        100%
-    ); /* Flyttar panelen helt utanför skärmen åt höger */
-
-    transition:
-        transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        /* Hur panelen glider in/ut – mjuk rörelse */ opacity 0.3s ease,
-        /* Hur snabbt den tonas in/ut */ visibility 0.3s ease; /* Gör att “hidden” växlas samtidigt som resten */
-
-    display: flex; /* Gör att du kan använda flex-layout inuti panelen (t.ex. för länkar) */
-    justify-content: flex-start; /* Innehållet börjar längst till vänster i panelen */
-    padding-top: 60px; /* Lite luft upptill, så innehållet inte sitter fast i kanten */
-}
-
-/* När overlay är aktiv */
-.nav-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0); /* Flytta in */
-}
-
-/* Navigation Menu */
-.nav-menu {
-    width: 100%;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* === Nav Link Base === */
-.nav-menu .nav-link {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 12px 12px 12px 16px;
-    margin-bottom: 5px;
-    border-radius: var(--border-radius);
-    background-color: transparent;
-    color: var(--text);
-    opacity: 0;
-    transform: translateX(-20px);
-    text-decoration: none;
-    position: relative;
-    justify-content: right;
-    transition:
-        background-color 0.3s ease,
-        color 0.3s ease,
-        transform 0.3s ease,
-        opacity 0.3s ease;
-}
-
-/* === Hover Effect === */
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .nav-menu .nav-link:hover {
-        background-color: var(--input-bg);
-        color: var(--hover-text);
-        transform: scale(var(--scale-hover));
-    }
-}
-
-/* === Reveal on active overlay === */
-.nav-overlay.active .nav-link {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* === Remove active state effect completely === */
-.nav-link.active {
-    background-color: var(--accent);
-    color: var(--text);
-    box-shadow: none;
-    font-weight: normal;
-}
-
-/* === Optional: Animated delay for menu links === */
-.nav-menu .nav-link:nth-child(n) {
-    transition-delay: calc(0.1s * var(--i, 1));
-}
-
-/* === Remove old underline animation === */
-.nav-menu .nav-link::after {
-    display: none;
-}
-
-/* Link styling */
+/* No underlines anywhere */
 a {
-    text-decoration: none;
-    color: var(--text);
-    transition: color var(--transition-standard);
-    position: relative;
-}
-
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    a.hover-dimmed:hover {
-        color: var(--hover-text);
-        transform: scale(1.03);
-    }
-
-    a:hover,
-    button:hover {
-        color: var(--accent);
-        background: var(--input-bg);
-        transform: scale(1.03);
-    }
-}
-
-/* Create underline animation for all links */
-a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -2px;
-    width: 0;
-    height: 2px;
-    background: currentColor;
-    transform: translateX(-50%);
-    transition: width var(--transition-standard);
-}
-
-a::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: width 0.3s ease;
-}
-
-@media (hover: hover) {
-    a:hover::after {
-        width: 100%;
-    }
-}
-
-/* Class for links without underline animation */
-.no-underline {
+    color: inherit;
     text-decoration: none;
 }
 
-.no-underline::after {
-    display: none;
-}
-
-/* -------------- */
-/*HAMBURGER BUTTON*/
-/* -------------- */
-
-/* Special styling for buttons to prevent underline animation */
-button a,
-.submit-btn a {
-    display: inline-block;
-}
-
-button a::after,
-.submit-btn a::after {
-    display: none;
-}
-
-/* Landing page specific styles */
-.landing-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    text-align: center;
-    position: relative;
-}
-
-/* Header visibility classes */
-/* Header is now always visible - these classes are deprecated */
-/*
-.hidden-header {
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.visible-header {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-}
-*/
-
-/* Centered title styles */
-/*
-.centered-title {
-    position: relative;
-    z-index: 5;
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
-    will-change: opacity, transform;
-} */
-
-/*Lines going over and under the title*/
-.horizontal-line {
-    height: 5px; /* Line thickness */
-    background-color: currentColor; /* Line color */
-    position: absolute; /* Positions of the lines around the title, needs to be absolute */
-    width: 100%; /* Width relative to title */
-    left: 50%; /* Position at center */
-    transform: translateX(-50%); /* Center the line */
-}
-
-/* The line that goes over the title */
-.top-line {
-    margin-top: -6px;
-    transform: translateX(-50%) scaleX(0);
-    animation: slideIn 0.5s ease forwards 0.3s;
-    transform-origin: left; /* Origin of the animation */
-}
-
-/* The line that goes under the title */
-.bottom-line {
-    margin-top: -6px;
-    transform: translateX(-50%) scaleX(0);
-    animation: slideIn 0.5s ease forwards 0.3s;
-    transform-origin: right; /* Origin of the animation */
-}
-
-/* Slide-in animation for lines */
-@keyframes slideIn {
-    from {
-        transform: translateX(-50%) scaleX(0);
-    }
-    to {
-        transform: translateX(-50%) scaleX(1);
-    }
-}
-
-/* Landing page title format */
-.centered-title h1 {
-    font-size: 3rem; /* Size of font relative to viewport */
-    margin-bottom: 0.5rem;
-    letter-spacing: 1rem;
-    animation: scaleIn 0.3s ease-in forwards;
-}
-
-/* Fade-in and scale-in animation */
-@keyframes scaleIn {
-    0% {
-        /* Start of animation */
-        opacity: 0; /* Initial opacity */
-        transform: scale(0.99); /* Initial scale */
-    }
-    100% {
-        /* End of animation */
-        opacity: 1; /* Final opacity */
-        transform: scale(1); /* Final scale */
-    }
-}
-
-/* Landing page subtitle format */
-.subtitle {
-    font-size: 1rem;
-    letter-spacing: 0.1rem;
-    margin-top: 0.7rem;
-    opacity: 0;
-    animation: fadeIn 1.2s ease-in forwards 0.8s;
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0; /* Start with opacity 0 */
-    }
-    to {
-        opacity: 1; /* End with opacity 1 */
-    }
-}
-
-/* Scroll indicator format */
-.scroll-indicator {
-    color: currentColor;
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 1;
-    animation: pulse 2s infinite;
-    transition:
-        opacity 0.4s ease-in-out,
-        transform 0.4s ease-in-out;
-}
-
-.scroll-arrow {
-    width: 20px;
-    height: 20px;
-    border-right: 3px solid currentColor;
-    border-bottom: 3px solid currentColor;
-    transform: rotate(45deg);
-    margin-bottom: 15px;
-}
-
-/* Scroll indicator text style */
-.scroll-text {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Pulsating animation */
-@keyframes pulse {
-    0% {
-        opacity: 0.3; /* Start of animation */
-    }
-    50% {
-        opacity: 1; /* Middle of animation */
-    }
-    100% {
-        opacity: 0.3; /* End of animation */
-    }
-}
-
-/* Image container style for multiple projects */ /* Denna måste fixas! */
 .container {
-    width: 100%;
+    max-width: var(--container-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+.section {
+    padding: 88px 0;
 }
 
-/*So this one is for the sections apparently*/
-.section-title {
+h1,
+h2,
+h3 {
+    margin: 0;
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    margin-top: 50px;
-    color: var(currentColor);
-    background: var(--accent);
-    background-repeat: no-repeat;
-    background-size: 30% 1em; /* höjden på markeringen */
-    background-position: 50% 50%; /* flytta upp/ner markeringen */
+}
+h1 {
+    font-family: "Silkscreen", system-ui, sans-serif;
+    font-size: clamp(54px, 9vw, 112px);
+    line-height: 0.96;
+    letter-spacing: 0.01em;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+    color: var(--ink);
+}
+h2 {
+    font-size: clamp(22px, 3.2vw, 30px);
+    color: var(--ink-soft);
+    font-weight: 600;
+    opacity: 0.95;
+}
+h3 {
+    font-size: 18px;
+    color: var(--ink-soft);
+    font-weight: 600;
 }
 
-/* Grid format */
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0px;
-    margin-bottom: 50px;
+/* Utilities */
+.center {
+    text-align: center;
+}
+.mt-2 {
+    margin-top: 8px;
+}
+.mt-4 {
+    margin-top: 16px;
+}
+.mt-6 {
+    margin-top: 24px;
+}
+.mt-8 {
+    margin-top: 40px;
 }
 
-/* Grid image format */
-.grid-item {
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition:
-        transform var(--transition-standard),
-        box-shadow var(--transition-standard);
-    display: block;
-    text-decoration: none;
-    color: var(--text);
-}
-
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .grid-item:hover {
-        transform: scale(1.02);
-        box-shadow: var(--shadow-hover);
-        color: var(--text);
-    }
-}
-
-.grid-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    border: none;
-    border-radius: var(--border-radius);
-}
-
-/* Project section styling */
-.degree-section {
-    background-color: var(--bg);
-    padding: 10px;
-    position: relative;
-    z-index: 1;
-}
-
-/* Text on top of project images – dolt från början */
-.grid-caption {
-    position: absolute;
+/* -----------------------
+   2) Header / Navigation
+------------------------ */
+.site-header {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    height: var(--header-h);
+
+    /* Keep header above everything else */
+    z-index: 1000;
+
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.06)),
+        rgba(var(--bg-rgb), 0.58);
+    border-bottom: var(--hairline) solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+        var(--inner),
+        0 2px 14px rgba(0, 0, 0, 0.22);
+}
+
+.site-nav {
+    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: inherit;
-    text-align: center;
-    font-size: 2rem;
-    opacity: 0;
+    justify-content: space-between;
+}
+
+/* Home button = pill */
+#home-btn.brand {
+    display: inline-grid;
+    place-items: center;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0.02)
+    );
+    border: var(--hairline) solid rgba(255, 255, 255, 0.12);
+    color: var(--ink);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font:
+        700 12px/1 ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        "Liberation Mono",
+        monospace;
+    box-shadow: var(--shadow);
     transition:
-        opacity 0.3s ease,
-        background-color 0.3s ease;
-    padding: 20px;
+        transform 0.15s ease,
+        filter 0.2s ease,
+        border-color 0.2s ease;
+    cursor: pointer;
+}
+#home-btn.brand:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    border-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Vid hover – visa texten och lägg till bakgrund */
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .grid-item:hover .grid-caption {
-        opacity: 1;
-        background-color: var(
-            --selector-color
-        ); /* eller rgba(0,0,0,0.4) om du vill ha semitransparent */
-    }
+/* Hamburger */
+.hamburger-btn {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 12px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0.02)
+    );
+    border: var(--hairline) solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow);
+    transition:
+        transform 0.15s ease,
+        filter 0.2s ease,
+        border-color 0.2s ease;
+    cursor: pointer;
+}
+.hamburger-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+.hamburger-line {
+    width: 18px;
+    height: 2px;
+    background: var(--ink);
+    display: block;
+    border-radius: 1px;
+    transform-origin: right;
+    transition:
+        transform 0.22s cubic-bezier(0.33, 1.5, 0.67, 1),
+        opacity 0.16s ease;
+}
+.hamburger-line + .hamburger-line {
+    margin-top: 0px;
+}
+.hamburger-btn.active .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-btn.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Grid item link styling - hover states managed by parent styles */
+/* Drawer sits BELOW header so hamburger remains clickable */
+.nav-drawer {
+    position: fixed;
+    inset: var(--header-h) 0 0 auto;
+    width: min(360px, 88vw);
+    height: calc(100vh - var(--header-h));
 
-/* tools section styling */
-.tools-section {
-    background-color: var(--bg);
-    padding: 10px 0;
-    color: var(--text);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.02)
+        ),
+        rgba(var(--bg-rgb), 0.8);
+    border-left: var(--hairline) solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        transform 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.26s ease,
+        visibility 0.26s ease;
+    box-shadow: -30px 0 80px rgba(0, 0, 0, 0.35);
+
+    z-index: 900; /* below header (1000) */
+    display: flex;
+    flex-direction: column;
+}
+.nav-drawer.active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
 }
 
-/* Project section styling */
-.project-section {
-    background-color: var(--bg);
-    padding: 10px 0;
+.nav-menu {
+    display: grid;
+    gap: 8px;
+    padding: 12px var(--gutter) 18px;
+}
+.nav-link {
+    display: block;
+    padding: 12px 12px;
+    border-radius: 10px;
+    color: var(--ink);
+    border: var(--hairline) solid transparent;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.12s ease,
+        backdrop-filter 0.2s ease;
+}
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateX(2px);
+    backdrop-filter: blur(6px);
+}
+
+/* -----------------------
+   3) Hero
+------------------------ */
+.hero {
+    min-height: calc(100svh - var(--header-h));
+    position: relative;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    overflow: hidden;
+
+    background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.22)),
+        var(--hero-img);
+    background-size: cover;
+    background-position: center center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            1200px 800px at 85% -10%,
+            rgba(126, 231, 255, 0.16),
+            transparent 60%
+        ),
+        radial-gradient(
+            1000px 700px at -10% 40%,
+            rgba(179, 156, 255, 0.16),
+            transparent 60%
+        );
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.centered-title {
     position: relative;
     z-index: 1;
+    display: grid;
+    gap: 14px;
+    padding: 0 10px;
+}
+.horizontal-line {
+    width: min(680px, 82vw);
+    height: 1px;
+    margin: 6px auto;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.28),
+        transparent
+    );
+}
+.over-line {
+    opacity: 0.9;
+}
+.under-line {
+    opacity: 0.5;
 }
 
-.tools-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+/* Scroll chevron (not just a line) */
+.scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+    font:
+        700 11px/1 ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        "Liberation Mono",
+        monospace;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+}
+.scroll-arrow {
+    position: relative;
+    width: 2px;
+    height: 26px;
+    background: currentColor;
+    opacity: 0.85;
+    animation: scrollPulse 1.8s infinite ease-in-out;
+}
+.scroll-arrow::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateX(-50%) rotate(45deg);
+}
+@keyframes scrollPulse {
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(8px);
+        opacity: 1;
+    }
 }
 
-.tools-item {
-    display: flex;
-    align-items: center;
-    background-color: var(--input-bg);
-    border-radius: var(--border-radius);
-    padding: 20px;
+/* -----------------------
+   4) Grids & Cards
+------------------------ */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px; /* Matches tools grid gap and container gutters align via .container */
+}
+
+/* Cards with hover caption overlay */
+.card {
+    grid-column: span 6;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.02)
+        ),
+        var(--bg-elev);
+    border: var(--hairline) solid rgba(255, 255, 255, 0.12);
     box-shadow: var(--shadow);
     transition:
-        transform var(--transition-standard),
-        box-shadow var(--transition-standard);
+        transform 0.18s ease,
+        filter 0.2s ease,
+        border-color 0.2s ease;
 }
-
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .tools-item:hover {
-        transform: scale(1.01);
-        box-shadow: var(--shadow-hover);
-    }
+.card:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+    border-color: rgba(255, 255, 255, 0.18);
 }
-
-.tools-logo {
-    flex: 0 0 120px;
-    margin-right: 20px;
-}
-
-.tools-logo img {
+.card img {
     width: 100%;
-    height: auto;
-    max-height: 80px;
-    object-fit: contain;
-    border: none;
+    height: clamp(200px, 30vw, 320px);
+    object-fit: cover;
+    display: block;
 }
 
-.tools-text {
-    flex: 1;
+/* Hover caption */
+.card .card-caption {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    color: var(--ink);
+    font-size: 13px;
+
+    background: linear-gradient(
+        180deg,
+        rgba(12, 14, 19, 0.35),
+        rgba(12, 14, 19, 0.55)
+    );
+    border: var(--hairline) solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    pointer-events: none;
+}
+.card:hover .card-caption {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.tools-text h3 {
-    margin-top: 0;
-    color: var(--text);
-    font-size: 1.3rem;
+/* -----------------------
+   5) Degree section
+------------------------ */
+.degree-container {
+    display: grid;
+    gap: 16px;
+}
+.degree-text {
+    color: var(--ink-soft);
 }
 
-.tools-text p {
-    margin-bottom: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
+/* -----------------------
+   6) Tools (tiles align with page gutters)
+------------------------ */
+.tools {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
 }
-
-/* Touch device optimizations - remove sticky hover states */
-@media (hover: none) and (pointer: coarse) {
-    /* Reset any potential sticky states on touch devices */
-    * {
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Ensure interactive elements give immediate visual feedback on touch */
-    .hamburger-btn:active {
-        transform: scale(0.95);
-    }
-
-    .nav-menu .nav-link:active {
-        background-color: var(--input-bg);
-        color: var(--hover-text);
-        transform: scale(0.98);
-    }
-
-    .submit-btn:active {
-        background-color: var(--accent-hover);
-        transform: scale(0.98);
-    }
-
-    .grid-item:active {
-        transform: scale(0.98);
-    }
-}
-
-/* Responsive adjustments for */
-@media (max-width: 600px) {
-    /* Navigation mobile styles */
-
-    .nav-overlay {
-        width: 100vw;
-        margin-top: 20px;
-    }
-
-    .centered-title h1 {
-        font-size: 1.5rem;
-        letter-spacing: 9px;
-    }
-
-    /* tools section mobile styles */
-    .tools-item {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .tools-logo {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-
-    /* Contact section mobile styles */
-    .contact-container {
-        width: 90%;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .contact-info,
-    .contact-form-container {
-        width: 100%;
-        margin: 0;
-    }
-
-    /* Projects grid mobile styles */
-    .grid-item {
-        transform: none;
-    }
-
-    .image-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Contact section styling */
-.contact-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    width: 90%; /* Width matching container class */
-    max-width: 1200px;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.contact-section {
-    padding: 10px 0; /* Remove horizontal padding */
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-.contact-intro {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    padding: 0 20px;
-}
-
-/*Profile picture*/
-.profile-picture {
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
+.tool-card {
+    grid-column: span 3;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.02)
+        ),
+        var(--bg-elev);
+    border: var(--hairline) solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
     box-shadow: var(--shadow);
+    padding: 18px;
+    text-align: center;
+    transition:
+        transform 0.12s ease,
+        border-color 0.2s ease,
+        filter 0.2s ease;
+}
+.tool-card:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.03);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+.tool-card img {
+    height: 42px;
+    display: block;
+    margin: 0 auto 10px;
+    object-fit: contain;
+}
+
+/* -----------------------
+   7) Contact / Form
+------------------------ */
+.contact-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+.contact-info,
+.contact-form-container {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.04),
+            rgba(255, 255, 255, 0.02)
+        ),
+        var(--bg-elev);
+    border: var(--hairline) solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+}
+.contact-info {
+    grid-column: span 5;
+}
+.contact-form-container {
+    grid-column: span 7;
 }
 
 .profile-picture img {
-    width: 100%;
-    height: 350px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
+    border-radius: 16px;
+    border: var(--hairline) solid rgba(255, 255, 255, 0.18);
     display: block;
-    border: none;
-}
-
-.contact-info,
-.contact-form-container {
-    background-color: var(--bg);
-    padding: 30px;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    width: 100%; /* Change from calc(50% - 20px) to let flex handle the width */
-    box-sizing: border-box;
-    flex: 1; /* Make both containers take equal space */
-}
-.contact-info h3 {
-    color: var(--text);
-    margin-top: 0;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.contact-info p {
-    margin-bottom: 15px;
-    font-size: 1rem;
-    line-height: 1.5;
-}
-
-.contact-info a {
-    color: var(--text);
-    transition: color var(--transition-standard);
-}
-
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .contact-info a:hover {
-        color: var(--hover-text);
-    }
-}
-
-.contact-form-container form {
-    width: 100%;
-}
-
-.contact-form-container h3 {
-    color: var(--text);
-    margin-top: 0;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
 }
 
 .form-group {
-    margin-bottom: 20px;
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+label {
+    font:
+        700 11px/1 ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        "Liberation Mono",
+        monospace;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+}
+input[type="text"],
+input[type="email"],
+textarea {
     width: 100%;
-    max-width: 100%;
+    padding: 12px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: var(--hairline) solid rgba(255, 255, 255, 0.14);
+    color: var(--ink);
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        backdrop-filter 0.2s ease;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: normal;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: var(--border-radius);
-    background-color: var(--input-bg);
-    color: var(--text);
-    font-family: "Courier New", sans-serif;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.form-group textarea {
+textarea {
     resize: vertical;
+    min-height: 120px;
 }
-
-.form-group input:focus,
-.form-group textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--accent); /* Use accent color for focus */
+    border-color: rgba(126, 231, 255, 0.7);
+    background: rgba(126, 231, 255, 0.1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .submit-btn {
-    background-color: var(--accent);
-    color: white; /* White text for better contrast on accent color background */
-    padding: 12px 24px;
-    border: none;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition:
-        background-color var(--transition-standard),
-        transform var(--transition-standard);
-    display: inline-block;
-    margin-top: 20px;
-}
-
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .submit-btn:hover {
-        background-color: var(--accent-hover);
-    }
-}
-
-/* Image Modal Styles */
-.image-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10000; /* Higher than header (9999) */
-    display: flex;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-standard);
-}
-
-.image-modal.active {
-    opacity: 1; /* opacity on overlay */
-    pointer-events: auto;
-}
-
-.modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    cursor: pointer;
-}
-
-.modal-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 90%;
-    height: 90%;
-    max-width: 90vw;
-    max-height: 90vh;
-    z-index: 10001;
-    border-radius: var(--border-radius);
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-shadow: var(--shadow-hover);
-    transform: scale(0.9);
-    transition: transform var(--transition-standard);
-    background-color: var(--bg);
-}
-
-.image-modal.active .modal-content {
-    transform: scale(1);
-}
-
-.modal-content img {
-    display: block;
-    width: 100%;
-    object-fit: cover;
-}
-
-/* Modal description styles */
-.modal-description {
-    padding: 30px;
-    background-color: var(--bg);
-    color: var(--text);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.modal-title {
-    font-size: 1.5rem;
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: var(--text);
-}
-
-.modal-description-text {
-    font-size: 1rem;
-    line-height: 1.6;
-    font-weight: normal;
-}
-
-.modal-close {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    width: 30px;
-    height: 30px;
-    background-color: var(--bg);
-    color: var(--text);
-    border: none;
-    border-radius: 50%;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0.02)
+    );
+    border: var(--hairline) solid rgba(255, 255, 255, 0.12);
     box-shadow: var(--shadow);
-    z-index: 10002; /* Ensure it's above other modal content */
+    color: var(--ink);
     transition:
-        background-color var(--transition-standard),
-        transform var(--transition-standard);
+        transform 0.15s ease,
+        filter 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+.submit-btn:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+    border-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Only apply hover effects on devices that can actually hover */
-@media (hover: hover) {
-    .modal-close:hover {
-        background-color: var(--input-bg);
-        color: var(--bg);
-        transform: scale(1.1);
-    }
+.site-footer {
+    margin-top: 36px;
+    padding-top: 16px;
+    border-top: var(--hairline) solid rgba(255, 255, 255, 0.1);
+    color: var(--ink-soft);
+    font-size: 13px;
+    text-align: center;
 }
 
-/* Responsive adjustments for modal */
-@media (max-width: 600px) {
-    .modal-content {
-        width: 95%;
-        max-width: 95vw;
-        max-height: 95vh;
+/* -----------------------
+   8) Responsive
+------------------------ */
+@media (max-width: 980px) {
+    .section {
+        padding: 72px 0;
     }
-
-    .modal-content img {
-        width: 100%;
-        height: 100%;
+    .contact-info,
+    .contact-form-container {
+        grid-column: span 12;
     }
-
-    .modal-description {
-        padding: 15px;
+}
+@media (max-width: 960px) {
+    .card {
+        grid-column: span 12;
     }
-
-    .modal-title {
-        font-size: 1.3rem;
+    .tool-card {
+        grid-column: span 6;
     }
-
-    .modal-description-text {
-        font-size: 0.95rem;
-    }
-
-    .modal-close {
-        top: 10px;
-        right: 10px;
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
+}
+@media (max-width: 560px) {
+    .tool-card {
+        grid-column: span 12;
     }
 }
