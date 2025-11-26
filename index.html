@@ -1,244 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="sv">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Filip Arkemar</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Inter:wght@400;600;700&display=swap"
-            rel="stylesheet"
-        />
-
-        <!--<link rel="stylesheet" href="reset.css" />-->
         <link rel="stylesheet" href="styles.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
-    <body id="top">
-        <!-- ================= Header / Navigation ================= -->
-        <header id="header" class="site-header">
-            <nav class="site-nav container">
-                <a href="#top" id="home-btn" class="brand">FILIP ARKEMAR</a>
 
-                <button
-                    class="hamburger-btn"
-                    aria-label="Toggle menu"
-                    aria-controls="site-menu"
-                    aria-expanded="false"
-                >
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
+    <body>
+        <header>
+            <nav class="nav-inner">
+                <a href="index.html" class="nav-brand">Filip Arkemar<</a>
+                <ul class="nav-links">
+                    <li>
+                        <h2><a href="about.html">About</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="projects.html">Projects</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="contact.html">Contact</a></h2>
+                    </li>
+                </ul>
             </nav>
-
-            <!-- Right drawer -->
-            <aside id="site-menu" class="nav-drawer" aria-hidden="true">
-                <nav class="nav-menu">
-                    <a href="#hero" class="nav-link">Start</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#degree" class="nav-link">Degree Project</a>
-                    <a href="#tools" class="nav-link">Tools</a>
-                    <a href="#contact" class="nav-link">Contact</a>
-                </nav>
-            </aside>
         </header>
 
-        <!-- ================= Hero ================= -->
-        <section id="hero" class="hero">
-            <div class="centered-title container">
-                <div class="horizontal-line over-line"></div>
-                <h1 id="title" class="hero-title">FILIP ARKEMAR</h1>
-                <h2 id="subtitle" class="hero-subtitle">Online Portfolio</h2>
-                <div class="horizontal-line under-line"></div>
-            </div>
-
-            <div class="scroll-indicator">
-                <div class="scroll-arrow"></div>
-                <span>scroll</span>
-            </div>
-        </section>
-
-        <!-- ================= Projects ================= -->
-        <section id="projects" class="section">
-            <div class="container">
-                <h2 class="section-title">Projects</h2>
-
-                <div class="grid">
-                    <a class="card" href="#projects">
-                        <img
-                            src="images/santa_fé_nightrender.jpg"
-                            alt="Project San­ta Fe cover"
-                        />
-                        <div class="card-caption">
-                            Santa Fe — residential concept
-                        </div>
-                    </a>
-
-                    <a class="card" href="#projects">
-                        <img
-                            src="images/tamnougalt_torg.png"
-                            alt="Project Tamnougalt cover"
-                        />
-                        <div class="card-caption">
-                            Tamnougalt — adobe restoration
-                        </div>
-                    </a>
-
-                    <a class="card" href="#projects">
-                        <img
-                            src="images/malmohus_giraff.png"
-                            alt="Project Malmöhus cover"
-                        />
-                        <div class="card-caption">
-                            Malmöhus — museum pavilion
-                        </div>
-                    </a>
-
-                    <a class="card" href="#projects">
-                        <img
-                            src="images/fjärilsdalen_från_stora_vägen.png"
-                            alt="Project Fjärilsdalen cover"
-                        />
-                        <div class="card-caption">
-                            Fjärilsdalen — landscape study
-                        </div>
-                    </a>
+        <main>
+            <section class="page">
+                <img
+                    src="images/hamburgsund_vinter.jpg"
+                    alt="Översiktsbild för Filip Arkemares portfolio"
+                    class="image"
+                />
+                <div class="image-meta">
+                    <h2>Filip Arkemar</h2>
+                    <h2>Portfolio</h2>
                 </div>
-            </div>
-        </section>
-
-        <!-- ================= Degree Project ================= -->
-        <section id="degree" class="section">
-            <div class="container">
-                <h2 class="section-title">Degree Project</h2>
-
-                <div class="degree-container">
-                    <p class="degree-text">
-                        Sauna raft — from first sketch to finished, floating
-                        structure: design, detailing, material logistics, and
-                        build.
-                    </p>
-                    <div class="grid">
-                        <div class="card">
-                            <img
-                                src="images/hamburgsund_vinter_bobby.jpg"
-                                alt="Sauna raft exterior"
-                            />
-                            <div class="card-caption">
-                                Exterior — winter test
-                            </div>
-                        </div>
-                        <div class="card">
-                            <img
-                                src="images/hamburgsund_morgon.jpg"
-                                alt="Sauna raft interior"
-                            />
-                            <div class="card-caption">
-                                Interior — framing details
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= Tools ================= -->
-        <section id="tools" class="section">
-            <div class="container">
-                <h2 class="section-title">Tools I Use</h2>
-
-                <div class="tools">
-                    <div class="tool-card">
-                        <img src="icons/autocad.svg" alt="AutoCAD" />
-                        <h3>AutoCAD</h3>
-                    </div>
-                    <div class="tool-card">
-                        <img src="icons/rhino.svg" alt="Rhino" />
-                        <h3>Rhino</h3>
-                    </div>
-                    <div class="tool-card">
-                        <img src="icons/grasshopper.svg" alt="Grasshopper" />
-                        <h3>Grasshopper</h3>
-                    </div>
-                    <div class="tool-card">
-                        <img src="icons/figma.svg" alt="Figma" />
-                        <h3>Figma</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= Contact ================= -->
-        <section id="contact" class="section">
-            <div class="container">
-                <h2 class="section-title">Contact</h2>
-
-                <div class="contact-container">
-                    <div class="contact-info">
-                        <div class="profile-picture">
-                            <img
-                                src="images/filip_uden_briller.jpg"
-                                alt="Filip Arkemar"
-                            />
-                        </div>
-                        <p>
-                            Based in Sweden. I like hands-on building, precise
-                            details, and automations that save time.
-                        </p>
-                    </div>
-
-                    <div class="contact-form-container">
-                        <form
-                            id="contact-form"
-                            action="#"
-                            method="post"
-                            novalidate
-                        >
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input
-                                    id="name"
-                                    name="name"
-                                    type="text"
-                                    placeholder="Your name"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    placeholder="you@example.com"
-                                />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="message">Message</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    placeholder="Say hello…"
-                                ></textarea>
-                            </div>
-
-                            <button class="submit-btn" type="submit">
-                                Send message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <footer class="site-footer">
-                <p>2025 Filip Arkemar</p>
-            </footer>
-        </section>
-
-        <!-- Your JS (keeps hamburger + scroll effects working) -->
-        <script src="script.js"></script>
+            </section>
+        </main>
     </body>
 </html>

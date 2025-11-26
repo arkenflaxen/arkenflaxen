@@ -1,809 +1,256 @@
-/* ========================================================================
-   FILIP ARKEMAR — Styles v6 (index only, scalable)
-   Fix: Hamburger lines are now centered and rotate into a perfect “X”
-   Other features retained from v5:
-   - Drawer uses same glass as header; header above drawer
-   - Smooth scrolling + anchor offset
-   - Pressed-in :active effects on all buttons/links
-   - Auto Light mode (and optional [data-theme] override)
-   - Faster, non-lingering drawer link hover
-   - Hover effects only on hover-capable devices
-   - Consistent gutters across site
-   - No underlines anywhere
-   ======================================================================== */
+:root {
+    /* Typ, layout, spacing */
+    --font-family:
+        system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --spacing: 1rem;
+    --nav-height: 64px;
+    --border-size: 0px;
+    --border-radius: 0px;
 
-/* -----------------------
-   0) Minimal modern reset
------------------------- */
+    /* Färger */
+    --bg-color: #eeeeee;
+    --text-color: #111111;
+    --accent-gray: #999999;
+
+    /* Tre textstorlekar */
+    --font-size-title: 2.4rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-heading: 0.7rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-body: 0.5rem; /* Brödtext, formulär etc */
+}
+
+/* Dark mode: byt plats på bakgrund och text */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #111111;
+        --text-color: #eeeeee;
+    }
+}
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
-:where(html) {
-    -webkit-text-size-adjust: 100%;
-}
-:where(body, h1, h2, h3, p, figure) {
-    margin: 0;
-}
-:where(img, picture, video, canvas, svg) {
-    display: block;
-    max-width: 100%;
-}
-:where(button, input, select, textarea) {
-    font: inherit;
-    color: inherit;
-}
-:where(a) {
-    color: inherit;
-    text-decoration: none;
-}
 
-/* -----------------------
-   1) Tokens (Dark = default)
------------------------- */
-:root {
-    /* Palette */
-    --bg: #0d1117;
-    --bg-elev: #0f141b;
-    --ink: #e6edf3;
-    --ink-soft: #a9b6c7;
-    --line: rgba(255, 255, 255, 0.1);
-    --line-strong: rgba(255, 255, 255, 0.18);
-
-    --accent: #7ee7ff;
-    --accent-2: #b39cff;
-
-    /* Layout & effects */
-    --radius-xl: 16px;
-    --radius: 12px;
-    --radius-sm: 10px;
-
-    --hairline: 1px;
-    --shadow-pop:
-        0 18px 60px rgba(0, 0, 0, 0.45), 0 4px 18px rgba(0, 0, 0, 0.32);
-    --shadow-inset:
-        inset 0 2px 8px rgba(0, 0, 0, 0.35),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.06);
-    --inner: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-
-    --header-h: 64px;
-    --container-w: 1120px;
-    --gutter: 24px;
-
-    --bg-rgb: 13, 17, 23;
-
-    /* Shared "glass" surface (header & drawer consistent) */
-    --glass-bg:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.06)),
-        rgba(var(--bg-rgb), 0.58);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --glass-blur: 16px;
-    --glass-sat: 120%;
-
-    /* Drawer glass */
-    --drawer-bg: var(--glass-bg);
-    --drawer-border: rgba(255, 255, 255, 0.12);
-    --drawer-blur: 24px;
-    --drawer-sat: 140%;
-
-    /* Hero bg */
-    --hero-img: image-set(
-        url("./assets/images/hamburgsund_vinter.webp") type("image/webp"),
-        url("./assets/images/hamburgsund_vinter.jpg") type("image/jpeg")
-    );
-}
-
-/* Light mode (auto via OS) */
-@media (prefers-color-scheme: light) {
-    :root {
-        --bg: #f6f8fb;
-        --bg-elev: #ffffff;
-        --ink: #101319;
-        --ink-soft: #5c6677;
-        --line: rgba(0, 0, 0, 0.08);
-        --line-strong: rgba(0, 0, 0, 0.14);
-
-        --bg-rgb: 246, 248, 251;
-        --glass-bg:
-            linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.02)),
-            rgba(var(--bg-rgb), 0.75);
-        --glass-border: rgba(0, 0, 0, 0.06);
-        --drawer-bg: var(--glass-bg);
-        --drawer-border: rgba(0, 0, 0, 0.08);
-    }
-}
-
-/* Manual theme overrides if you add data-theme="light"/"dark" on <html> */
-html[data-theme="light"] {
-    color-scheme: light;
-}
-html[data-theme="dark"] {
-    color-scheme: dark;
-}
-
-/* -----------------------
-   2) Base
------------------------- */
-html {
-    /* Smooth scrolling for in-page links */
-    scroll-behavior: smooth;
-}
+html,
 body {
-    min-height: 100dvh;
-    background:
-        radial-gradient(
-            1200px 800px at 80% -10%,
-            rgba(126, 231, 255, 0.1),
-            transparent 60%
-        ),
-        radial-gradient(
-            900px 700px at -10% 45%,
-            rgba(179, 156, 255, 0.1),
-            transparent 60%
-        ),
-        var(--bg);
-    color: var(--ink);
-    font:
-        400 16px/1.6 Inter,
-        system-ui,
-        -apple-system,
-        Segoe UI,
-        Roboto,
-        "Noto Sans",
-        sans-serif;
-
-    /* Keep content clear of fixed header */
-    padding-top: var(--header-h);
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: normal;
 }
 
-/* Container & sections (consistent gutters) */
-.container {
-    max-width: var(--container-w);
-    margin-inline: auto;
-    padding-inline: var(--gutter);
-}
-.section {
-    padding-block: 88px;
-}
-
-/* Anchor offset so fixed header doesn't cover targets */
-:where(section, [id]) {
-    scroll-margin-top: calc(var(--header-h) + 12px);
+/* All text */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    line-height: 1.5;
+    text-align: left;
 }
 
-/* Headings centered */
+/* Huvudrubriker (h1/h2) – används både i nav (runt länkar) och under bilder */
 h1,
-h2,
-h3 {
-    text-align: center;
-}
-h1 {
-    font-family: "Silkscreen", system-ui, sans-serif;
-    font-size: clamp(54px, 9vw, 112px);
-    line-height: 0.96;
-    letter-spacing: 0.01em;
-    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-}
 h2 {
-    font-size: clamp(22px, 3.2vw, 30px);
-    color: var(--ink-soft);
-    font-weight: 600;
-}
-h3 {
-    font-size: 18px;
-    color: var(--ink-soft);
-    font-weight: 600;
+    font-size: var(--font-size-heading);
+    margin: 0;
+    text-transform: uppercase;
+
+    font-weight: normal;
 }
 
-/* Utilities */
-.center {
-    text-align: center;
-}
-.mt-2 {
-    margin-top: 8px;
-}
-.mt-4 {
-    margin-top: 16px;
-}
-.mt-6 {
-    margin-top: 24px;
-}
-.mt-8 {
-    margin-top: 40px;
-}
-
-/* -----------------------
-   3) Header / Navigation
------------------------- */
-.site-header {
+/* NAVBAR */
+header {
     position: fixed;
-    inset: 0 0 auto 0;
-    height: var(--header-h);
-    z-index: 1000; /* header above drawer */
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-sat));
-    background: var(--glass-bg);
-    border-bottom: var(--hairline) solid var(--glass-border);
-    box-shadow:
-        var(--inner),
-        0 2px 14px rgba(0, 0, 0, 0.22);
-}
-.site-nav {
-    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline: var(--gutter);
-}
-
-/* Brand / Home button (with pressed-in effect) */
-#home-btn.brand {
-    display: inline-grid;
-    place-items: center;
-    height: 42px;
-    padding-inline: 14px;
-    border-radius: var(--radius);
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.06),
-        rgba(255, 255, 255, 0.02)
-    );
-    border: var(--hairline) solid var(--line-strong);
-    box-shadow: var(--shadow-pop);
-    color: var(--ink);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    font:
-        700 12px/1 ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        "Liberation Mono",
-        monospace;
-    transition:
-        transform 0.15s ease,
-        filter 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.15s ease;
-    cursor: pointer;
-}
-@media (hover: hover) {
-    #home-btn.brand:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.06);
-    }
-}
-#home-btn.brand:active {
-    transform: translateY(1px);
-    box-shadow: var(--shadow-inset);
-}
-
-/* =======================
-   HAMBURGER — PERFECT X
-   ======================= */
-/* Button container */
-.hamburger-btn {
-    position: relative; /* NEW: for absolute lines */
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius);
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.06),
-        rgba(255, 255, 255, 0.02)
-    );
-    border: var(--hairline) solid var(--line-strong);
-    box-shadow: var(--shadow-pop);
-    transition:
-        transform 0.15s ease,
-        filter 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.15s ease;
-    cursor: pointer;
-}
-@media (hover: hover) {
-    .hamburger-btn:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.06);
-    }
-}
-.hamburger-btn:active {
-    transform: translateY(1px);
-    box-shadow: var(--shadow-inset);
-}
-
-/* Lines: absolute, centered; top/bottom offset by 6px */
-.hamburger-line {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 22px;
-    height: 2px;
-    background: var(--ink);
-    border-radius: 2px;
-    transform-origin: 50% 50%;
-    transition:
-        transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.12s ease;
-}
-.hamburger-line:nth-child(1) {
-    transform: translate(-50%, -50%) translateY(-6px);
-}
-.hamburger-line:nth-child(2) {
-    transform: translate(-50%, -50%) translateY(0);
-}
-.hamburger-line:nth-child(3) {
-    transform: translate(-50%, -50%) translateY(6px);
-}
-
-/* Active: outer lines rotate into X; middle vanishes (no side-shift) */
-.hamburger-btn.active .hamburger-line:nth-child(1) {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-.hamburger-btn.active .hamburger-line:nth-child(2) {
-    opacity: 0;
-    transform: translate(-50%, -50%) scaleX(0.2);
-}
-.hamburger-btn.active .hamburger-line:nth-child(3) {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-/* Drawer — same glass as header, beneath header */
-.nav-drawer {
-    position: fixed;
-    inset: var(--header-h) 0 0 auto;
-    width: min(360px, 88vw);
-    height: calc(100dvh - var(--header-h));
-    z-index: 900; /* below header */
-    transform: translateX(100%);
-    opacity: 0;
-    visibility: hidden;
-    transition:
-        transform 0.2s ease,
-        opacity 0.16s ease,
-        visibility 0.16s ease; /* snappier -> no lingering */
-    background: var(--drawer-bg);
-    border-left: var(--hairline) solid var(--drawer-border);
-    backdrop-filter: blur(var(--drawer-blur)) saturate(var(--drawer-sat));
-    -webkit-backdrop-filter: blur(var(--drawer-blur))
-        saturate(var(--drawer-sat));
-    box-shadow: -30px 0 80px rgba(0, 0, 0, 0.35);
-    display: flex;
-    flex-direction: column;
-}
-.nav-drawer.active {
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-}
-
-.nav-menu {
-    display: grid;
-    gap: 8px;
-    padding: 12px var(--gutter) 18px;
-}
-
-/* Links in drawer */
-.nav-link {
-    display: block;
-    padding: 12px 12px;
-    border-radius: 10px;
-    border: var(--hairline) solid transparent;
-    transition:
-        background 0.1s ease,
-        border-color 0.1s ease,
-        transform 0.08s ease,
-        box-shadow 0.08s ease;
-}
-@media (hover: hover) {
-    .nav-link:hover {
-        background: rgba(255, 255, 255, 0.06);
-        border-color: var(--line-strong);
-    }
-}
-.nav-link:active {
-    transform: translateY(1px);
-    box-shadow: var(--shadow-inset);
-}
-
-/* -----------------------
-   4) Hero
------------------------- */
-.hero {
-    min-height: calc(100svh - var(--header-h));
-    position: relative;
-    display: grid;
-    place-items: center;
-    text-align: center;
-    overflow: hidden;
-    background-image:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.22)),
-        var(--hero-img);
-    background-size: cover;
-    background-position: center;
-}
-.hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(
-            1200px 800px at 85% -10%,
-            rgba(126, 231, 255, 0.16),
-            transparent 60%
-        ),
-        radial-gradient(
-            1000px 700px at -10% 40%,
-            rgba(179, 156, 255, 0.16),
-            transparent 60%
-        );
-    backdrop-filter: blur(6px) saturate(120%);
-    -webkit-backdrop-filter: blur(6px) saturate(120%);
-    pointer-events: none;
-    z-index: 0;
-}
-.centered-title {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    gap: 14px;
-    padding-inline: 10px;
-}
-.horizontal-line {
-    width: min(680px, 82vw);
-    height: 1px;
-    margin: 6px auto;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.28),
-        transparent
-    );
-}
-.over-line {
-    opacity: 0.9;
-}
-.under-line {
-    opacity: 0.5;
-}
-
-/* Scroll chevron */
-.scroll-indicator {
-    position: absolute;
-    left: 50%;
-    bottom: 22px;
-    translate: -50% 0;
-    display: grid;
-    justify-items: center;
-    gap: 8px;
-    color: var(--ink-soft);
-    font:
-        700 11px/1 ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        "Liberation Mono",
-        monospace;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    user-select: none;
-    pointer-events: none;
-    z-index: 1;
-}
-.scroll-arrow {
-    position: relative;
-    width: 2px;
-    height: 26px;
-    background: currentColor;
-    opacity: 0.85;
-    animation: scrollPulse 1.6s infinite ease-in-out;
-}
-.scroll-arrow::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    translate: -50% 0;
-    rotate: 45deg;
-}
-@keyframes scrollPulse {
-    0%,
-    100% {
-        transform: translateY(0);
-        opacity: 0.6;
-    }
-    50% {
-        transform: translateY(8px);
-        opacity: 1;
-    }
-}
-
-/* -----------------------
-   5) Grid & Cards (hover shows caption)
------------------------- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-}
-
-.card {
-    grid-column: span 6;
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius-xl);
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(255, 255, 255, 0.02)
-        ),
-        var(--bg-elev);
-    border: var(--hairline) solid var(--line);
-    box-shadow: var(--shadow-pop);
-    transition:
-        transform 0.16s ease,
-        border-color 0.16s ease,
-        filter 0.16s ease;
-}
-@media (hover: hover) {
-    .card:hover {
-        transform: translateY(-2px);
-        border-color: var(--line-strong);
-        filter: brightness(1.03);
-    }
-}
-.card img {
-    width: 100%;
-    height: clamp(200px, 30vw, 320px);
-    object-fit: cover;
-}
-.card .card-caption {
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    color: var(--ink);
-    font-size: 13px;
-    pointer-events: none;
-    background: linear-gradient(
-        180deg,
-        rgba(12, 14, 19, 0.35),
-        rgba(12, 14, 19, 0.55)
-    );
-    border: var(--hairline) solid var(--line-strong);
-    backdrop-filter: blur(10px) saturate(120%);
-    -webkit-backdrop-filter: blur(10px) saturate(120%);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    opacity: 0;
-    transform: translateY(8px);
-    transition:
-        opacity 0.12s ease,
-        transform 0.12s ease; /* quick -> no lingering */
-}
-@media (hover: hover) {
-    .card:hover .card-caption {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* -----------------------
-   6) Tools
------------------------- */
-.tools {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-}
-.tool-card {
-    grid-column: span 3;
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(255, 255, 255, 0.02)
-        ),
-        var(--bg-elev);
-    border: var(--hairline) solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-pop);
-    padding: 18px;
-    text-align: center;
-    transition:
-        transform 0.12s ease,
-        border-color 0.12s ease,
-        filter 0.12s ease;
-}
-@media (hover: hover) {
-    .tool-card:hover {
-        transform: translateY(-2px);
-        border-color: var(--line-strong);
-        filter: brightness(1.03);
-    }
-}
-.tool-card:active {
-    transform: translateY(1px);
-    box-shadow: var(--shadow-inset);
-}
-.tool-card img {
-    height: 42px;
-    margin: 0 auto 10px;
-    object-fit: contain;
-}
-
-/* -----------------------
-   7) Contact / Form
------------------------- */
-.contact-container {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 24px;
-    align-items: start;
-}
-.contact-info,
-.contact-form-container {
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.04),
-            rgba(255, 255, 255, 0.02)
-        ),
-        var(--bg-elev);
-    border: var(--hairline) solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-pop);
-    padding: 22px;
-    backdrop-filter: blur(8px) saturate(120%);
-    -webkit-backdrop-filter: blur(8px) saturate(120%);
-}
-.contact-info {
-    grid-column: span 5;
-}
-.contact-form-container {
-    grid-column: span 7;
-}
-
-.profile-picture img {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 16px;
-    border: var(--hairline) solid var(--line-strong);
-    margin-bottom: 16px;
-    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-}
-.form-group {
-    display: grid;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-label {
-    font:
-        700 11px/1 ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        "Liberation Mono",
-        monospace;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-}
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.04);
-    border: var(--hairline) solid var(--line-strong);
-    color: var(--ink);
-    transition:
-        border-color 0.12s ease,
-        background 0.12s ease,
-        backdrop-filter 0.12s ease;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-}
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: rgba(126, 231, 255, 0.1);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-}
-
-/* Submit button */
-.submit-btn {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 12px 18px;
-    border-radius: var(--radius);
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.06),
-        rgba(255, 255, 255, 0.02)
-    );
-    border: var(--hairline) solid var(--line-strong);
-    box-shadow: var(--shadow-pop);
-    transition:
-        transform 0.15s ease,
-        filter 0.15s ease,
-        border-color 0.12s ease,
-        box-shadow 0.15s ease;
-}
-@media (hover: hover) {
-    .submit-btn:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.05);
-    }
-}
-.submit-btn:active {
-    transform: translateY(1px);
-    box-shadow: var(--shadow-inset);
+    border-bottom: 1px solid var(--text-color);
+    background-color: var(--bg-color);
+    z-index: 2; /* Räcker att vara högre än innehållet */
 }
 
-.site-footer {
-    margin-top: 36px;
-    padding-top: 16px;
-    border-top: var(--hairline) solid var(--line);
-    color: var(--ink-soft);
-    font-size: 13px;
-    text-align: center;
+.nav-inner {
+    width: 100%;
+    max-width: var(--max-width);
+    display: flex; /* brand + lista i rad */
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: var(--spacing);
 }
 
-/* -----------------------
-   8) Responsive
------------------------- */
-@media (max-width: 980px) {
-    .section {
-        padding-block: 72px;
-    }
-    .contact-info,
-    .contact-form-container {
-        grid-column: 1 / -1;
-    }
-}
-@media (max-width: 960px) {
-    .card {
-        grid-column: 1 / -1;
-    }
-    .tool-card {
-        grid-column: span 6;
-    }
-}
-@media (max-width: 560px) {
-    .tool-card {
-        grid-column: 1 / -1;
-    }
+.nav-brand {
+    font-size: var(--font-size-title);
+    text-decoration: none;
+    color: var(--text-color);
 }
 
-/* -----------------------
-   9) Hover-capable gating
------------------------- */
-@media (hover: none) {
-    .nav-link,
-    .card,
-    .tool-card,
-    #home-btn.brand,
-    .submit-btn {
-        transition: none;
-    }
+/* Nav-länkar: vanlig lista */
+.nav-links {
+    margin: 0;
+    padding: 0;
+}
+
+/* Listobjekt i rad */
+.nav-links li {
+    display: block;
+    text-align: right;
+}
+
+/* Avstånd mellan navobjekt */
+.nav-links li + li {
+    margin-left: 0;
+    margin-top: 0;
+}
+
+/* Själva länkarna i nav – tar färg men ärver storlek från h2 */
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.nav-links a:hover,
+.nav-brand:hover {
+    color: var(--bg-color);
+    background-color: var(--text-color);
+}
+
+.nav-links a:active,
+.nav-brand:active {
+    color: var(--accent-gray);
+}
+
+/* SIDLAYOUT */
+main {
+    min-height: 100vh;
+}
+
+.page {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-inline: var(--spacing);
+    padding-top: var(--nav-height);
+    padding-bottom: calc(2 * var(--spacing));
+}
+
+/* Gemensam vertikal spacing mellan block i en sida */
+.page > * + * {
+    margin-top: var(--spacing);
+}
+
+/* Brödtext */
+p {
+    margin: 0;
+    font-size: var(--font-size-body);
+}
+
+/* Alla bilder */
+.image {
+    display: block;
+    width: 100%;
+    height: calc(100vh - (96px + var(--nav-height)));
+    object-fit: cover;
+    border: var(--border-size) solid var(--text-color);
+    margin-top: var(--spacing);
+    border-radius: var(--border-radius);
+}
+
+/* Flexrad under varje bild: namn vänster, verktyg höger */
+.image-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing);
+}
+
+/* PROJECTS */
+.project-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.project-item + .project-item {
+    margin-top: var(--spacing);
+}
+
+/* CONTACT */
+.contact-info {
+    margin: 0;
+}
+
+.contact-info p + p {
+    margin-top: var(--spacing);
+}
+
+.contact-info a {
+    color: var(--text-color);
+    text-decoration: underline;
+}
+
+.contact-info a:hover {
+    color: var(--accent-gray);
+}
+
+/* FORMULÄR */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing);
+    max-width: 500px;
+}
+
+label {
+    font-size: var(--font-size-body);
+}
+
+input,
+textarea {
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    padding: 0.4rem 0.5rem;
+    border: 1px solid var(--text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+input:focus,
+textarea:focus {
+    outline: 1px solid var(--text-color);
+}
+
+button {
+    align-self: flex-start;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+button:hover {
+    color: var(--bg-color);
+    background-color: var(--text-color);
+}
+
+button:active {
+    filter: invert(1);
+}
+
+/* Formfel och status */
+.form-error {
+    font-size: 0.8rem;
+    color: #b00000;
+}
+
+#form-status {
+    margin-top: var(--spacing);
+    font-size: 0.8rem;
 }

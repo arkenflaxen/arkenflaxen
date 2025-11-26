@@ -1,119 +1,64 @@
-// Scroll effects for header and main title
-window.addEventListener("scroll", function () {
-  const mainTitle = document.querySelector(".centered-title");
-  const firstSection = document.getElementById("grid-section");
-  if (!mainTitle || !firstSection) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#contact-form");
+  if (!form) return;
 
-  const scrollPosition = window.scrollY;
-  const sectionTop = firstSection.offsetTop;
+  const nameInput = form.querySelector("#name");
+  const emailInput = form.querySelector("#email");
+  const messageInput = form.querySelector("#message");
+  const statusEl = document.querySelector("#form-status");
+  const errorEls = form.querySelectorAll(".form-error");
 
-  if (scrollPosition > 50) {
-    const fadeRatio = Math.min(scrollPosition / (sectionTop * 0.5), 1);
-    mainTitle.style.opacity = 1 - fadeRatio;
-    mainTitle.style.transform = `translateY(-${fadeRatio * 70}px)`;
-  } else {
-    mainTitle.style.opacity = 1;
-    mainTitle.style.transform = "translateY(0)";
-  }
-});
-
-// Scroll to top when clicking header title (without smooth scroll)
-document
-  .getElementById("header-title")
-  ?.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0 });
-  });
-
-// Hamburger menu functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const hamburgerBtn = document.querySelector(".hamburger-btn");
-  const navDrawer = document.querySelector(".nav-drawer");
-
-  if (!hamburgerBtn || !navDrawer) return;
-
-  function toggleMenu(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    hamburgerBtn.classList.toggle("active");
-    navDrawer.classList.toggle("active");
-  }
-
-  hamburgerBtn.addEventListener("click", toggleMenu);
-  hamburgerBtn.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      toggleMenu(e);
-    }
-  });
-
-  hamburgerBtn.setAttribute("tabindex", "0");
-
-  document.addEventListener("click", function (e) {
-    if (
-      !navDrawer.contains(e.target) &&
-      !hamburgerBtn.contains(e.target) &&
-      navDrawer.classList.contains("active")
-    ) {
-      toggleMenu();
-    }
-  });
-
-  window.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && navDrawer.classList.contains("active")) {
-      toggleMenu();
-    }
-  });
-});
-
-// Contact form modal functionality
-document.addEventListener("DOMContentLoaded", function () {
-  const contactBtn = document.querySelector(".contact-btn");
-  const contactModal = document.getElementById("contact-modal");
-  const contactForm = document.getElementById("contact-modal-form");
-
-  if (!contactBtn || !contactModal) return;
-
-  function toggleContactModal() {
-    contactModal.classList.toggle("active");
-    contactBtn.classList.toggle("active");
-
-    if (contactModal.classList.contains("active")) {
-      setTimeout(() => {
-        document.getElementById("modal-name")?.focus();
-      }, 300);
-    }
-  }
-
-  contactBtn.addEventListener("click", toggleContactModal);
-  contactBtn.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      toggleContactModal();
-    }
-  });
-
-  contactModal.addEventListener("click", function (e) {
-    if (e.target === contactModal) {
-      toggleContactModal();
-    }
-  });
-
-  if (contactForm) {
-    contactForm.addEventListener("click", function (e) {
-      e.stopPropagation();
+  function clearErrors() {
+    errorEls.forEach((el) => {
+      el.textContent = "";
     });
-
-    contactForm.addEventListener("submit", function () {
-      setTimeout(toggleContactModal, 100);
-    });
+    if (statusEl) {
+      statusEl.textContent = "";
+    }
   }
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && contactModal.classList.contains("active")) {
-      toggleContactModal();
+  function setError(fieldName, message) {
+    const el = form.querySelector(`.form-error[data-for="${fieldName}"]`);
+    if (el) {
+      el.textContent = message;
     }
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    clearErrors();
+
+    let isValid = true;
+
+    if (!nameInput.value.trim()) {
+      setError("name", "Skriv gärna ditt namn.");
+      isValid = false;
+    }
+
+    const emailValue = emailInput.value.trim();
+    if (!emailValue) {
+      setError("email", "Email behövs för att jag ska kunna svara.");
+      isValid = false;
+    } else {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailValue)) {
+        setError("email", "Skriv en giltig emailadress.");
+        isValid = false;
+      }
+    }
+
+    if (!messageInput.value.trim()) {
+      setError("message", "Skriv gärna ett kort meddelande.");
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    if (statusEl) {
+      statusEl.textContent =
+        "Tack för ditt meddelande. I den här versionen skickas det inte iväg på riktigt utan bara som en demo.";
+    }
+
+    form.reset();
   });
 });
