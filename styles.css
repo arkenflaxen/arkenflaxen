@@ -13,7 +13,7 @@
     --accent-gray: #999999;
 
     /* Tre textstorlekar */
-    --font-size-title: 2.4rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-title: 1rem; /* Nav-brand (Filip Arkemar) */
     --font-size-heading: 0.7rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body: 0.5rem; /* Brödtext, formulär etc */
 }
@@ -133,7 +133,7 @@ main {
     max-width: var(--max-width);
     margin: 0 auto;
     padding-inline: var(--spacing);
-    padding-top: var(--nav-height);
+    padding-top: calc(var(--nav-height) + var(--spacing));
     padding-bottom: calc(2 * var(--spacing));
 }
 
@@ -155,7 +155,6 @@ p {
     height: calc(100vh - (96px + var(--nav-height)));
     object-fit: cover;
     border: var(--border-size) solid var(--text-color);
-    margin-top: var(--spacing);
     border-radius: var(--border-radius);
 }
 
@@ -164,7 +163,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: var(--spacing);
+    margin-top: calc(var(--spacing) / 4);
 }
 
 /* PROJECTS */
