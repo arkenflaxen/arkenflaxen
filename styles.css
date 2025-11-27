@@ -257,6 +257,7 @@ button:active {
 /* Mobilversion */
 @media (max-width: 600px) {
     :root {
+        --font-size-title: calc(var(--font-size-title) * 2);
         --font-size-heading: calc(var(--font-size-heading) * 2);
         --font-size-body: calc(var(--font-size-body) * 2);
         --nav-height: calc(var(--nav-height) * 2);
