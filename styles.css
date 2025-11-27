@@ -1,8 +1,8 @@
 :root {
     /* Typ, layout, spacing */
-    --font-family: --font-family: Menlo, Consolas, monospace;
+    --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     --spacing: 1rem;
-    --nav-height: 64px;
+    --nav-height: 128px;
     --border-size: 0px;
     --border-radius: 0px;
 
@@ -12,9 +12,9 @@
     --accent-gray: #999999;
 
     /* Tre textstorlekar */
-    --font-size-title: 1rem; /* Nav-brand (Filip Arkemar) */
-    --font-size-heading: 0.7rem; /* h1, h2, nav-links, text under bilder */
-    --font-size-body: 0.5rem; /* Brödtext, formulär etc */
+    --font-size-title: 2.4rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-heading: 1.2rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-body: 0.6rem; /* Brödtext, formulär etc */
 }
 
 /* Dark mode: byt plats på bakgrund och text */
@@ -34,7 +34,6 @@
 html,
 body {
     margin: 0;
-    text-transform: uppercase;
     font-weight: normal;
 }
 
@@ -54,7 +53,6 @@ h2 {
     font-size: var(--font-size-heading);
     margin: 0;
     text-transform: uppercase;
-
     font-weight: normal;
 }
 
@@ -84,6 +82,7 @@ header {
 
 .nav-brand {
     font-size: var(--font-size-title);
+    text-transform: uppercase;
     text-decoration: none;
     color: var(--text-color);
 }
@@ -151,7 +150,7 @@ p {
 .image {
     display: block;
     width: 100%;
-    height: calc(100vh - (96px + var(--nav-height)));
+    height: calc(100vh - (2 * var(--nav-height)));
     object-fit: cover;
     border: var(--border-size) solid var(--text-color);
     border-radius: var(--border-radius);
@@ -161,8 +160,9 @@ p {
 .image-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-top: calc(var(--spacing) / 4);
+    gap: var(--spacing);
 }
 
 /* PROJECTS */
@@ -245,7 +245,7 @@ button:active {
 /* Formfel och status */
 .form-error {
     font-size: var(--font-size-body);
-    color: #b00000;
+    color: tomato;
 }
 
 #form-status {
@@ -255,14 +255,22 @@ button:active {
 
 /* Mobilversion */
 @media (max-width: 600px) {
-    :root {
-        --font-size-title: calc(var(--font-size-title) * 2);
-        --font-size-heading: calc(var(--font-size-heading) * 2);
-        --font-size-body: calc(var(--font-size-body) * 2);
-        --nav-height: calc(var(--nav-height) * 2);
+    h1,
+    h2 {
+        font-size: calc(var(--font-size-heading) * 1.2);
     }
-    .page {
-        padding-top: calc(var(--nav-height) * 2 + var(--spacing));
-        padding-bottom: calc(2 * var(--spacing));
+
+    p,
+    label,
+    input,
+    textarea,
+    button,
+    .form-error,
+    #form-status {
+        font-size: calc(var(--font-size-body) * 1.2);
+    }
+
+    .image {
+        height: calc(100vh - (4 * var(--nav-height)));
     }
 }
