@@ -1,7 +1,6 @@
 :root {
     /* Typ, layout, spacing */
-    --font-family:
-        --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-family: --font-family: Menlo, Consolas, monospace;
     --spacing: 1rem;
     --nav-height: 64px;
     --border-size: 0px;
