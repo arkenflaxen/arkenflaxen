@@ -32,15 +32,6 @@
     box-sizing: border-box;
 }
 
-/* Mobilversion */
-@media (max-width: 600px) {
-    :root {
-        --font-size-heading: calc(var(--font-size-heading) * 2);
-        --font-size-body: calc(var(--font-size-body) * 2);
-        --nav-height: calc(var(--nav-height) * 2);
-    }
-}
-
 html,
 body {
     margin: 0;
@@ -209,7 +200,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: var(--spacing);
-    max-width: 500px;
+    max-width: 100vw;
 }
 
 label {
@@ -254,11 +245,20 @@ button:active {
 
 /* Formfel och status */
 .form-error {
-    font-size: 0.8rem;
+    font-size: var(--font-size-body);
     color: #b00000;
 }
 
 #form-status {
     margin-top: var(--spacing);
-    font-size: 0.8rem;
+    font-size: var(--font-size-body);
+}
+
+/* Mobilversion */
+@media (max-width: 600px) {
+    :root {
+        --font-size-heading: calc(var(--font-size-heading) * 2);
+        --font-size-body: calc(var(--font-size-body) * 2);
+        --nav-height: calc(var(--nav-height) * 2);
+    }
 }
