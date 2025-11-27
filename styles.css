@@ -262,4 +262,8 @@ button:active {
         --font-size-body: calc(var(--font-size-body) * 2);
         --nav-height: calc(var(--nav-height) * 2);
     }
+    .page {
+    padding-top: calc(var(--nav-height) + var(--spacing));
+    padding-bottom: calc(2 * var(--spacing));
+    }
 }
