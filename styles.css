@@ -1,7 +1,7 @@
 :root {
     /* Typ, layout, spacing */
     --font-family:
-    --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     --spacing: 1rem;
     --nav-height: 64px;
     --border-size: 0px;
@@ -263,12 +263,7 @@ button:active {
         --nav-height: calc(var(--nav-height) * 2);
     }
     .page {
-<<<<<<< HEAD
-    padding-top: calc(var(--nav-height) * 2 + var(--spacing));
-    padding-bottom: calc(2 * var(--spacing));
-=======
-        padding-top: calc(var(--nav-height) + var(--spacing));
+        padding-top: calc(var(--nav-height) * 2 + var(--spacing));
         padding-bottom: calc(2 * var(--spacing));
->>>>>>> 127c00b (Kanske f-at denna?)
     }
 }
