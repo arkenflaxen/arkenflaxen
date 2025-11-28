@@ -2,24 +2,27 @@
     /* Typ, layout, spacing */
     --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     --spacing: 1rem;
-    --nav-height: calc(var(--font-size-heading) * 6);
+    --nav-height: calc(
+        (var(--font-size-heading) * 3) + (calc(var(--spacing) * 3))
+    );
     --border-size: 0px;
     --border-radius: 0px;
+    --image-height: calc(96vh - (2 * var(--nav-height)));
 
     /* Färger */
     --bg-color: #eeeeee;
     --text-color: #111111;
-    --accent-gray: #999999;
+    --accent-gray: #777777;
 
     /* Tre textstorlekar */
-    --font-size-title: 1.8rem; /* Nav-brand (Filip Arkemar) */
-    --font-size-heading: 1.2rem; /* h1, h2, nav-links, text under bilder */
-    --font-size-body: 0.9rem; /* Brödtext, formulär etc */
+    --font-size-title: 2rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-heading: 1rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-body: 0.8rem; /* Brödtext, formulär etc */
 
     /*mobilstorlekar */
-    --font-size-title-mobile: 2.2rem; /* Nav-brand (Filip Arkemar) */
-    --font-size-heading-mobile: 1.6rem; /* h1, h2, nav-links, text under bilder */
-    --font-size-body-mobile: 1.3rem; /* Brödtext, formulär etc */
+    --font-size-title-mobile: 1.2rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-heading-mobile: 1.2rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-body-mobile: 1rem; /* Brödtext, formulär etc */
     --image-height-mobile: 30vh;
 }
 
@@ -154,7 +157,7 @@ p {
 .image {
     display: block;
     width: 100%;
-    height: calc(100vh - (2 * var(--nav-height)));
+    height: var(--image-height);
     object-fit: cover;
     border: var(--border-size) solid var(--text-color);
     border-radius: var(--border-radius);
@@ -271,11 +274,11 @@ button:active {
     }
 
     .image-meta {
-        display: list-item;
+        display: block;
     }
 
     .form {
-        display: list;
+        display: block;
     }
 
     input,
