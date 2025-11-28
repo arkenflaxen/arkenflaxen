@@ -2,7 +2,7 @@
     /* Typ, layout, spacing */
     --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     --spacing: 1rem;
-    --nav-height: 128px;
+    --nav-height: calc(var(--font-size-heading) * 6);
     --border-size: 0px;
     --border-radius: 0px;
 
@@ -12,9 +12,15 @@
     --accent-gray: #999999;
 
     /* Tre textstorlekar */
-    --font-size-title: 2.4rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-title: 1.8rem; /* Nav-brand (Filip Arkemar) */
     --font-size-heading: 1.2rem; /* h1, h2, nav-links, text under bilder */
-    --font-size-body: 0.6rem; /* Brödtext, formulär etc */
+    --font-size-body: 0.9rem; /* Brödtext, formulär etc */
+
+    /*mobilstorlekar */
+    --font-size-title-mobile: 2.2rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-heading-mobile: 1.6rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-body-mobile: 1.3rem; /* Brödtext, formulär etc */
+    --image-height-mobile: 30vh;
 }
 
 /* Dark mode: byt plats på bakgrund och text */
@@ -68,14 +74,13 @@ header {
     justify-content: center;
     border-bottom: 1px solid var(--text-color);
     background-color: var(--bg-color);
-    z-index: 2; /* Räcker att vara högre än innehållet */
+    z-index: 2;
 }
 
 .nav-inner {
     width: 100%;
-    max-width: var(--max-width);
-    display: flex; /* brand + lista i rad */
-    align-items: flex-end;
+    display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     padding-inline: var(--spacing);
 }
@@ -128,7 +133,6 @@ main {
 }
 
 .page {
-    max-width: var(--max-width);
     margin: 0 auto;
     padding-inline: var(--spacing);
     padding-top: calc(var(--nav-height) + var(--spacing));
@@ -199,7 +203,6 @@ form {
     display: flex;
     flex-direction: column;
     gap: var(--spacing);
-    max-width: 100vw;
 }
 
 label {
@@ -210,15 +213,16 @@ input,
 textarea {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
-    padding: 0.4rem 0.5rem;
+    padding: calc(var(--spacing) / 4) calc(var(--spacing) / 4);
     border: 1px solid var(--text-color);
     background-color: var(--bg-color);
     color: var(--text-color);
+    width: 30vw;
 }
 
 input:focus,
 textarea:focus {
-    outline: 1px solid var(--text-color);
+    outline: 2px solid var(--text-color);
 }
 
 button {
@@ -226,7 +230,7 @@ button {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
     text-transform: uppercase;
-    padding: 0.4rem 0.8rem;
+    padding: calc(var(--spacing) / 4) calc(var(--spacing) / 2);
     border: 1px solid var(--text-color);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -255,22 +259,27 @@ button:active {
 
 /* Mobilversion */
 @media (max-width: 600px) {
-    h1,
-    h2 {
-        font-size: calc(var(--font-size-heading) * 1.2);
-    }
-
-    p,
-    label,
-    input,
-    textarea,
-    button,
-    .form-error,
-    #form-status {
-        font-size: calc(var(--font-size-body) * 1.2);
+    :root {
+        /* Tre textstorlekar */
+        --font-size-title: var(--font-size-title-mobile);
+        --font-size-heading: var(--font-size-heading-mobile);
+        --font-size-body: var(--font-size-body-mobile);
     }
 
     .image {
-        height: calc(100vh - (4 * var(--nav-height)));
+        height: var(--image-height-mobile);
+    }
+
+    .image-meta {
+        display: list-item;
+    }
+
+    .form {
+        display: list;
+    }
+
+    input,
+    textarea {
+        width: calc(100vw - var(--spacing) * 2);
     }
 }
