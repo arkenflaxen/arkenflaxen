@@ -2,9 +2,7 @@
     /* Typ, layout, spacing */
     --font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     --spacing: 1rem;
-    --nav-height: calc(
-        (var(--font-size-heading) * 3) + (calc(var(--spacing) * 3))
-    );
+    --nav-height: calc(var(--font-size-heading) * 6);
     --border-size: 0px;
     --border-radius: 0px;
     --image-height: calc(96vh - (2 * var(--nav-height)));
@@ -15,7 +13,7 @@
     --accent-gray: #777777;
 
     /* Tre textstorlekar */
-    --font-size-title: 2rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-title: 2.2rem; /* Nav-brand (Filip Arkemar) */
     --font-size-heading: 1rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body: 0.8rem; /* Brödtext, formulär etc */
 
@@ -170,6 +168,14 @@ p {
     align-items: flex-start;
     margin-top: calc(var(--spacing) / 4);
     gap: var(--spacing);
+}
+
+.image-meta .left {
+    text-align: left;
+}
+
+.image-meta .right {
+    text-align: right;
 }
 
 /* PROJECTS */
