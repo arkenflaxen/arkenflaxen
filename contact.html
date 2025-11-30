@@ -27,51 +27,59 @@
 
         <main>
             <section class="page">
-                <div class="contact-info">
-                    <p>
-                        Email:
-                        <a href="mailto:filip.arkemar@example.com">
-                            filip.arkemar@example.com
-                        </a>
-                    </p>
-                    <p>Telefon: +46 (0)7X XXX XX XX</p>
-                    <p>
-                        LinkedIn:
-                        <a
-                            href="https://www.linkedin.com/in/filiparkemar"
-                            target="_blank"
-                        >
-                            linkedin.com/in/filiparkemar
-                        </a>
-                    </p>
+                <div class="contact-layout">
+                    <div class="contact-info">
+                        <img
+                            src="images/filip_uden_briller.jpg"
+                            alt="Profilbild"
+                            class="image"
+                        />
+                        <p>
+                            Email:
+                            <a href="mailto:filip.arkemar@example.com">
+                                filip.arkemar@example.com
+                            </a>
+                        </p>
+                        <p>Telefon: +46 (0)7X XXX XX XX</p>
+                        <p>
+                            LinkedIn:
+                            <a
+                                href="https://www.linkedin.com/in/filiparkemar"
+                                target="_blank"
+                            >
+                                linkedin.com/in/filiparkemar
+                            </a>
+                        </p>
+                    </div>
+
+                    <form id="contact-form" novalidate>
+                        <h2>Kontakta mig</h2>
+                        <div>
+                            <label for="name">Namn</label><br />
+                            <input type="text" id="name" name="name" />
+                            <div class="form-error" data-for="name"></div>
+                        </div>
+
+                        <div>
+                            <label for="email">Email</label><br />
+                            <input type="email" id="email" name="email" />
+                            <div class="form-error" data-for="email"></div>
+                        </div>
+
+                        <div>
+                            <label for="message">Meddelande</label><br />
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="5"
+                            ></textarea>
+                            <div class="form-error" data-for="message"></div>
+                        </div>
+
+                        <button type="submit">Skicka</button>
+                        <div id="form-status"></div>
+                    </form>
                 </div>
-
-                <form id="contact-form" novalidate>
-                    <div>
-                        <label for="name">Namn</label><br />
-                        <input type="text" id="name" name="name" />
-                        <div class="form-error" data-for="name"></div>
-                    </div>
-
-                    <div>
-                        <label for="email">Email</label><br />
-                        <input type="email" id="email" name="email" />
-                        <div class="form-error" data-for="email"></div>
-                    </div>
-
-                    <div>
-                        <label for="message">Meddelande</label><br />
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="5"
-                        ></textarea>
-                        <div class="form-error" data-for="message"></div>
-                    </div>
-
-                    <button type="submit">Skicka</button>
-                    <div id="form-status"></div>
-                </form>
             </section>
         </main>
 
