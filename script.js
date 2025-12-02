@@ -1,4 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const galleries = document.querySelectorAll(".project-gallery");
+
+  galleries.forEach((gallery) => {
+    const images = gallery.querySelectorAll(".project-images .image");
+    const prevBtn = gallery.querySelector(".project-prev");
+    const nextBtn = gallery.querySelector(".project-next");
+
+    images.forEach((img, i) => {
+      if (i === 0) img.classList.add("is-active");
+      else img.classList.remove("is-active");
+    });
+
+    if (images.length === 0) return;
+
+    let index = 0;
+
+    function show(newIndex) {
+      images[index].classList.remove("is-active");
+      index = (newIndex + images.length) % images.length;
+      images[index].classList.add("is-active");
+    }
+
+    prevBtn.addEventListener("click", () => {
+      show(index - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      show(index + 1);
+    });
+  });
+
   const form = document.querySelector("#contact-form");
   if (!form) return;
 

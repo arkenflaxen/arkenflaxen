@@ -8,8 +8,8 @@
     --image-height: calc(96vh - (2 * var(--nav-height)));
 
     /* Färger */
-    --bg-color: #eeeeee;
-    --text-color: #111111;
+    --bg-color: #ffffff;
+    --text-color: #000000;
     --accent-gray: #777777;
 
     /* Tre textstorlekar */
@@ -27,8 +27,8 @@
 /* Dark mode: byt plats på bakgrund och text */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #111111;
-        --text-color: #eeeeee;
+        --bg-color: #000000;
+        --text-color: #ffffff;
     }
 }
 
@@ -187,6 +187,45 @@ p {
 
 .project-item + .project-item {
     margin-top: var(--spacing);
+}
+
+/* Minimal slider – pilar ovanpå bilden */
+.project-gallery {
+    position: relative;
+}
+
+/* Här styr vi bara visning/inte visning */
+.project-images .image {
+    display: none;
+}
+
+.project-images .image.is-active {
+    display: block;
+}
+
+/* Pilarna ligger ovanpå bilden */
+.project-prev,
+.project-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: calc(var(--spacing) / 4) calc(var(--spacing) / 2);
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: var(--font-size-heading);
+}
+
+/* Vänster pil */
+.project-prev {
+    left: var(--spacing);
+}
+
+/* Höger pil */
+.project-next {
+    right: var(--spacing);
 }
 
 /* Layout för kontaktsektion: form + bild + info */
