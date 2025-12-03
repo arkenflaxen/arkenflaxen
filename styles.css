@@ -13,7 +13,7 @@
     --accent-gray: #777777;
 
     /* Tre textstorlekar */
-    --font-size-title: 2.2rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-title: 3rem; /* Nav-brand (Filip Arkemar) */
     --font-size-heading: 1rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body: 0.8rem; /* Brödtext, formulär etc */
 
@@ -28,7 +28,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --bg-color: #000000;
-        --text-color: #ffffff;
+        --text-color: #00ff00;
     }
 }
 
@@ -209,7 +209,7 @@ p {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background: var(--bg-color);
     border: 1px solid var(--text-color);
     color: var(--text-color);
     padding: calc(var(--spacing) / 4) calc(var(--spacing) / 2);
@@ -228,32 +228,29 @@ p {
     right: var(--spacing);
 }
 
-/* Layout för kontaktsektion: form + bild + info */
+/* Layout för kontaktsektion: bild + info + form */
 .contact-layout {
     display: flex;
     gap: var(--spacing);
     align-items: flex-start;
 }
 
-/* Båda kolumnerna lika breda */
-.contact-info {
-    flex: 1; /* 1 del */
+/* Alla tre kolumner (contact-image, contact-info, contact-form) får varsin tredjedel */
+.contact-layout > * {
+    flex: 1;
 }
 
-.contact-layout form {
-    flex: 2; /* 2 delar */
+/* Bild-kolumnen */
+.contact-image {
+    display: flex;
+    flex-direction: column;
 }
 
-/* Bilden anpassas */
-.contact-info .image {
+/* Bilden använder fortfarande .image, men vi kan justera just här */
+.contact-image .image {
     width: 100%;
-    height: calc(var(--image-height) / 1.6);
+    height: auto; /* låt proportionerna styra här */
     object-fit: cover;
-}
-
-/* CONTACT */
-.contact-info {
-    margin: 0;
 }
 
 .contact-info p + p {
@@ -269,7 +266,7 @@ p {
     color: var(--accent-gray);
 }
 
-/* FORMULÄR */
+/* FORMULÄR (gäller contact-form och ev. andra formulär) */
 form {
     display: flex;
     flex-direction: column;
@@ -288,7 +285,7 @@ textarea {
     border: 1px solid var(--text-color);
     background-color: var(--bg-color);
     color: var(--text-color);
-    width: 100%; /* inte 30vw här längre */
+    width: 100%;
 }
 
 input:focus,
