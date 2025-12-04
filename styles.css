@@ -8,8 +8,8 @@
     --image-height: calc(96vh - (2 * var(--nav-height)));
 
     /* Färger */
-    --bg-color: #ffffff;
-    --text-color: #000000;
+    --bg-color: #eeeeee;
+    --text-color: #111122;
     --accent-gray: #777777;
 
     /* Tre textstorlekar */
@@ -18,17 +18,17 @@
     --font-size-body: 0.8rem; /* Brödtext, formulär etc */
 
     /*mobilstorlekar */
-    --font-size-title-mobile: 1.2rem; /* Nav-brand (Filip Arkemar) */
-    --font-size-heading-mobile: 1.2rem; /* h1, h2, nav-links, text under bilder */
-    --font-size-body-mobile: 1rem; /* Brödtext, formulär etc */
-    --image-height-mobile: 30vh;
+    --font-size-title-mobile: 3rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-heading-mobile: 1rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-body-mobile: 0.8rem; /* Brödtext, formulär etc */
+    --image-height-mobile: 40vh;
 }
 
 /* Dark mode: byt plats på bakgrund och text */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #000000;
-        --text-color: #00ff00;
+        --bg-color: #111122;
+        --text-color: #eeeeee;
     }
 }
 
@@ -145,6 +145,18 @@ main {
     margin-top: var(--spacing);
 }
 
+.page p + p {
+    margin-top: var(--spacing);
+}
+
+.page div + p {
+    margin-top: calc(var(--spacing) / 6);
+}
+
+.page h2 + p {
+    margin-top: calc(var(--spacing) / 6);
+}
+
 /* Brödtext */
 p {
     margin: 0;
@@ -166,7 +178,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: calc(var(--spacing) / 4);
+    margin-top: calc(var(--spacing) / 6);
     gap: var(--spacing);
 }
 
@@ -249,12 +261,8 @@ p {
 /* Bilden använder fortfarande .image, men vi kan justera just här */
 .contact-image .image {
     width: 100%;
-    height: auto; /* låt proportionerna styra här */
+    height: auto;
     object-fit: cover;
-}
-
-.contact-info p + p {
-    margin-top: var(--spacing);
 }
 
 .contact-info a {
@@ -281,7 +289,7 @@ input,
 textarea {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
-    padding: calc(var(--spacing) / 4);
+    padding: calc(var(--spacing) / 6);
     border: 1px solid var(--text-color);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -298,7 +306,7 @@ button {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
     text-transform: uppercase;
-    padding: calc(var(--spacing) / 4) calc(var(--spacing) / 2);
+    padding: calc(var(--spacing) / 2) calc(var(--spacing) / 2);
     border: 1px solid var(--text-color);
     background-color: var(--bg-color);
     color: var(--text-color);
