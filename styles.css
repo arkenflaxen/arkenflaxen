@@ -14,14 +14,14 @@
 
     /* Tre textstorlekar */
     --font-size-title: 3rem; /* Nav-brand (Filip Arkemar) */
-    --font-size-heading: 1rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-heading: 0.8rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body: 0.8rem; /* Brödtext, formulär etc */
 
     /*mobilstorlekar */
     --font-size-title-mobile: 3rem; /* Nav-brand (Filip Arkemar) */
-    --font-size-heading-mobile: 1rem; /* h1, h2, nav-links, text under bilder */
+    --font-size-heading-mobile: 0.8rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body-mobile: 0.8rem; /* Brödtext, formulär etc */
-    --image-height-mobile: 40vh;
+    --image-height-mobile: 70vh;
 }
 
 /* Dark mode: byt plats på bakgrund och text */
@@ -149,18 +149,18 @@ main {
     margin-top: var(--font-size-body);
 }
 
-.page div + p {
-    margin-top: calc(var(--font-size-body) / 6);
-}
-
 .page h2 + p {
-    margin-top: calc(var(--spacing) / 6);
+    margin-top: var(--spacing);
 }
 
 /* Brödtext */
 p {
     margin: 0;
     font-size: var(--font-size-body);
+}
+
+a {
+    text-decoration: underline;
 }
 
 /* Alla bilder */
@@ -178,7 +178,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: calc(var(--font-size-heading) / 2);
+    margin-top: calc(var(--font-size-heading) / 3);
     gap: var(--spacing);
 }
 
