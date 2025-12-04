@@ -146,11 +146,11 @@ main {
 }
 
 .page p + p {
-    margin-top: var(--spacing);
+    margin-top: var(--font-size-body);
 }
 
 .page div + p {
-    margin-top: calc(var(--spacing) / 6);
+    margin-top: calc(var(--font-size-body) / 6);
 }
 
 .page h2 + p {
@@ -178,7 +178,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: calc(var(--spacing) / 6);
+    margin-top: calc(var(--font-size-heading) / 2);
     gap: var(--spacing);
 }
 
