@@ -21,7 +21,7 @@
     --font-size-title-mobile: 3rem; /* Nav-brand (Filip Arkemar) */
     --font-size-heading-mobile: 0.8rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body-mobile: 0.8rem; /* Brödtext, formulär etc */
-    --image-height-mobile: 70vh;
+    --image-height-mobile: 50vh;
 }
 
 /* Dark mode: byt plats på bakgrund och text */
@@ -115,12 +115,7 @@ header {
 .nav-links a {
     text-decoration: none;
     color: var(--text-color);
-}
-
-.nav-links a:hover,
-.nav-brand:hover {
-    color: var(--bg-color);
-    background-color: var(--text-color);
+}ackground-color: var(--text-color);
 }
 
 .nav-links a:active,
@@ -270,10 +265,6 @@ a {
     text-decoration: underline;
 }
 
-.contact-info a:hover {
-    color: var(--accent-gray);
-}
-
 /* FORMULÄR (gäller contact-form och ev. andra formulär) */
 form {
     display: flex;
@@ -313,11 +304,6 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    color: var(--bg-color);
-    background-color: var(--text-color);
-}
-
 button:active {
     filter: invert(1);
 }
@@ -331,6 +317,23 @@ button:active {
 #form-status {
     margin-top: var(--spacing);
     font-size: var(--font-size-body);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .nav-links a:hover,
+    .nav-brand:hover {
+        color: var(--bg-color);
+        background-color: var(--text-color);
+    }
+
+    button:hover {
+        color: var(--bg-color);
+        background-color: var(--text-color);
+    }
+
+    .contact-info a:hover {
+        color: var(--accent-gray);
+    }
 }
 
 /* Mobilversion */
@@ -374,5 +377,9 @@ button:active {
 
     .contact-info .image {
         width: 100%;
+    }
+
+    .contact-info a:active {
+        color: var(--accent-gray);
     }
 }
