@@ -1,42 +1,370 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Projects</title>
-</head>
-<body>
-    <header>
-        <h1>Our Projects</h1>
-    </header>
-    <main>
-        <section class="image-slider">
-            <!-- Image Slider Logic Here -->
-            <div class="slides">
-                <div class="slide active">
-                    <img src="image1.jpg" alt="Project 1">
-                    <div class="project-description">
-                        <h2>Project 1</h2>
-                        <p>Toggle this descriptive text of Project 1.</p>
-                    </div>
-                </div>
-                <div class="slide">
-                    <img src="image2.jpg" alt="Project 2">
-                    <div class="project-description">
-                        <h2>Project 2</h2>
-                        <p>Toggle this descriptive text of Project 2.</p>
-                    </div>
-                </div>
-                <!-- Add more slides as required -->
-            </div>
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 arkenflaxen</p>
-    </footer>
-    <script src="slider.js"></script>
-</body>
+<!doctype html>
+<html lang="sv">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Filip Arkemar – Projects</title>
+        <link rel="stylesheet" href="styles.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+
+    <body>
+        <header>
+            <nav class="nav-inner">
+                <a href="index.html" class="nav-brand">FA</a>
+                <ul class="nav-links">
+                    <li>
+                        <h2><a href="about.html">About</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="projects.html">>Projects</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="contact.html">Contact</a></h2>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="page">
+                <ul class="project-list">
+                    <li class="project-item">
+                        <div class="project-gallery">
+                            <button class="project-prev"><</button>
+                            <div class="project-images">
+                                <img
+                                    src="images/fjarilsdalen_fran_stora_vagen.jpg"
+                                    alt="Projekt 1"
+                                    class="image is-active"
+                                />
+                                <img
+                                    src="images/fjarilsdalen_exploded_axo.jpg"
+                                    alt="Projekt 1"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/fjarilsdalen_site.jpg"
+                                    alt="Projekt 1"
+                                    class="image"
+                                />
+                            </div>
+                            <button class="project-next">></button>
+                        </div>
+
+                        <div class="image-meta">
+                            <h2 class="left">Fjärilsdalen</h2>
+                            <h2 class="right">Sub-Division / V-Ray</h2>
+                        </div>
+
+                        <p>
+                            Creator: Filip Arkemar
+                            <br />
+                            Semester: 6 VT 2022
+                            <br />
+                            Course: Arkitektur i Samtid (bachelor project)
+                            <br />
+                            Tools: Rhino, Grasshopper, V-Ray, Photoshop,
+                            InDesign, 3D-Print
+                        </p>
+                        <p>
+                            This project was part of an elective bachelor course
+                            that mostly focused on extensive use of digital
+                            tools like subdivision and grasshopper. The site, on
+                            the outskirts of eastern Helsingborg, already had a
+                            planned development that involved turning top grade
+                            arable land into predominantly suburbs. We were
+                            tasked with creating a new twist of the swedish
+                            concept “Naturum”, making it more focused on the
+                            conservation and appreciation of aggrecultural sites
+                            like this. The biggest challenge in creating this
+                            blobby and organic architecture was how to convey
+                            its spaces through two dimensional drawings. The
+                            final proposal is a very sculptural building meant
+                            to symbolise the merge between nature and structure
+                            as a dichotomy yet with a symbiotic relationship.
+                        </p>
+                    </li>
+
+                    <li class="project-item">
+                        <div class="project-gallery">
+                            <button class="project-prev"><</button>
+                            <div class="project-images">
+                                <img
+                                    src="images/tamnougalt_torg.jpg"
+                                    alt="Projekt 2"
+                                    class="image is-active"
+                                />
+                                <img
+                                    src="images/tamnougalt_korridor.jpg"
+                                    alt="Projekt 2"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/tamnougalt_plan.jpg"
+                                    alt="Projekt 2"
+                                    class="image"
+                                />
+                                <button class="project-next">></button>
+                            </div>
+                        </div>
+
+                        <div class="image-meta">
+                            <h2 class="left">Tamnougalt</h2>
+                            <h2 class="right">
+                                Ladybug / Kangaroo / Stitching
+                            </h2>
+                        </div>
+                        <p>
+                            Creators: Filip Arkemar & Marios Papadoulis
+                            <br />
+                            Semester: 7 HT 2022
+                            <br />
+                            Course: Spatiala Experiment
+                            <br />
+                            Tools: Rhino, Grasshopper, Enscape, InDesign, laser
+                            cutter, knitting tools
+                        </p>
+                        <p>
+                            In this course we were tasked with developing
+                            architecture through biomimicry and parametric
+                            design. The site was in a small rural town in the
+                            Moroccan country side and for our concept we chose
+                            to make new roofs for an old abandoned kasbah,
+                            making it livable again. Our biggest concern was
+                            shading from the sun and to have minimal impact on
+                            the rammed earth walls. We experimented with
+                            knitting to make a fabric that could have variable
+                            density and the final proposal was a knitted fabric
+                            thet shades in accordance with sun hours and wind.
+                            It is suspended with a skeleton of metal that uses
+                            the existing constructional holes and does not
+                            require any extra means of mounting.
+                        </p>
+                    </li>
+                    <li class="project-item">
+                        <div class="project-gallery">
+                            <button class="project-prev"><</button>
+
+                            <div class="project-images">
+                                <img
+                                    src="images/fusagasuga_corte_fugado.jpg"
+                                    alt="Projekt 3"
+                                    class="image is-active"
+                                />
+                                <img
+                                    src="images/fusagasuga_collage.jpg"
+                                    alt="Projekt 3"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/fusagasuga_axo.jpg"
+                                    alt="Projekt 3"
+                                    class="image"
+                                />
+                                <button class="project-next">></button>
+                            </div>
+                        </div>
+
+                        <div class="image-meta">
+                            <h2 class="left">Fusagasugá</h2>
+                            <h2 class="right">Rhino / Revit / AutoCAD</h2>
+                        </div>
+                        <p>
+                            Creators: Filip Arkemar & Daniel Rodríguez
+                            <br />
+                            Semester: 8 VT 2023
+                            <br />
+                            Course: Housing in Colombia
+                            <br />
+                            Tools: AutoCAD, Rhino, Grasshopper, Photoshop,
+                            InDesign, laser cutter, cardboard model
+                        </p>
+                        <p>
+                            As part of my exchange studies in Colombia this
+                            course focused on designing housing in the small
+                            town of Fusagasugá, just south of Bogotá. The
+                            assignment was to develop units suitable for
+                            different types of clients. The challanges of this
+                            site was very typical of a small colombian town:
+                            steep terrain, very noisy and with massive amounts
+                            of precipitation during rain season. The UV light
+                            from the sun is also very strong this close to the
+                            equator so proper shading and ventilation is needed.
+                            The final proposal included four different types of
+                            apartments, for students, seniors, families and
+                            co-living along with safe and calm outdoor areas
+                            that shelter inhabitants from larg
+                        </p>
+                    </li>
+                    <li class="project-item">
+                        <div class="project-gallery">
+                            <button class="project-prev"><</button>
+                            <div class="project-images">
+                                <img
+                                    src="images/santa_fe_nightrender.jpg"
+                                    alt="Projekt 4"
+                                    class="image is-active"
+                                />
+                                <img
+                                    src="images/santa_fe_street_model_top.jpg"
+                                    alt="Projekt 4"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/santa_fe_plan_7.jpg"
+                                    alt="Projekt 4"
+                                    class="image"
+                                />
+                                <button class="project-next">></button>
+                            </div>
+                        </div>
+
+                        <div class="image-meta">
+                            <h2 class="left">Santa Fé</h2>
+                            <h2 class="right">Rhino / Grasshopper / Enscape</h2>
+                        </div>
+                        <p>
+                            Creators: Filip Arkemar & Frej Einarsson
+                            <br />
+                            Semester: 8 VT 2023
+                            <br />
+                            Course: Arquitectura con Enfoque en Género y
+                            Differencial
+                            <br />
+                            Tools: Rhino, Grasshopper, Enscape, InDesign, laser
+                            cutter
+                        </p>
+                        <p>
+                            The final project of my exchange to Colombia was set
+                            in eastern Bogotá, tasked with designing a
+                            recreational facility with a strong emphasis on
+                            gender equality and accessability. Knowing that many
+                            Colombians suffer from different kinds of physical
+                            impairments due to a long history of violence in the
+                            region we decided to create a paralympic sports
+                            arena. It houses all of the paralympic summer games
+                            that could be performed indoors and is fully
+                            accessible with specific attention to the
+                            requirements of the impairments of each individual
+                            sport.
+                        </p>
+                    </li>
+                    <li class="project-item">
+                        <div class="project-gallery">
+                            <button class="project-prev"><</button>
+                            <div class="project-images">
+                                <img
+                                    src="images/malmohus_giraff.jpg"
+                                    alt="Projekt 5"
+                                    class="image is-active"
+                                />
+                                <img
+                                    src="images/malmohus_plan_1.jpg"
+                                    alt="Projekt 5"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/malmohus_sektion_aa.jpg"
+                                    alt="Projekt 5"
+                                    class="image"
+                                />
+                                <button class="project-next">></button>
+                            </div>
+                        </div>
+                        <div class="image-meta">
+                            <h2 class="left">Malmohus</h2>
+                            <h2 class="right">Rhino / TwinMotion</h2>
+                        </div>
+                        <p>
+                            Creators: Filip Arkemar
+                            <br />
+                            Semester: 9 HT 2023
+                            <br />
+                            Course: Kulturhistoriska Byggnader
+                            <br />
+                            Tools: Rhino, Twinmotion, InDesign
+                        </p>
+                        <p>
+                            This was a renovation proposal for the western wing
+                            of the Malmö Museum comlpex and it focuses on
+                            creating a clearer separation between the art museum
+                            and the castle to enhance the flow through the
+                            property. By establishing a space between these
+                            functions, a gathering place with unique qualities
+                            for expression and experiences is formed. The site’s
+                            former prison building served as inspiration for the
+                            project’s overall expression, this intermediate time
+                            and space becomes a dynamic and versatile area that
+                            contrasts with the current structure and yet ties
+                            everything together.
+                        </p>
+                    </li>
+                    <li class="project-item">
+                        <div class="project-gallery">
+                            <button class="project-prev"><</button>
+                            <div class="project-images">
+                                <img
+                                    src="images/hamburgsund_morgon.jpg"
+                                    alt="Projekt 6"
+                                    class="image is-active"
+                                />
+                                <img
+                                    src="images/hamburgsund_badat.jpg"
+                                    alt="Projekt 6"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/hamburgsund_power_section.jpg"
+                                    alt="Projekt 6"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/hamburgsund_launch.jpg"
+                                    alt="Projekt 6"
+                                    class="image"
+                                />
+                                <img
+                                    src="images/hamburgsund_axo.jpeg"
+                                    alt="Projekt 6"
+                                    class="image"
+                                />
+                                <button class="project-next">></button>
+                            </div>
+                        </div>
+                        <div class="image-meta">
+                            <h2 class="left">Hamburgsund</h2>
+                            <h2 class="right">Hammer / Nail</h2>
+                        </div>
+                        <p>
+                            Creators: Filip Arkemar
+                            <br />
+                            Semester: 10 VT 2024
+                            <br />
+                            Course: Examensarbete i Arkitektur (degree project)
+                            <br />
+                            Tools: Rhino, Excel, Affinity Publisher, woodworking
+                            tools
+                        </p>
+                        <p>
+                            In an attempt to broaden my horizons and
+                            qualifications as an architect my thesis project
+                            treats architecture as a total process from initial
+                            sketch to finished building, aiming to highlight
+                            what kinds of problems and opportunities arise from
+                            overseeing the complete construction of a project.
+                            My goal was to design and construct a sauna that
+                            could seamlessly integrate into the existing,
+                            saltwater-sprayed, and rocky bathing culture of the
+                            Swedish west coast of the Bohuslän archipelago. The
+                            design is therefor meant to mimic a very local
+                            typology called a “vadbod” and a lot of the
+                            materials are reused or upcycled, minimising costs
+                            and climate impact.
+                        </p>
+                    </li>
+                </ul>
+            </section>
+        </main>
+        <script src="script.js"></script>
+    </body>
 </html>
