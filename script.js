@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   form.addEventListener("submit", (event) => {
-    event.preventDefault();
     clearErrors();
 
     let isValid = true;
@@ -85,9 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!isValid) return;
 
-    if (statusEl) {
-      statusEl.textContent =
-        "Tack för ditt meddelande. I den här versionen skickas det inte iväg på riktigt utan bara som en demo.";
+    if (!isValid) {
+      event.preventDefault();
+      return;
     }
 
     form.reset();
