@@ -37,14 +37,14 @@
                     </div>
 
                     <div class="contact-info">
-                        <h2>Kontakta mig</h2>
+                        <h2>Contact me</h2>
                         <p>
                             Email:
                             <a href="mailto:filip.arkemar@gmail.com">
                                 filip.arkemar@gmail.com
                             </a>
                         </p>
-                        <p>Telefon: +46 (0)76 795 88 11</p>
+                        <p>Phone: +46 (0)76 795 88 11</p>
                         <p>
                             LinkedIn:
                             <a
@@ -63,6 +63,7 @@
                         action="https://formsubmit.co/filip.arkemar@gmail.com"
                         method="POST"
                         novalidate
+                        autocomplete="on"
                     >
                         <input
                             type="hidden"
@@ -71,14 +72,10 @@
                         />
                         <input type="hidden" name="_captcha" value="false" />
                         <input type="hidden" name="_template" value="table" />
-                        <input
-                            type="text"
-                            name="_honey"
-                            style="display: none"
-                        />
+                        <input type="hidden" name="_honey" />
 
                         <div>
-                            <label for="name">Namn</label><br />
+                            <label for="name">Name</label><br />
                             <input
                                 type="text"
                                 id="name"
@@ -102,7 +99,7 @@
                         </div>
 
                         <div>
-                            <label for="message">Meddelande</label><br />
+                            <label for="message">Message</label><br />
                             <textarea
                                 id="message"
                                 name="message"
@@ -112,7 +109,7 @@
                             <div class="form-error" data-for="message"></div>
                         </div>
 
-                        <button type="submit">Skicka</button>
+                        <button type="submit">Submit</button>
                         <div id="form-status"></div>
                     </form>
                 </div>

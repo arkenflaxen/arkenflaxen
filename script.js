@@ -40,19 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const errorEls = form.querySelectorAll(".form-error");
 
   function clearErrors() {
-    errorEls.forEach((el) => {
-      el.textContent = "";
-    });
-    if (statusEl) {
-      statusEl.textContent = "";
-    }
+    errorEls.forEach((el) => (el.textContent = ""));
+    statusEl.textContent = "";
   }
 
   function setError(fieldName, message) {
     const el = form.querySelector(`.form-error[data-for="${fieldName}"]`);
-    if (el) {
-      el.textContent = message;
-    }
+    if (el) el.textContent = message;
   }
 
   form.addEventListener("submit", async (event) => {
@@ -62,50 +56,40 @@ document.addEventListener("DOMContentLoaded", () => {
     let isValid = true;
 
     if (!nameInput.value.trim()) {
-      setError("name", "Skriv gärna ditt namn.");
+      setError("name", "Please provide your name.");
       isValid = false;
     }
 
     const emailValue = emailInput.value.trim();
-    if (!emailValue) {
-      setError("email", "Email behövs för att jag ska kunna svara.");
+    if (!emailValue || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+      setError("email", "Please provide a valid email address.");
       isValid = false;
-    } else {
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(emailValue)) {
-        setError("email", "Skriv en giltig emailadress.");
-        isValid = false;
-      }
     }
 
     if (!messageInput.value.trim()) {
-      setError("message", "Skriv gärna ett kort meddelande.");
+      setError("message", "Please provide a message.");
       isValid = false;
     }
 
     if (!isValid) return;
 
-    statusEl.textContent = "Skickar…";
-
-    const formData = new FormData(form);
+    statusEl.textContent = "Sending…";
 
     try {
       const response = await fetch(form.action, {
         method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
       });
 
       if (response.ok) {
-        statusEl.textContent = "Tack! Ditt meddelande har skickats.";
+        statusEl.textContent = "Thank you! Your message has been sent.";
         form.reset();
       } else {
-        statusEl.textContent = "Något gick fel. Försök igen.";
+        statusEl.textContent = "An error occurred. Please try again.";
       }
-    } catch (error) {
-      statusEl.textContent = "Kunde inte skicka meddelandet.";
+    } catch {
+      statusEl.textContent = "Could not send message.";
     }
   });
 });
