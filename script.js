@@ -55,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
     clearErrors();
 
     let isValid = true;
@@ -82,15 +83,29 @@ document.addEventListener("DOMContentLoaded", () => {
       isValid = false;
     }
 
-    if (!isValid) {
-      event.preventDefault();
-      return;
+    if (!isValid) return;
+
+    statusEl.textContent = "Skickar…";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        statusEl.textContent = "Tack! Ditt meddelande har skickats.";
+        form.reset();
+      } else {
+        statusEl.textContent = "Något gick fel. Försök igen.";
+      }
+    } catch (error) {
+      statusEl.textContent = "Kunde inte skicka meddelandet.";
     }
   });
-
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("sent") === "true" && statusEl) {
-    statusEl.textContent = "Tack! Ditt meddelande har skickats.";
-    form.reset();
-  }
 });
