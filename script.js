@@ -82,11 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
       isValid = false;
     }
 
-    if (!isValid) return;
-
     if (!isValid) {
       event.preventDefault();
       return;
     }
   });
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("sent") === "true" && statusEl) {
+    statusEl.textContent = "Tack! Ditt meddelande har skickats.";
+    form.reset();
+  }
 });

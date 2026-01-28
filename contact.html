@@ -50,6 +50,7 @@
                             <a
                                 href="https://www.linkedin.com/in/filip-arkemar/"
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 linkedin.com/in/filip-arkemar
                             </a>
@@ -65,20 +66,43 @@
                     >
                         <input
                             type="hidden"
+                            name="_next"
+                            value="contact.html?sent=true"
+                        />
+                        <input
+                            type="hidden"
                             name="_subject"
                             value="Nytt meddelande från portfolio"
                         />
                         <input type="hidden" name="_captcha" value="false" />
+                        <input type="hidden" name="_template" value="table" />
+                        <input
+                            type="text"
+                            name="_honey"
+                            style="display: none"
+                        />
 
                         <div>
                             <label for="name">Namn</label><br />
-                            <input type="text" id="name" name="name" />
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                autocomplete="name"
+                                required
+                            />
                             <div class="form-error" data-for="name"></div>
                         </div>
 
                         <div>
                             <label for="email">Email</label><br />
-                            <input type="email" id="email" name="email" />
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                autocomplete="email"
+                                required
+                            />
                             <div class="form-error" data-for="email"></div>
                         </div>
 
@@ -88,6 +112,7 @@
                                 id="message"
                                 name="message"
                                 rows="5"
+                                required
                             ></textarea>
                             <div class="form-error" data-for="message"></div>
                         </div>
