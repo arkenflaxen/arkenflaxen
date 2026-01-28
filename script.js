@@ -88,7 +88,5 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       return;
     }
-
-    form.reset();
   });
 });
