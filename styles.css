@@ -9,11 +9,11 @@
 
     /* Färger */
     --bg-color: #eeeeee;
-    --text-color: #111122;
-    --accent-gray: #777777;
+    --text-color: #111111;
+    --accent-gray: #999999;
 
     /* Tre textstorlekar */
-    --font-size-title: 3rem; /* Nav-brand (Filip Arkemar) */
+    --font-size-title: 1.6rem; /* Nav-brand (Filip Arkemar) */
     --font-size-heading: 0.8rem; /* h1, h2, nav-links, text under bilder */
     --font-size-body: 0.8rem; /* Brödtext, formulär etc */
 
@@ -27,7 +27,7 @@
 /* Dark mode: byt plats på bakgrund och text */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #111122;
+        --bg-color: #111111;
         --text-color: #eeeeee;
     }
 }
