@@ -115,7 +115,7 @@ header {
 .nav-links a {
     text-decoration: none;
     color: var(--text-color);
-}ackground-color: var(--text-color);
+    background-color: var(--bg-color);
 }
 
 .nav-links a:active,
@@ -233,25 +233,25 @@ a {
 }
 
 /* Layout för kontaktsektion: bild + info + form */
-.contact-layout {
+.column-layout {
     display: flex;
     gap: var(--spacing);
     align-items: flex-start;
 }
 
-/* Alla tre kolumner (contact-image, contact-info, contact-form) får varsin tredjedel */
-.contact-layout > * {
+/* Alla tre kolumner (column-image, contact-info, contact-form) får varsin tredjedel */
+.column-layout > * {
     flex: 1;
 }
 
 /* Bild-kolumnen */
-.contact-image {
+.column-image {
     display: flex;
     flex-direction: column;
 }
 
 /* Bilden använder fortfarande .image, men vi kan justera just här */
-.contact-image .image {
+.column-image .image {
     width: 100%;
     height: auto;
     object-fit: cover;
@@ -362,12 +362,12 @@ button:active {
         display: block;
     }
 
-    .contact-layout {
+    .column-layout {
         flex-direction: column;
     }
 
     .contact-info,
-    .contact-layout form {
+    .column-layout form {
         width: 100%;
         flex: unset; /* nollställ så inget konstigt händer */
     }
