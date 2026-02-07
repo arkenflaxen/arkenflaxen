@@ -257,7 +257,7 @@ a {
     object-fit: cover;
 }
 
-.contact-info a {
+a {
     color: var(--text-color);
     text-decoration: underline;
 }
@@ -328,7 +328,7 @@ button:active {
         background-color: var(--text-color);
     }
 
-    .contact-info a:hover {
+    a:hover {
         color: var(--accent-gray);
     }
 }
@@ -376,7 +376,7 @@ button:active {
         width: 100%;
     }
 
-    .contact-info a:active {
+    a:active {
         color: var(--accent-gray);
     }
 
